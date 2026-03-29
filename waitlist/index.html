@@ -42,7 +42,7 @@ html { scroll-behavior:smooth; font-size:16px; }
   --border2:   rgba(255,255,255,0.07);
   /* Dark glass for use over light bg-flare */
   --glass-dk:  rgba(0,0,0,0.82);
-  --txt-shadow: 0 2px 24px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1), 0 0 48px rgba(255,100,8,0.25);
+  --txt-shadow: 0 1px 2px rgba(0,0,0,1), 0 0px 1px rgba(0,0,0,1), 0 0 18px rgba(255,100,8,0.7), 0 0 6px rgba(255,100,8,0.9);
 }
 
 body {
@@ -211,7 +211,7 @@ h1 {
   text-shadow: var(--txt-shadow);
   opacity: 0; animation: fadeUp 0.8s ease 0.18s forwards;
 }
-.t1 { display: block; margin-bottom: 0.45em; line-height: 1.15; color: var(--text); text-shadow: 0 2px 24px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.8); filter: drop-shadow(0 0 32px rgba(255,100,8,0.35)); }
+.t1 { display: block; margin-bottom: 0.45em; line-height: 1.15; color: var(--text); text-shadow: 0 1px 2px rgba(0,0,0,1), 0 0px 1px rgba(0,0,0,1), 0 0 18px rgba(255,100,8,0.7), 0 0 6px rgba(255,100,8,0.9); filter: drop-shadow(0 0 32px rgba(255,100,8,0.35)); }
 .t2 {
   display: block;
   background: linear-gradient(108deg, var(--orange) 0%, var(--red) 42%, var(--crimson) 100%);
@@ -647,7 +647,7 @@ select option { background: #120810; color: var(--text); }
 }
 .how-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px,5.6vw,70px); line-height: 0.86;
+  font-size: clamp(36px,5.6vw,70px); line-height: 1.1;
   letter-spacing: -0.02em; color: var(--text);
   text-shadow: var(--txt-shadow);
 }
@@ -717,7 +717,7 @@ select option { background: #120810; color: var(--text); }
 }
 .ig-title {
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,60px);
-  color: var(--text); margin-bottom: 10px; letter-spacing: -0.01em;
+  color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; line-height: 1.0;
 }
 .ig-sub { font-size: clamp(13px,1.3vw,16px); color: var(--muted); max-width: 420px; margin: 0 auto 30px; line-height: 1.65; }
 .ig-btn {
@@ -843,6 +843,7 @@ footer {
   .how-header { flex-direction:column; align-items:flex-start; }
 }
 @media (max-width: 560px) {
+  .how-title { line-height: 1.25 !important; }
   .t1 { margin-bottom: 0.55em !important; line-height: 1.2; display: block; }
   .t2 { display: block; margin-top: 0.15em; line-height: 1.2; }
   .form-row { grid-template-columns:1fr; }
