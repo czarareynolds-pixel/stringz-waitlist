@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stringz — Your People Are Already Out There</title>
+<!-- Primary meta -->
+<meta name="description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
+<link rel="canonical" href="https://stringz.social/waitlist">
+
+<!-- Open Graph — controls how the link looks on Instagram, iMessage, Facebook, Slack -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://stringz.social/waitlist">
+<meta property="og:title"       content="Your People Are Already Out There — Stringz">
+<meta property="og:description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
+<meta property="og:image"       content="https://stringz.social/waitlist/brand_photo_stringz.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height"content="630">
+<meta property="og:site_name"   content="Stringz">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Your People Are Already Out There — Stringz">
+<meta name="twitter:description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.">
+<meta name="twitter:image"       content="https://stringz.social/waitlist/brand_photo_stringz.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+:root {
+  --bg:      #080407;
+  --glass:   rgba(20,9,15,0.65);
+  --border:  rgba(255,148,8,0.12);
+  --border2: rgba(255,255,255,0.07);
+  --orange:  #FF9408;
+  --red:     #CA3F16;
+  --crimson: #95122C;
+  --text:    #F0E8EA;
+  --muted:   #7a5566;
+  --sub:     #3d2030;
+}
+
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Satoshi', sans-serif;
+  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+}
+
+#bar { position: fixed; top: 0; left: 0; height: 1px; width: 0; background: linear-gradient(90deg, var(--orange), var(--crimson)); z-index: 999; }
+#canvas-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 52px;
+  background: linear-gradient(to bottom, rgba(8,4,7,0.97) 0%, transparent 100%);
+}
+.nav-logo img { height: 20px; display: block; }
+.nav-ig-pill {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.2);
+  border-radius: 8px; padding: 10px 16px;
+  transition: all 0.2s;
+}
+.nav-ig-pill:hover { background: rgba(255,148,8,0.13); border-color: rgba(255,148,8,0.4); }
+.nav-ig-dot {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  display: flex; align-items: center; justify-content: center;
+}
+.nav-ig-text { display: flex; flex-direction: column; gap: 1px; }
+.nav-ig-handle { font-size: 13px; font-weight: 700; color: var(--text); }
+.nav-ig-sub    { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.nav-cta {
+  text-decoration: none; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; padding: 9px 20px;
+  transition: all 0.2s;
+}
+.nav-cta:hover { border-color: rgba(255,148,8,0.3); background: rgba(255,148,8,0.06); }
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1; min-height: 100vh;
+  display: flex; align-items: center; padding: 0 52px;
+}
+.hero-split {
+  width: 100%; display: grid; grid-template-columns: 1fr 420px;
+  gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; padding-top: 80px;
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 28px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+}
+.eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--orange); opacity: 0.5; }
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 128px);
+  line-height: 0.87; letter-spacing: 0.01em; margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.t1 { display: block; color: var(--text); }
+.t2 {
+  display: block;
+  background: linear-gradient(100deg, var(--orange) 0%, var(--red) 40%, var(--crimson) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+.hero-tagline {
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.7; color: var(--text);
+  font-weight: 500; max-width: 480px; margin-bottom: 14px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
+}
+.hero-sub {
+  font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 480px; margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+}
+.hero-ig {
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+}
+.hero-ig-link {
+  display: flex; align-items: center; gap: 10px; text-decoration: none;
+  border: 1px solid rgba(255,148,8,0.2); border-radius: 10px; padding: 11px 16px;
+  background: rgba(255,148,8,0.06); transition: all 0.2s;
+}
+.hero-ig-link:hover { background: rgba(255,148,8,0.1); border-color: rgba(255,148,8,0.4); }
+.hero-ig-av {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-ig-info { display: flex; flex-direction: column; gap: 2px; }
+.hero-ig-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.hero-ig-meta { font-size: 11px; color: var(--muted); }
+.hero-ig-btn {
+  font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 8px 14px;
+  border: 1px solid rgba(255,148,8,0.25); border-radius: 6px; text-decoration: none;
+  background: rgba(255,148,8,0.05); transition: all 0.2s;
+}
+.hero-ig-btn:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5); }
+
+/* ── GLASS CARD ── */
+.glass-card {
+  background: var(--glass); backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px;
+  box-shadow: 0 0 0 1px rgba(255,148,8,0.05) inset, 0 40px 80px rgba(0,0,0,0.5);
+  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+  position: relative; overflow: hidden;
+}
+.glass-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.45), transparent);
+}
+
+.card-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em; color: var(--text); margin-bottom: 4px; }
+.card-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+.form-group { margin-bottom: 14px; }
+
+label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+
+input, select {
+  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border2);
+  border-radius: 8px; padding: 12px 14px;
+  font-family: 'Satoshi', sans-serif; font-size: 14px; color: var(--text); outline: none;
+  transition: border-color 0.2s, background 0.2s; -webkit-appearance: none;
+}
+input::placeholder { color: var(--muted); opacity: 0.55; }
+input:focus, select:focus { border-color: rgba(255,148,8,0.4); background: rgba(255,148,8,0.04); }
+select { color: var(--muted); cursor: pointer; }
+select.filled { color: var(--text); }
+select option { background: #1a0d14; color: var(--text); }
+
+.phone-wrap { position: relative; }
+.phone-pre { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); pointer-events: none; z-index: 1; }
+.phone-wrap input { padding-left: 36px; }
+
+.btn-submit {
+  width: 100%; background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  border: none; border-radius: 10px; padding: 16px;
+  font-family: 'Satoshi', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
+  color: #fff; cursor: pointer; margin-top: 6px;
+  transition: opacity 0.2s, transform 0.1s; position: relative; overflow: hidden;
+}
+.btn-submit::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent); pointer-events: none; }
+.btn-submit:hover { opacity: 0.9; }
+.btn-submit:active { transform: scale(0.99); }
+
+.form-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; opacity: 0.7; }
+
+/* Success state with share */
+.success-state { display: none; text-align: center; }
+.success-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+}
+.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--text); margin-bottom: 8px; }
+.success-sub { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+
+.share-box {
+  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.2);
+  border-radius: 10px; padding: 16px;
+  margin-bottom: 14px;
+}
+.share-box-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+.share-box-msg { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+.share-link-row {
+  display: flex; gap: 8px; align-items: center;
+}
+.share-link-input {
+  flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 9px 12px;
+  font-family: 'Satoshi', sans-serif; font-size: 12px; color: var(--muted);
+  outline: none; cursor: default;
+}
+.copy-btn {
+  background: linear-gradient(90deg, var(--orange), var(--crimson));
+  border: none; border-radius: 6px; padding: 9px 14px;
+  font-family: 'Satoshi', sans-serif; font-size: 12px; font-weight: 700;
+  color: #fff; cursor: pointer; white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.copy-btn:hover { opacity: 0.88; }
+
+.share-note { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
+
+/* ── DIVIDER ── */
+.hr { border: none; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* ── THREADS SECTION ── */
+.threads-section { position: relative; z-index: 1; padding: 140px 52px; max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); display: flex; align-items: center; gap: 12px; margin-bottom: 60px;
+}
+.section-label::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
+
+.thread-display { min-height: 300px; }
+
+.thread-word-wrap { display: flex; align-items: baseline; margin-bottom: 6px; }
+.thread-word {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 8vw, 100px);
+  line-height: 1; letter-spacing: 0.02em;
+  background: linear-gradient(100deg, var(--orange) 0%, var(--red) 45%, var(--crimson) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  min-height: 1.1em;
+}
+.cursor {
+  display: inline-block; width: 3px; height: 0.8em; background: var(--orange);
+  margin-left: 4px; vertical-align: middle; animation: blink 0.7s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.thread-def {
+  font-size: 17px; color: var(--muted); font-style: italic;
+  margin-bottom: 0; max-width: 640px; line-height: 1.75;
+  opacity: 0; transition: opacity 0.5s ease;
+  min-height: 80px;
+}
+.thread-def.show { opacity: 1; }
+
+.thread-dots { display: flex; gap: 8px; margin-top: 36px; }
+.dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--sub);
+  cursor: pointer; transition: background 0.2s, transform 0.2s;
+}
+.dot.active { background: var(--orange); transform: scale(1.4); }
+
+/* ── CITY ROLLOUT ── */
+.cities-section { position: relative; z-index: 1; padding: 0 52px 140px; max-width: 1200px; margin: 0 auto; }
+
+.city-intro {
+  max-width: 600px; margin-bottom: 56px;
+}
+.city-intro h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(44px, 5.5vw, 68px); line-height: 0.95; letter-spacing: 0.02em;
+  color: var(--text); margin-bottom: 16px;
+}
+.city-intro .city-sub {
+  font-size: 16px; color: var(--muted); line-height: 1.7;
+}
+
+.cities-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+}
+
+.city-card {
+  background: var(--glass); backdrop-filter: blur(12px);
+  border: 1px solid var(--border2); border-radius: 12px;
+  padding: 20px 18px; position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s;
+}
+.city-card.on { opacity: 1; transform: none; }
+.city-card.home { border-color: rgba(255,148,8,0.3); }
+.city-card.home::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.6), transparent);
+}
+.city-card:not(.home):hover { border-color: rgba(255,255,255,0.12); }
+
+.city-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block;
+}
+.city-badge.live    { background: rgba(255,148,8,0.15); color: var(--orange); border: 1px solid rgba(255,148,8,0.3); }
+.city-badge.soon    { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
+
+.city-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
+.city-state { font-size: 12px; color: var(--muted); }
+
+.city-share {
+  display: flex; align-items: center; gap: 6px; margin-top: 12px;
+  font-size: 11px; color: var(--muted); cursor: pointer;
+  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05);
+  transition: color 0.2s;
+}
+.city-share:hover { color: var(--orange); }
+.city-share svg { flex-shrink: 0; transition: transform 0.2s; }
+.city-share:hover svg { transform: translateX(2px); }
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  position: relative; z-index: 1;
+  background: rgba(14,7,11,0.7); backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.how-inner { max-width: 1200px; margin: 0 auto; padding: 80px 52px; }
+.steps { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 48px; }
+.step {
+  padding: 40px 36px; border-right: 1px solid rgba(255,255,255,0.05);
+  opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.step:last-child { border-right: none; }
+.step.on { opacity: 1; transform: none; }
+.step-n {
+  font-family: 'Bebas Neue', sans-serif; font-size: 44px;
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block; margin-bottom: 16px;
+}
+.step-t { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.step-d { font-size: 13px; line-height: 1.7; color: var(--muted); }
+
+/* ── INSTAGRAM SECTION ── */
+.ig-section { position: relative; z-index: 1; padding: 100px 52px; max-width: 1200px; margin: 0 auto; text-align: center; }
+.ig-card {
+  background: var(--glass); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,148,8,0.15); border-radius: 24px; padding: 60px 48px;
+  position: relative; overflow: hidden;
+}
+.ig-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.5), transparent);
+}
+.ig-big-icon {
+  width: 72px; height: 72px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; box-shadow: 0 8px 32px rgba(255,148,8,0.25);
+}
+.ig-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,56px); color: var(--text); margin-bottom: 12px; }
+.ig-sub { font-size: 16px; color: var(--muted); max-width: 440px; margin: 0 auto 32px; line-height: 1.65; }
+.ig-btn {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  color: #fff; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; padding: 16px 36px; border-radius: 8px;
+  transition: opacity 0.2s;
+}
+.ig-btn:hover { opacity: 0.88; }
+.ig-handle { font-size: 13px; color: var(--muted); margin-top: 16px; }
+
+/* ── CTA ── */
+.cta-section { position: relative; z-index: 1; text-align: center; padding: 160px 52px; overflow: hidden; }
+.cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(149,18,44,0.2) 0%, transparent 60%); }
+.cta-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px,9vw,108px); line-height: 0.9; margin-bottom: 20px; position: relative; }
+.cta-tagline { font-size: 18px; font-weight: 500; color: var(--text); max-width: 480px; margin: 0 auto 12px; line-height: 1.6; position: relative; }
+.cta-sub { font-size: 15px; color: var(--muted); max-width: 400px; margin: 0 auto 48px; line-height: 1.65; position: relative; }
+.cta-btn {
+  display: inline-block; text-decoration: none;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  color: #fff; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; padding: 18px 52px; border-radius: 8px;
+  transition: opacity 0.2s;
+}
+.cta-btn:hover { opacity: 0.88; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 28px 52px; display: flex; align-items: center; justify-content: space-between;
+}
+.foot-logo img { height: 16px; opacity: 0.25; filter: brightness(3); }
+.foot-links { display: flex; gap: 28px; }
+.foot-link { text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--muted); transition: color 0.2s; }
+.foot-link:hover { color: var(--text); }
+.foot-copy { font-size: 12px; color: var(--muted); opacity: 0.4; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+/* ── VIDEO SECTION ── */
+.video-section {
+  position: relative; z-index: 1;
+  width: 100%; overflow: hidden;
+}
+
+.video-wrap {
+  position: relative; width: 100%;
+  height: clamp(360px, 55vw, 680px);
+  overflow: hidden;
+}
+
+.community-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  filter: saturate(0.8);
+}
+
+/* Dark gradient overlays — top and bottom fade into page bg */
+.video-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(8,4,7,1) 0%,
+      rgba(8,4,7,0) 18%,
+      rgba(8,4,7,0) 82%,
+      rgba(8,4,7,1) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(149,18,44,0.08) 50%,
+      transparent 100%
+    );
+  pointer-events: none;
+}
+
+/* Centered text over video */
+.video-caption {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 0 24px;
+  pointer-events: none;
+}
+
+.video-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--orange);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.video-label::before,
+.video-label::after {
+  content: ''; display: block; width: 40px; height: 1px;
+  background: var(--orange); opacity: 0.5;
+}
+
+.video-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5.5vw, 72px);
+  line-height: 1; letter-spacing: 0.02em;
+  color: var(--text);
+  text-shadow: 0 2px 40px rgba(0,0,0,0.8);
+}
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: rgba(20,9,15,0.95); border: 1px solid rgba(255,148,8,0.3);
+  backdrop-filter: blur(16px); border-radius: 10px; padding: 12px 24px;
+  font-size: 13px; font-weight: 600; color: var(--orange); z-index: 998;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 960px) {
+  nav { padding: 18px 24px; }
+  .nav-cta { display: none; }
+  .hero { padding: 0 24px; }
+  .hero-split { grid-template-columns: 1fr; gap: 48px; padding-top: 110px; padding-bottom: 60px; }
+  .threads-section, .cities-section { padding-left: 24px; padding-right: 24px; }
+  .cities-grid { grid-template-columns: repeat(2, 1fr); }
+  .how-inner { padding: 60px 24px; }
+  .steps { grid-template-columns: repeat(2,1fr); }
+  .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .step:last-child { border-bottom: none; }
+  .ig-section { padding: 60px 24px; }
+  .ig-card { padding: 40px 24px; }
+  .cta-section { padding: 100px 24px; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 28px 24px; }
+  .foot-links { flex-wrap: wrap; justify-content: center; }
+  .nav-ig-text .nav-ig-sub { display: none; }
+}
+@media (max-width: 560px) {
+  .form-row { grid-template-columns: 1fr; }
+  .cities-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas-bg"></canvas>
+<div id="bar"></div>
+<div class="toast" id="toast"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="_logo-wordmark.png" alt="Stringz"
+      onerror="this.parentElement.innerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:22px;letter-spacing:0.08em;background:linear-gradient(90deg,#FF9408,#95122C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text\'>STRINGZ</span>'">
+  </a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="nav-ig-pill">
+      <div class="nav-ig-dot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+      </div>
+      <div class="nav-ig-text">
+        <span class="nav-ig-handle">@stringz.social</span>
+        <span class="nav-ig-sub">Follow us</span>
+      </div>
+    </a>
+    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-split">
+    <div>
+      <div class="eyebrow">Atlanta — You're Invited</div>
+      <h1>
+        <span class="t1">Your People</span>
+        <span class="t2">Are Already<br>Out There.</span>
+      </h1>
+      <p class="hero-tagline">Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.</p>
+      <p class="hero-sub">Find events worth showing up for, see who else is going, and build the kind of community you actually want to be part of.</p>
+      <div class="hero-ig">
+        <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="hero-ig-link">
+          <div class="hero-ig-av">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+          </div>
+          <div class="hero-ig-info">
+            <span class="hero-ig-name">@stringz.social</span>
+            <span class="hero-ig-meta">Follow us on Instagram</span>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="hero-ig-btn">Follow</a>
+      </div>
+    </div>
+
+    <!-- Waitlist card -->
+    <div class="glass-card" id="waitlist">
+      <div id="form-state">
+        <p class="card-title">Get Early Access.</p>
+        <p class="card-sub">Atlanta is home — you're up first.</p>
+
+        <div class="form-row">
+          <div>
+            <label>First Name</label>
+            <input type="text" id="f-first" placeholder="First name" autocomplete="given-name">
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input type="text" id="f-last" placeholder="Last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <div class="phone-wrap">
+            <span class="phone-pre">🇺🇸</span>
+            <input type="tel" id="f-phone" placeholder="+1 (404) 000-0000" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Your City</label>
+          <select id="f-city" onchange="this.classList.add('filled')">
+            <option value="" disabled selected>Select your city</option>
+            <option>Atlanta, GA</option>
+            <option>Houston, TX</option>
+            <option>Washington, DC</option>
+            <option>Charlotte, NC</option>
+            <option>Chicago, IL</option>
+            <option>New York, NY</option>
+            <option>Los Angeles, CA</option>
+            <option>Miami, FL</option>
+            <option>Dallas, TX</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button class="btn-submit" onclick="handleSubmit()">Get Early Access</button>
+        <p class="form-note">No spam. Your info is never shared or sold.</p>
+      </div>
+
+      <!-- Success + share state -->
+      <div class="success-state" id="success-state">
+        <div class="success-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <p class="success-title">You're In.</p>
+        <p class="success-sub">Welcome to the community. We'll hit you when Atlanta goes live.</p>
+
+        <div class="share-box">
+          <p class="share-box-label">Grow Your Community</p>
+          <p class="share-box-msg">Share your link and anyone who signs up automatically joins your Stringz community when we launch.</p>
+          <div class="share-link-row">
+            <input class="share-link-input" id="share-url" readonly value="stringz.social/ref/loading...">
+            <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+          </div>
+        </div>
+        <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- Threads typewriter — name + description only -->
+<section class="threads-section">
+  <p class="section-label">Your Threads</p>
+  <div class="thread-display">
+    <div class="thread-word-wrap">
+      <div class="thread-word" id="tw-word"></div>
+      <div class="cursor"></div>
+    </div>
+    <div class="thread-def" id="tw-def"></div>
+    <div class="thread-dots" id="tw-dots"></div>
+  </div>
+</section>
+
+<!-- City Rollout -->
+<section class="cities-section">
+  <div class="city-intro">
+    <h2>Atlanta is Home.<br>But We're Just<br>Getting Started.</h2>
+    <p class="city-sub">Atlanta launches first — because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p>
+  </div>
+
+  <div class="cities-grid" id="cities">
+    <div class="city-card home">
+      <span class="city-badge live">Live First</span>
+      <p class="city-name">Atlanta</p>
+      <p class="city-state">Georgia</p>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Houston</p>
+      <p class="city-state">Texas</p>
+      <div class="city-share" onclick="shareCity('Houston')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock Houston early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Washington</p>
+      <p class="city-state">DC</p>
+      <div class="city-share" onclick="shareCity('Washington DC')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock DC early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Charlotte</p>
+      <p class="city-state">North Carolina</p>
+      <div class="city-share" onclick="shareCity('Charlotte')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock Charlotte early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Chicago</p>
+      <p class="city-state">Illinois</p>
+      <div class="city-share" onclick="shareCity('Chicago')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock Chicago early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">New York</p>
+      <p class="city-state">New York</p>
+      <div class="city-share" onclick="shareCity('New York')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock NYC early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Miami</p>
+      <p class="city-state">Florida</p>
+      <div class="city-share" onclick="shareCity('Miami')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock Miami early
+      </div>
+    </div>
+    <div class="city-card">
+      <span class="city-badge soon">Coming Soon</span>
+      <p class="city-name">Los Angeles</p>
+      <p class="city-state">California</p>
+      <div class="city-share" onclick="shareCity('Los Angeles')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        Share to unlock LA early
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- Video Section -->
+<div class="video-section">
+  <div class="video-wrap">
+    <video autoplay muted loop playsinline src="community.mp4" class="community-video"></video>
+    <div class="video-overlay"></div>
+    <div class="video-caption">
+      <p class="video-label">The Community</p>
+      <p class="video-text">Your people are already out there.<br>Stringz helps you find them.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="hr">
+
+<!-- How It Works -->
+<section class="how-section">
+  <div class="how-inner">
+    <p class="section-label">How It Works</p>
+    <div class="steps" id="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <p class="step-t">Find your thread</p>
+        <p class="step-d">Browse this week's events filtered by the communities that match who you are. Music. Food. Fitness. Culture. You pick.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <p class="step-t">See who's going</p>
+        <p class="step-d">Before you commit — see who else is showing up. Invite your crew or find someone worth meeting. Know the room before you walk in.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <p class="step-t">Show up with intention</p>
+        <p class="step-d">RSVP, set your vibe, and connect with other attendees before the night starts. Walk in knowing exactly who to find.</p>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <p class="step-t">Build your world</p>
+        <p class="step-d">After the meetup — a quick vibe check. Add who clicked. Let the rest go. Real community, on your terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- Instagram Section -->
+<section class="ig-section">
+  <div class="ig-card">
+    <div class="ig-big-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+    </div>
+    <p class="ig-title">We're Building This in Public</p>
+    <p class="ig-sub">Follow along on Instagram as we build Stringz from the ground up — behind the scenes, early looks, and the community growing with us.</p>
+    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="ig-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+      Follow @stringz.social
+    </a>
+    <p class="ig-handle">instagram.com/stringz.social</p>
+  </div>
+</section>
+
+<hr class="hr">
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-glow"></div>
+  <p class="eyebrow" style="justify-content:center;margin-bottom:28px;opacity:1">You're Already Invited</p>
+  <h2 class="cta-h">
+    <span style="color:var(--text);display:block">Find Your</span>
+    <span style="background:linear-gradient(100deg,var(--orange) 0%,var(--red) 42%,var(--crimson) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block">People.</span>
+  </h2>
+  <p class="cta-tagline">Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.</p>
+  <p class="cta-sub">Atlanta launches first. Secure your spot before we go live.</p>
+  <a href="#waitlist" class="cta-btn">Get Early Access</a>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="foot-logo">
+    <img src="_logo-wordmark.png" alt="Stringz" onerror="this.style.display='none'">
+  </div>
+  <div class="foot-links">
+    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="foot-link">Instagram</a>
+    <a href="mailto:support@stringz.social" class="foot-link">support@stringz.social</a>
+  </div>
+  <p class="foot-copy">© 2026 Stringz. All rights reserved.</p>
+</footer>
+
+<script>
+/* ── Animated Mesh ── */
+(function(){
+  const cv=document.getElementById('canvas-bg'), cx=cv.getContext('2d');
+  let W,H;
+  const orbs=[
+    {ox:.7,oy:.2,r:380,sx:.15,sy:.10,h:'crimson',a:.18},
+    {ox:.2,oy:.6,r:300,sx:-.10,sy:-.08,h:'red',a:.12},
+    {ox:.5,oy:.9,r:420,sx:.08,sy:-.12,h:'orange',a:.09},
+    {ox:.85,oy:.7,r:260,sx:-.12,sy:.15,h:'deep',a:.14},
+    {ox:.1,oy:.15,r:320,sx:.10,sy:.12,h:'crimson',a:.10},
+  ];
+  const COLS={crimson:[149,18,44],red:[202,63,22],orange:[255,148,8],deep:[100,8,30]};
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+  function draw(ts){
+    cx.clearRect(0,0,W,H); cx.fillStyle='#080407'; cx.fillRect(0,0,W,H);
+    const t=ts*.0004;
+    orbs.forEach(o=>{
+      const nx=o.ox*W+Math.sin(t*o.sx*2+o.r)*60;
+      const ny=o.oy*H+Math.cos(t*o.sy*2+o.r)*50;
+      const [r,g,b]=COLS[o.h];
+      const g2=cx.createRadialGradient(nx,ny,0,nx,ny,o.r);
+      g2.addColorStop(0,`rgba(${r},${g},${b},${o.a})`);
+      g2.addColorStop(.5,`rgba(${r},${g},${b},${o.a*.4})`);
+      g2.addColorStop(1,`rgba(${r},${g},${b},0)`);
+      cx.fillStyle=g2; cx.beginPath(); cx.arc(nx,ny,o.r,0,Math.PI*2); cx.fill();
+    });
+    cx.fillStyle='rgba(8,4,7,0.22)'; cx.fillRect(0,0,W,H);
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize(); requestAnimationFrame(draw);
+})();
+
+/* ── Scroll progress ── */
+window.addEventListener('scroll',()=>{
+  const s=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('bar').style.width=(s/h*100)+'%';
+},{passive:true});
+
+/* ── Intersection observers ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*90);io.unobserve(e.target);}
+  });
+},{threshold:.12});
+document.querySelectorAll('.step,.city-card').forEach(el=>io.observe(el));
+
+/* ── Toast ── */
+function toast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ── Supabase config ── */
+const SUPA_URL = 'https://ersdolnklkfxdpjtqqdb.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVyc2RvbG5rbGtmeGRwanRxcWRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1MTcyMDYsImV4cCI6MjA1ODA5MzIwNn0.pQZPv3SUNNxcGk3z5sABHSRpNPNP8s3sxJQjBhwHqkA';
+
+/* ── Referral code generator ── */
+function makeRefCode(email){
+  const base = btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g,'').substring(0,10).toLowerCase();
+  return base;
+}
+
+/* ── Get referred_by from URL ── */
+function getRefParam(){
+  const p = new URLSearchParams(window.location.search);
+  return p.get('ref') || null;
+}
+
+/* ── Waitlist submit ── */
+async function handleSubmit(){
+  const first = document.getElementById('f-first').value.trim();
+  const last  = document.getElementById('f-last').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const city  = document.getElementById('f-city').value;
+
+  // Validate
+  const inv=[];
+  if(!first) inv.push('f-first');
+  if(!last)  inv.push('f-last');
+  if(!email||!email.includes('@')) inv.push('f-email');
+  if(!city)  inv.push('f-city');
+  if(inv.length){
+    inv.forEach(id=>{
+      const el=document.getElementById(id);
+      el.style.borderColor='rgba(255,80,80,0.6)';
+      setTimeout(()=>el.style.borderColor='',1800);
+    }); return;
+  }
+
+  // Disable button
+  const btn = document.querySelector('.btn-submit');
+  btn.textContent = 'Securing your spot...';
+  btn.style.opacity = '0.7';
+  btn.disabled = true;
+
+  const refCode = makeRefCode(email);
+  const referredBy = getRefParam();
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/waitlist`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        first_name:  first,
+        last_name:   last,
+        email:       email,
+        phone:       phone || null,
+        city:        city,
+        ref_code:    refCode,
+        referred_by: referredBy
+      })
+    });
+
+    if(res.ok || res.status === 409) {
+      // 409 = duplicate email, still show success
+      const shareLink = `https://stringz.social?ref=${refCode}`;
+      document.getElementById('share-url').value = shareLink;
+      document.getElementById('form-state').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+    } else {
+      const err = await res.json();
+      console.error('Supabase error:', err);
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+    }
+  } catch(e){
+    console.error('Network error:', e);
+    btn.textContent = 'Something went wrong — try again';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+  }
+}
+
+/* ── Copy referral link ── */
+function copyLink(){
+  const val=document.getElementById('share-url').value;
+  navigator.clipboard.writeText('https://'+val).then(()=>{
+    toast('Link copied — share it with your people!');
+  }).catch(()=>{
+    document.getElementById('share-url').select();
+    document.execCommand('copy');
+    toast('Link copied!');
+  });
+}
+
+/* ── City share ── */
+function shareCity(city){
+  const msg=`Stringz is coming to ${city}! Sign up for early access — when you use my link, we automatically connect on the app: https://stringz.social`;
+  if(navigator.share){
+    navigator.share({title:'Stringz — Your People Are Already Out There', text:msg}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(msg).then(()=>toast(`Copied share message for ${city}!`));
+  }
+}
+
+/* ── Typewriter Threads (name + definition only) ── */
+const THREADS=[
+  {name:'Pass the Aux',       def:'Music is the main character. These are the nights where the playlist hits just right, the energy is electric, and you end up staying way longer than you planned. Whether it\'s a live set, a DJ night, or a watch party — if the sound is the whole point, this is your thread.'},
+  {name:'Outside Energy',     def:'Some of the best moments happen when you step outside. Day parties in the sun, street markets with good finds, pop-up events where the weather and the people just work. If it\'s happening outdoors and the vibe is everything, this is where you\'ll find it.'},
+  {name:'The Feed',           def:'Food festivals, bottomless brunches, pop-up dining experiences — events where the meal is the whole point and the conversations happen over a shared plate. Come hungry. Leave with new people in your phone.'},
+  {name:'The Sweat Check',    def:'Run clubs, yoga in the park, group fitness classes, wellness workshops. Because the people you work out alongside are usually the most real ones you\'ll meet. Sweat together, stay together.'},
+  {name:'The Culture',        def:'Fashion shows, gallery openings, comedy nights, film screenings. The events that remind you why your city is a creative capital. Come dressed. Come curious. Leave inspired.'},
+  {name:'Secure the Bag',     def:'Networking events that actually connect you with people doing real things. Panels, pitch nights, summits, and masterclasses — where the right conversation in the right room can genuinely change your trajectory.'},
+  {name:'The Arena',          def:'Bingo nights, watch parties, trivia leagues, bowling, game nights. Competitive energy mixed with good people. You come to play, you stay because the room just hits different.'},
+  {name:'Shoot Your Shot',    def:'Speed dating, singles mixers, and intentional social events for people who are actually open to meeting someone. Low pressure, real people, good energy. No apps. No swiping. Just showing up.'},
+];
+
+let cur=0, typeTimer=null, autoTimer=null;
+
+function renderDots(){
+  const w=document.getElementById('tw-dots'); w.innerHTML='';
+  THREADS.forEach((_,i)=>{
+    const d=document.createElement('div'); d.className='dot'+(i===cur?' active':'');
+    d.onclick=()=>{clearTimeout(autoTimer);go(i);}; w.appendChild(d);
+  });
+}
+
+function typeWord(word,el,done){
+  clearTimeout(typeTimer); el.textContent=''; let i=0;
+  function t(){
+    if(i<=word.length){ el.textContent=word.slice(0,i++); typeTimer=setTimeout(t,i===1?100:48+Math.random()*28); }
+    else done();
+  }
+  t();
+}
+
+function go(index){
+  cur=index; renderDots();
+  const th=THREADS[index];
+  const wordEl=document.getElementById('tw-word');
+  const defEl=document.getElementById('tw-def');
+  defEl.classList.remove('show'); defEl.textContent='';
+  typeWord(th.name,wordEl,()=>{
+    setTimeout(()=>{
+      defEl.textContent=th.def; defEl.classList.add('show');
+      autoTimer=setTimeout(()=>go((cur+1)%THREADS.length),4000);
+    },150);
+  });
+}
+
+renderDots(); go(0);
+</script>
+</body>
+</html>
