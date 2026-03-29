@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Stringz — Your People Are Already Out There</title>
-<meta name="description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
+<title>Stringz â Your People Are Already Out There</title>
+<meta name="description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access â Atlanta launches first.">
 <link rel="canonical" href="https://stringz.social/waitlist">
 <meta property="og:type"         content="website">
 <meta property="og:url"          content="https://stringz.social/waitlist">
-<meta property="og:title"        content="Your People Are Already Out There — Stringz">
-<meta property="og:description"  content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
+<meta property="og:title"        content="Your People Are Already Out There â Stringz">
+<meta property="og:description"  content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access â Atlanta launches first.">
 <meta property="og:image"        content="https://stringz.social/waitlist/brand_photo_stringz.png">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name"    content="Stringz">
 <meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="Your People Are Already Out There — Stringz">
+<meta name="twitter:title"       content="Your People Are Already Out There â Stringz">
 <meta name="twitter:description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.">
 <meta name="twitter:image"       content="https://stringz.social/waitlist/brand_photo_stringz.png">
 
@@ -24,9 +24,9 @@
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 
 <style>
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    RESET & DESIGN TOKENS
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:16px; }
 
@@ -53,7 +53,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Film grain ── */
+/* ââ Film grain ââ */
 body::before {
   content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -61,14 +61,14 @@ body::before {
   mix-blend-mode: overlay;
 }
 
-/* ── Progress bar ── */
+/* ââ Progress bar ââ */
 #bar {
   position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 9999;
   background: linear-gradient(90deg, var(--orange), var(--crimson));
   transition: width 0.1s linear;
 }
 
-/* ── Background flare video (full-page, light texture) ── */
+/* ââ Background flare video (full-page, light texture) ââ */
 #bg-flare-wrap {
   position: fixed; inset: 0; z-index: -1; overflow: hidden;
 }
@@ -76,16 +76,16 @@ body::before {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0.55; filter: saturate(1.6) brightness(1.1);
 }
-/* Soft vignette — just enough to keep edges readable */
+/* Soft vignette â just enough to keep edges readable */
 #bg-flare-wrap::after {
   content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse 90% 90% at 50% 50%,
     rgba(6,3,10,0.08) 0%, rgba(6,3,10,0.42) 100%);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    NAV
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
   display: flex; align-items: center; justify-content: space-between;
@@ -129,9 +129,9 @@ nav {
 }
 .nav-cta:hover { border-color: var(--orange); background: rgba(255,148,8,0.1); color: var(--orange); }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    TICKER TAPE
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .ticker-wrap {
   overflow: hidden;
   border-top: 1px solid rgba(255,148,8,0.1); border-bottom: 1px solid rgba(255,148,8,0.1);
@@ -148,9 +148,9 @@ nav {
 .ticker-item em { color: var(--orange); font-style: normal; margin-right: 8px; }
 @keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ═══════════════════════════════════════════════════════
-   HERO — hero-atl.mp4 fullscreen
-═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   HERO â hero-atl.mp4 fullscreen
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .hero {
   position: relative; z-index: 1;
   min-height: 100svh;
@@ -167,7 +167,7 @@ nav {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0.80; filter: saturate(1.1) brightness(0.85);
 }
-/* Lighter overlay — Atlanta shows through, text still readable */
+/* Lighter overlay â Atlanta shows through, text still readable */
 .hero-vid-wrap::after {
   content: ''; position: absolute; inset: 0;
   background:
@@ -191,7 +191,7 @@ nav {
 /* Prevent giant h1 from blowing out the left column */
 .hero-split > div:first-child { min-width: 0; overflow: hidden; }
 
-/* ── Eyebrow ── */
+/* ââ Eyebrow ââ */
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: 'Barlow Condensed', sans-serif;
@@ -202,7 +202,7 @@ nav {
 }
 .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--orange); opacity: 0.6; }
 
-/* ── MASSIVE H1 ── */
+/* ââ MASSIVE H1 ââ */
 h1 {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(50px,9vw,112px);
@@ -262,9 +262,9 @@ h1 {
 }
 .hero-ig-btn:hover { background: rgba(255,148,8,0.14); border-color: rgba(255,148,8,0.55); }
 
-/* ═══════════════════════════════════════════════════════
-   PREMIUM GLASS CARD — dark for legibility over light flare
-═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   PREMIUM GLASS CARD â dark for legibility over light flare
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .glass-card {
   background: var(--glass-dk);
   backdrop-filter: blur(48px) saturate(160%);
@@ -337,7 +337,7 @@ select option { background: #120810; color: var(--text); }
 }
 .phone-wrap input { padding-left: 38px; }
 
-/* ── THE BUTTON ── */
+/* ââ THE BUTTON ââ */
 .btn-submit {
   width: 100%; position: relative; overflow: hidden;
   background: linear-gradient(90deg, var(--orange) 0%, var(--red) 48%, var(--crimson) 100%);
@@ -377,7 +377,7 @@ select option { background: #120810; color: var(--text); }
 
 .form-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 10px; opacity: 0.55; }
 
-/* ── Success state ── */
+/* ââ Success state ââ */
 .success-state { display: none; text-align: center; }
 .success-icon {
   width: 56px; height: 56px; border-radius: 50%;
@@ -422,14 +422,14 @@ select option { background: #120810; color: var(--text); }
 .copy-btn:hover { opacity: 0.88; }
 .share-note { font-size: 10px; color: var(--muted); text-align: center; line-height: 1.6; }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    DIVIDER
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .hr { border: none; border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    SHARED: SECTION LABEL
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .section-label {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
@@ -437,9 +437,9 @@ select option { background: #120810; color: var(--text); }
 }
 .section-label::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
 
-/* ═══════════════════════════════════════════════════════
-   THREADS SECTION — TICKET CARD
-═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   THREADS SECTION â TICKET CARD
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .threads-section {
   position: relative; z-index: 1;
   padding: clamp(80px,10vw,140px) clamp(20px,4.5vw,52px);
@@ -495,7 +495,7 @@ select option { background: #120810; color: var(--text); }
 }
 .ticket-label-row::after { content: ''; flex: 1; height: 1px; background: rgba(255,148,8,0.1); }
 
-/* ── MASSIVE THREAD WORD ── */
+/* ââ MASSIVE THREAD WORD ââ */
 .thread-word-wrap { display: flex; align-items: baseline; flex-wrap: wrap; }
 .thread-word {
   font-family: 'Bebas Neue', sans-serif;
@@ -541,9 +541,9 @@ select option { background: #120810; color: var(--text); }
 }
 .thread-arrow:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5); color: var(--orange); }
 
-/* ═══════════════════════════════════════════════════════
-   CITIES SECTION — TICKET AESTHETIC
-═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   CITIES SECTION â TICKET AESTHETIC
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .cities-section {
   position: relative; z-index: 1;
   padding: 0 clamp(20px,4.5vw,52px) clamp(80px,10vw,140px);
@@ -570,7 +570,7 @@ select option { background: #120810; color: var(--text); }
 
 .cities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
 
-/* City cards — ticket treatment */
+/* City cards â ticket treatment */
 .city-card {
   background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
   border: 1px solid var(--border2); border-radius: 12px; padding: 18px 16px;
@@ -580,7 +580,7 @@ select option { background: #120810; color: var(--text); }
 }
 .city-card.on { opacity: 1; transform: none; }
 
-/* Atlanta — animated conic border */
+/* Atlanta â animated conic border */
 .city-card.home {
   border-color: rgba(255,148,8,0.35);
   box-shadow: 0 0 40px rgba(255,148,8,0.12), inset 0 0 28px rgba(255,148,8,0.05);
@@ -622,9 +622,9 @@ select option { background: #120810; color: var(--text); }
 
 
 
-/* ═══════════════════════════════════════════════════════
-   HOW IT WORKS — TICKET AESTHETIC
-═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   HOW IT WORKS â TICKET AESTHETIC
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .how-section {
   position: relative; z-index: 1;
   border-top: 1px solid rgba(255,255,255,0.045);
@@ -691,9 +691,9 @@ select option { background: #120810; color: var(--text); }
 .step-t { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
 .step-d { font-size: 12px; line-height: 1.74; color: var(--muted); }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    INSTAGRAM SECTION
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .ig-section {
   position: relative; z-index: 1;
   padding: clamp(60px,8vw,110px) clamp(20px,4.5vw,52px);
@@ -731,9 +731,9 @@ select option { background: #120810; color: var(--text); }
 .ig-btn:hover { opacity: 0.9; box-shadow: 0 6px 40px rgba(202,63,22,0.62); }
 .ig-handle { font-size: 12px; color: var(--muted); margin-top: 14px; }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    CTA SECTION
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .cta-section {
   position: relative; z-index: 1; text-align: center;
   padding: clamp(100px,13vw,200px) clamp(20px,4.5vw,52px); overflow: hidden;
@@ -771,9 +771,9 @@ select option { background: #120810; color: var(--text); }
   transform: translateY(-2px);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    FOOTER
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 footer {
   position: relative; z-index: 1;
   border-top: 1px solid rgba(255,255,255,0.05);
@@ -789,9 +789,9 @@ footer {
 .foot-link:hover { color: var(--text); }
 .foot-copy { font-size: 11px; color: var(--muted); opacity: 0.36; }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    TOAST
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 .toast {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
   background: rgba(0,0,0,0.96); border: 1px solid rgba(255,148,8,0.32);
@@ -801,14 +801,14 @@ footer {
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    ANIMATIONS
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 @keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    RESPONSIVE
-═══════════════════════════════════════════════════════ */
+âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 @media (max-width: 960px) {
   nav { padding:12px 18px; position:relative; background:rgba(6,3,10,0.99); }
   .nav-cta { display:none; }
@@ -851,10 +851,14 @@ footer {
   .step:last-child { border-radius:0 0 12px 12px !important; }
 }
 </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() { emailjs.init('I1dmdbtHOjOduh8Wa'); })();
+  </script>
 </head>
 <body>
 
-<!-- ══ BACKGROUND FLARE VIDEO (light orange/pink texture) ══ -->
+<!-- ââ BACKGROUND FLARE VIDEO (light orange/pink texture) ââ -->
 <div id="bg-flare-wrap">
   <video id="bg-flare" autoplay muted loop playsinline src="bg-flare.mp4"></video>
 </div>
@@ -862,7 +866,7 @@ footer {
 <div id="bar"></div>
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════════ NAV ══════════════════ -->
+<!-- ââââââââââââââââââ NAV ââââââââââââââââââ -->
 <nav>
   <a href="#" class="nav-logo">
     <img src="logo-wordmark.png" alt="Stringz"
@@ -885,7 +889,7 @@ footer {
   </div>
 </nav>
 
-<!-- ══════════════════ HERO — hero-atl.mp4 ══════════════════ -->
+<!-- ââââââââââââââââââ HERO â hero-atl.mp4 ââââââââââââââââââ -->
 <section class="hero" id="top">
 
   <!-- Atlanta video backdrop -->
@@ -900,26 +904,26 @@ footer {
       <!-- Ticker -->
       <div class="ticker-wrap">
         <div class="ticker-track">
-          <span class="ticker-item"><em>✦</em>Pass the Aux</span>
-          <span class="ticker-item"><em>✦</em>Outside Energy</span>
-          <span class="ticker-item"><em>✦</em>The Feed</span>
-          <span class="ticker-item"><em>✦</em>The Sweat Check</span>
-          <span class="ticker-item"><em>✦</em>The Culture</span>
-          <span class="ticker-item"><em>✦</em>Secure the Bag</span>
-          <span class="ticker-item"><em>✦</em>The Arena</span>
-          <span class="ticker-item"><em>✦</em>Shoot Your Shot</span>
-          <span class="ticker-item"><em>✦</em>Pass the Aux</span>
-          <span class="ticker-item"><em>✦</em>Outside Energy</span>
-          <span class="ticker-item"><em>✦</em>The Feed</span>
-          <span class="ticker-item"><em>✦</em>The Sweat Check</span>
-          <span class="ticker-item"><em>✦</em>The Culture</span>
-          <span class="ticker-item"><em>✦</em>Secure the Bag</span>
-          <span class="ticker-item"><em>✦</em>The Arena</span>
-          <span class="ticker-item"><em>✦</em>Shoot Your Shot</span>
+          <span class="ticker-item"><em>â¦</em>Pass the Aux</span>
+          <span class="ticker-item"><em>â¦</em>Outside Energy</span>
+          <span class="ticker-item"><em>â¦</em>The Feed</span>
+          <span class="ticker-item"><em>â¦</em>The Sweat Check</span>
+          <span class="ticker-item"><em>â¦</em>The Culture</span>
+          <span class="ticker-item"><em>â¦</em>Secure the Bag</span>
+          <span class="ticker-item"><em>â¦</em>The Arena</span>
+          <span class="ticker-item"><em>â¦</em>Shoot Your Shot</span>
+          <span class="ticker-item"><em>â¦</em>Pass the Aux</span>
+          <span class="ticker-item"><em>â¦</em>Outside Energy</span>
+          <span class="ticker-item"><em>â¦</em>The Feed</span>
+          <span class="ticker-item"><em>â¦</em>The Sweat Check</span>
+          <span class="ticker-item"><em>â¦</em>The Culture</span>
+          <span class="ticker-item"><em>â¦</em>Secure the Bag</span>
+          <span class="ticker-item"><em>â¦</em>The Arena</span>
+          <span class="ticker-item"><em>â¦</em>Shoot Your Shot</span>
         </div>
       </div>
 
-      <div class="eyebrow">Atlanta — You're Invited</div>
+      <div class="eyebrow">Atlanta â You're Invited</div>
 
       <h1>
         <span class="t1">Your People</span>
@@ -950,7 +954,7 @@ footer {
     <div class="glass-card" id="waitlist">
       <div id="form-state">
         <p class="card-title">Get Early Access.</p>
-        <p class="card-sub">Atlanta is home — you're up first.</p>
+        <p class="card-sub">Atlanta is home â you're up first.</p>
 
         <div class="form-row">
           <div>
@@ -971,7 +975,7 @@ footer {
         <div class="form-group">
           <label>Phone Number</label>
           <div class="phone-wrap">
-            <span class="phone-pre">🇺🇸</span>
+            <span class="phone-pre">ðºð¸</span>
             <input type="tel" id="f-phone" placeholder="+1 (404) 000-0000" autocomplete="tel">
           </div>
         </div>
@@ -993,7 +997,7 @@ footer {
           </select>
         </div>
 
-        <button class="btn-submit" onclick="handleSubmit()">Secure Your Spot →</button>
+        <button class="btn-submit" onclick="handleSubmit()">Secure Your Spot â</button>
         <p class="form-note">No spam. Your info is never shared or sold.</p>
       </div>
 
@@ -1023,7 +1027,7 @@ footer {
 
 <hr class="hr">
 
-<!-- ══════════════════ THREADS — TICKET CARD ══════════════════ -->
+<!-- ââââââââââââââââââ THREADS â TICKET CARD ââââââââââââââââââ -->
 <section class="threads-section">
   <div style="margin-bottom:clamp(24px,3.5vw,44px)">
     <p class="section-label">Your Threads</p>
@@ -1057,12 +1061,12 @@ footer {
   </div>
 </section>
 
-<!-- ══════════════════ CITIES ══════════════════ -->
+<!-- ââââââââââââââââââ CITIES ââââââââââââââââââ -->
 <section class="cities-section">
   <div class="city-header">
     <div class="city-intro">
       <h2>Atlanta is Home.<br>But We're Just<br>Getting Started.</h2>
-      <p class="city-sub">Atlanta launches first — because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p>
+      <p class="city-sub">Atlanta launches first â because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p>
     </div>
     <img src="brand_photo_stringz.png" alt="Stringz community" class="city-brand-img"
       onerror="this.style.display='none'">
@@ -1136,7 +1140,7 @@ footer {
 
 <hr class="hr">
 
-<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
+<!-- ââââââââââââââââââ HOW IT WORKS ââââââââââââââââââ -->
 <section class="how-section">
   <div class="how-inner">
     <div class="how-header">
@@ -1154,7 +1158,7 @@ footer {
         <div class="step-barcode" id="bc2"></div>
         <span class="step-n">02</span>
         <p class="step-t">See who's going</p>
-        <p class="step-d">Before you commit — see who else is showing up. Invite your crew or find someone worth meeting. Know the room before you walk in.</p>
+        <p class="step-d">Before you commit â see who else is showing up. Invite your crew or find someone worth meeting. Know the room before you walk in.</p>
       </div>
       <div class="step">
         <div class="step-barcode" id="bc3"></div>
@@ -1166,7 +1170,7 @@ footer {
         <div class="step-barcode" id="bc4"></div>
         <span class="step-n">04</span>
         <p class="step-t">Build your world</p>
-        <p class="step-d">After the meetup — a quick vibe check. Add who clicked. Let the rest go. Real community, on your terms.</p>
+        <p class="step-d">After the meetup â a quick vibe check. Add who clicked. Let the rest go. Real community, on your terms.</p>
       </div>
     </div>
   </div>
@@ -1174,7 +1178,7 @@ footer {
 
 <hr class="hr">
 
-<!-- ══════════════════ INSTAGRAM ══════════════════ -->
+<!-- ââââââââââââââââââ INSTAGRAM ââââââââââââââââââ -->
 <section class="ig-section">
   <div class="ig-card">
     <div class="ig-big-icon">
@@ -1184,7 +1188,7 @@ footer {
       </svg>
     </div>
     <p class="ig-title">We're Building This in Public</p>
-    <p class="ig-sub">Follow along on Instagram as we build Stringz from the ground up — behind the scenes, early looks, and the community growing with us.</p>
+    <p class="ig-sub">Follow along on Instagram as we build Stringz from the ground up â behind the scenes, early looks, and the community growing with us.</p>
     <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="ig-btn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
         <rect x="2" y="2" width="20" height="20" rx="5"/>
@@ -1198,7 +1202,7 @@ footer {
 
 <hr class="hr">
 
-<!-- ══════════════════ CTA ══════════════════ -->
+<!-- ââââââââââââââââââ CTA ââââââââââââââââââ -->
 <section class="cta-section">
   <div class="cta-glow"></div>
   <p class="eyebrow" style="justify-content:center;margin-bottom:28px;opacity:1">You're Already Invited</p>
@@ -1208,10 +1212,10 @@ footer {
   </h2>
   <p class="cta-tagline">Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.</p>
   <p class="cta-sub">Atlanta launches first. Secure your spot before we go live.</p>
-  <a href="#waitlist" class="cta-btn">Get Early Access →</a>
+  <a href="#waitlist" class="cta-btn">Get Early Access â</a>
 </section>
 
-<!-- ══════════════════ FOOTER ══════════════════ -->
+<!-- ââââââââââââââââââ FOOTER ââââââââââââââââââ -->
 <footer>
   <div class="foot-logo">
     <img src="logo-wordmark.png" alt="Stringz" onerror="this.style.display='none'">
@@ -1222,14 +1226,14 @@ footer {
       <span class="__cf_email__" data-cfemail="52212722223d2026122126203b3c35287c213d313b333e">[email&#160;protected]</span>
     </a>
   </div>
-  <p class="foot-copy">© 2026 Stringz. All rights reserved.</p>
+  <p class="foot-copy">Â© 2026 Stringz. All rights reserved.</p>
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-/* ══════════════════════════════════════════════════════════
-   SUCCESS SWOOSH — preloaded, fires on successful submit
-══════════════════════════════════════════════════════════ */
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   SUCCESS SWOOSH â preloaded, fires on successful submit
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 const swooshAudio = new Audio('success-swoosh.wav');
 swooshAudio.preload = 'auto';
 
@@ -1240,11 +1244,11 @@ function playSwoosh() {
   } catch(e) {}
 }
 
-/* ══════════════════════════════════════════════════════════
-   TYPE CLICK AUDIO — fires on every typewriter keystroke
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   TYPE CLICK AUDIO â fires on every typewriter keystroke
    Uses an AudioBuffer pool so rapid clicks never overlap
-══════════════════════════════════════════════════════════ */
-/* ── TYPE CLICK — Web Audio API (no distortion, clean per-keystroke clicks) ── */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
+/* ââ TYPE CLICK â Web Audio API (no distortion, clean per-keystroke clicks) ââ */
 let _audioCtx = null;
 let _clickBuffer = null;
 let _clickReady = false;
@@ -1280,21 +1284,21 @@ function playTypeClick() {
     gain.gain.value = 0.28;
     src.connect(gain);
     gain.connect(ctx.destination);
-    src.start(0, 0, 0.08); /* play only first 80ms — crisp click, no tail */
+    src.start(0, 0, 0.08); /* play only first 80ms â crisp click, no tail */
   } catch(e) {}
 }
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    SCROLL PROGRESS BAR
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 window.addEventListener('scroll', () => {
   const s = scrollY, h = document.documentElement.scrollHeight - innerHeight;
   document.getElementById('bar').style.width = (s / h * 100) + '%';
 }, { passive: true });
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    INTERSECTION OBSERVERS
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 const io = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1305,9 +1309,9 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: .12 });
 document.querySelectorAll('.step, .city-card').forEach(el => io.observe(el));
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    DECORATIVE BARCODES
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 function makeBarcode(el, seed) {
   if (!el) return;
   const h = [28,16,22,12,28,10,20,16,28,12,18,28,14,22,10,28,18,14,22,28];
@@ -1322,18 +1326,18 @@ makeBarcode(document.getElementById('bc2'), 8);
 makeBarcode(document.getElementById('bc3'), 14);
 makeBarcode(document.getElementById('bc4'), 6);
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    TOAST
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 function toast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ══════════════════════════════════════════════════════════
-   SUPABASE CONFIG — DO NOT MODIFY
-══════════════════════════════════════════════════════════ */
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   SUPABASE CONFIG â DO NOT MODIFY
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 const SUPA_URL = 'https://ersdolnklkfxdpjtqqdb.supabase.co';
 const SUPA_KEY = 'sb_publishable_7DO1aPgeAvEwAn2ka2oU5A_lh2XmJnA';
 
@@ -1346,10 +1350,10 @@ function getRefParam() {
   return p.get('ref') || null;
 }
 
-/* ══════════════════════════════════════════════════════════
-   WAITLIST SUBMIT — DO NOT MODIFY LOGIC
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   WAITLIST SUBMIT â DO NOT MODIFY LOGIC
    Audio trigger added at success point only
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 async function handleSubmit() {
   const first = document.getElementById('f-first').value.trim();
   const last  = document.getElementById('f-last').value.trim();
@@ -1400,8 +1404,9 @@ async function handleSubmit() {
     });
 
     if (res.ok || res.status === 409) {
-      /* ── AUDIO TRIGGER — fires exactly on success ── */
+      /* ââ AUDIO TRIGGER â fires exactly on success ââ */
       playSwoosh();
+          emailjs.send('service_p0pkhiu', 'template_7fvnfxg', { to_email: email, first_name: first }).catch(function(err) { console.warn('EmailJS error', err); });
 
       const shareLink = `https://stringz.social?ref=${refCode}`;
       document.getElementById('share-url').value = shareLink;
@@ -1410,25 +1415,25 @@ async function handleSubmit() {
     } else {
       const err = await res.json();
       console.error('Supabase error:', err);
-      btn.textContent = 'Something went wrong — try again';
+      btn.textContent = 'Something went wrong â try again';
       btn.style.opacity = '1';
       btn.disabled = false;
     }
   } catch (e) {
     console.error('Network error:', e);
-    btn.textContent = 'Something went wrong — try again';
+    btn.textContent = 'Something went wrong â try again';
     btn.style.opacity = '1';
     btn.disabled = false;
   }
 }
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    COPY LINK
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 function copyLink() {
   const val = document.getElementById('share-url').value;
   navigator.clipboard.writeText('https://' + val).then(() => {
-    toast('Link copied — share it with your people!');
+    toast('Link copied â share it with your people!');
   }).catch(() => {
     document.getElementById('share-url').select();
     document.execCommand('copy');
@@ -1436,28 +1441,28 @@ function copyLink() {
   });
 }
 
-/* ══════════════════════════════════════════════════════════
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    CITY SHARE
-══════════════════════════════════════════════════════════ */
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 function shareCity(city) {
-  const msg = `Stringz is coming to ${city}! Sign up for early access — when you use my link, we automatically connect on the app: https://stringz.social`;
+  const msg = `Stringz is coming to ${city}! Sign up for early access â when you use my link, we automatically connect on the app: https://stringz.social`;
   if (navigator.share) {
-    navigator.share({ title: 'Stringz — Your People Are Already Out There', text: msg }).catch(() => {});
+    navigator.share({ title: 'Stringz â Your People Are Already Out There', text: msg }).catch(() => {});
   } else {
     navigator.clipboard.writeText(msg).then(() => toast(`Copied share message for ${city}!`));
   }
 }
 
-/* ══════════════════════════════════════════════════════════
-   DICTIONARY TYPEWRITER — UNTOUCHED LOGIC
-══════════════════════════════════════════════════════════ */
+/* ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   DICTIONARY TYPEWRITER â UNTOUCHED LOGIC
+ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 const THREADS = [
-  { name: 'Pass the Aux',    def: 'Music is the main character. These are the nights where the playlist hits just right, the energy is electric, and you end up staying way longer than you planned. Whether it\'s a live set, a DJ night, or a watch party — if the sound is the whole point, this is your thread.' },
+  { name: 'Pass the Aux',    def: 'Music is the main character. These are the nights where the playlist hits just right, the energy is electric, and you end up staying way longer than you planned. Whether it\'s a live set, a DJ night, or a watch party â if the sound is the whole point, this is your thread.' },
   { name: 'Outside Energy',  def: 'Some of the best moments happen when you step outside. Day parties in the sun, street markets with good finds, pop-up events where the weather and the people just work. If it\'s happening outdoors and the vibe is everything, this is where you\'ll find it.' },
-  { name: 'The Feed',        def: 'Food festivals, bottomless brunches, pop-up dining experiences — events where the meal is the whole point and the conversations happen over a shared plate. Come hungry. Leave with new people in your phone.' },
+  { name: 'The Feed',        def: 'Food festivals, bottomless brunches, pop-up dining experiences â events where the meal is the whole point and the conversations happen over a shared plate. Come hungry. Leave with new people in your phone.' },
   { name: 'The Sweat Check', def: 'Run clubs, yoga in the park, group fitness classes, wellness workshops. Because the people you work out alongside are usually the most real ones you\'ll meet. Sweat together, stay together.' },
   { name: 'The Culture',     def: 'Fashion shows, gallery openings, comedy nights, film screenings. The events that remind you why your city is a creative capital. Come dressed. Come curious. Leave inspired.' },
-  { name: 'Secure the Bag',  def: 'Networking events that actually connect you with people doing real things. Panels, pitch nights, summits, and masterclasses — where the right conversation in the right room can genuinely change your trajectory.' },
+  { name: 'Secure the Bag',  def: 'Networking events that actually connect you with people doing real things. Panels, pitch nights, summits, and masterclasses â where the right conversation in the right room can genuinely change your trajectory.' },
   { name: 'The Arena',       def: 'Bingo nights, watch parties, trivia leagues, bowling, game nights. Competitive energy mixed with good people. You come to play, you stay because the room just hits different.' },
   { name: 'Shoot Your Shot', def: 'Speed dating, singles mixers, and intentional social events for people who are actually open to meeting someone. Low pressure, real people, good energy. No apps. No swiping. Just showing up.' },
 ];
