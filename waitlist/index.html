@@ -652,6 +652,7 @@ select option { background: #120810; color: var(--text); }
   text-shadow: var(--txt-shadow);
 }
 .how-title span {
+  display: block; margin-top: 0.15em;
   background: linear-gradient(108deg, var(--orange) 0%, var(--red) 42%, var(--crimson) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   filter:
@@ -844,6 +845,7 @@ footer {
 }
 @media (max-width: 560px) {
   .how-title { line-height: 1.25 !important; }
+  .how-title span { display: block; margin-top: 0.35em; }
   .t1 { margin-bottom: 0.55em !important; line-height: 1.2; display: block; }
   .t2 { display: block; margin-top: 0.15em; line-height: 1.2; }
   .form-row { grid-template-columns:1fr; }
