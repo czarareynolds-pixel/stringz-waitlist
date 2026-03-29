@@ -1269,7 +1269,7 @@ function playTypeClick() {
     gain.gain.value = 0.28;
     src.connect(gain);
     gain.connect(ctx.destination);
-    src.start();
+    src.start(0, 0, 0.08); /* play only first 80ms — crisp click, no tail */
   } catch(e) {}
 }
 
