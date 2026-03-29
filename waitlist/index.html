@@ -2,542 +2,914 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Stringz — Your People Are Already Out There</title>
-<!-- Primary meta -->
 <meta name="description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
 <link rel="canonical" href="https://stringz.social/waitlist">
-
-<!-- Open Graph — controls how the link looks on Instagram, iMessage, Facebook, Slack -->
-<meta property="og:type"        content="website">
-<meta property="og:url"         content="https://stringz.social/waitlist">
-<meta property="og:title"       content="Your People Are Already Out There — Stringz">
-<meta property="og:description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
-<meta property="og:image"       content="https://stringz.social/waitlist/brand_photo_stringz.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height"content="630">
-<meta property="og:site_name"   content="Stringz">
-
-<!-- Twitter / X card -->
+<meta property="og:type"         content="website">
+<meta property="og:url"          content="https://stringz.social/waitlist">
+<meta property="og:title"        content="Your People Are Already Out There — Stringz">
+<meta property="og:description"  content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new. Get early access — Atlanta launches first.">
+<meta property="og:image"        content="https://stringz.social/waitlist/brand_photo_stringz.png">
+<meta property="og:image:width"  content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name"    content="Stringz">
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="Your People Are Already Out There — Stringz">
 <meta name="twitter:description" content="Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.">
 <meta name="twitter:image"       content="https://stringz.social/waitlist/brand_photo_stringz.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* ═══════════════════════════════════════════════════════
+   RESET & DESIGN TOKENS
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
 
 :root {
-  --bg:      #080407;
-  --glass:   rgba(20,9,15,0.65);
-  --border:  rgba(255,148,8,0.12);
-  --border2: rgba(255,255,255,0.07);
-  --orange:  #FF9408;
-  --red:     #CA3F16;
-  --crimson: #95122C;
-  --text:    #F0E8EA;
-  --muted:   #7a5566;
-  --sub:     #3d2030;
+  --bg:        #06030A;
+  --orange:    #FF9408;
+  --red:       #CA3F16;
+  --crimson:   #95122C;
+  --text:      #F2EBE0;
+  --muted:     #7a5060;
+  --sub:       #2a1420;
+  --border:    rgba(255,148,8,0.18);
+  --border2:   rgba(255,255,255,0.07);
+  /* Dark glass for use over light bg-flare */
+  --glass-dk:  rgba(0,0,0,0.82);
+  --txt-shadow: 0 2px 24px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1);
 }
 
 body {
-  background: var(--bg); color: var(--text);
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Satoshi', sans-serif;
-  overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-#bar { position: fixed; top: 0; left: 0; height: 1px; width: 0; background: linear-gradient(90deg, var(--orange), var(--crimson)); z-index: 999; }
-#canvas-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+/* ── Film grain ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px; opacity: 0.035;
+  mix-blend-mode: overlay;
+}
 
-/* ── NAV ── */
+/* ── Progress bar ── */
+#bar {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 9999;
+  background: linear-gradient(90deg, var(--orange), var(--crimson));
+  transition: width 0.1s linear;
+}
+
+/* ── Background flare video (full-page, light texture) ── */
+#bg-flare-wrap {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden;
+}
+#bg-flare {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.18; filter: saturate(1.4) brightness(0.9);
+  mix-blend-mode: screen;
+}
+/* Dark vignette so text stays legible over the light flare */
+#bg-flare-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 90% at 50% 50%,
+    rgba(6,3,10,0.35) 0%, rgba(6,3,10,0.88) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 24px 52px;
-  background: linear-gradient(to bottom, rgba(8,4,7,0.97) 0%, transparent 100%);
+  padding: clamp(14px,2.2vw,22px) clamp(20px,4.5vw,52px);
+  background: linear-gradient(to bottom, rgba(6,3,10,0.96) 0%, transparent 100%);
 }
-.nav-logo img { height: 80px; width: auto; display: block; }
+.nav-logo img {
+  height: clamp(36px,5.5vw,52px); width: auto; display: block;
+  filter: drop-shadow(0 0 16px rgba(255,148,8,0.35));
+  transition: filter 0.3s;
+}
+.nav-logo img:hover { filter: drop-shadow(0 0 28px rgba(255,148,8,0.65)); }
+.nav-logo-fallback {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(20px,3vw,26px);
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, var(--orange), var(--crimson));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
 .nav-ig-pill {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.2);
-  border-radius: 8px; padding: 10px 16px;
-  transition: all 0.2s;
+  display: flex; align-items: center; gap: 8px; text-decoration: none;
+  background: rgba(0,0,0,0.55); border: 1px solid rgba(255,148,8,0.22);
+  border-radius: 8px; padding: 8px 14px; transition: all 0.2s;
+  backdrop-filter: blur(12px);
 }
-.nav-ig-pill:hover { background: rgba(255,148,8,0.13); border-color: rgba(255,148,8,0.4); }
+.nav-ig-pill:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.45); }
 .nav-ig-dot {
-  width: 30px; height: 30px; border-radius: 8px;
+  width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
   background: linear-gradient(135deg, var(--orange), var(--crimson));
   display: flex; align-items: center; justify-content: center;
 }
-.nav-ig-text { display: flex; flex-direction: column; gap: 1px; }
-.nav-ig-handle { font-size: 13px; font-weight: 700; color: var(--text); }
-.nav-ig-sub    { font-size: 10px; font-weight: 500; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+.nav-ig-handle { font-size: 12px; font-weight: 700; color: var(--text); }
+.nav-ig-sub { font-size: 9px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; display: block; }
+
 .nav-cta {
-  text-decoration: none; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; padding: 9px 20px;
-  transition: all 0.2s;
+  text-decoration: none; font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); border: 1px solid rgba(255,255,255,0.14); border-radius: 6px;
+  padding: 9px 18px; transition: all 0.2s; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
 }
-.nav-cta:hover { border-color: rgba(255,148,8,0.3); background: rgba(255,148,8,0.06); }
+.nav-cta:hover { border-color: var(--orange); background: rgba(255,148,8,0.1); color: var(--orange); }
 
-/* ── HERO ── */
+/* ═══════════════════════════════════════════════════════
+   TICKER TAPE
+═══════════════════════════════════════════════════════ */
+.ticker-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(255,148,8,0.1); border-bottom: 1px solid rgba(255,148,8,0.1);
+  padding: 8px 0; margin-bottom: clamp(20px,3vw,36px);
+  opacity: 0; animation: fadeUp 0.5s ease 0.05s forwards;
+}
+.ticker-track { display: flex; width: max-content; animation: tickerScroll 24s linear infinite; }
+.ticker-item {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; padding: 0 24px;
+  text-shadow: var(--txt-shadow);
+}
+.ticker-item em { color: var(--orange); font-style: normal; margin-right: 8px; }
+@keyframes tickerScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ═══════════════════════════════════════════════════════
+   HERO — hero-atl.mp4 fullscreen
+═══════════════════════════════════════════════════════ */
 .hero {
-  position: relative; z-index: 1; min-height: 100vh;
-  display: flex; align-items: center; padding: 0 52px;
-}
-.hero-split {
-  width: 100%; display: grid; grid-template-columns: 1fr 420px;
-  gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; padding-top: 80px;
+  position: relative; z-index: 1;
+  min-height: 100svh;
+  display: flex; align-items: center;
+  padding: clamp(100px,13vw,128px) clamp(20px,4.5vw,52px) clamp(48px,6vw,72px);
+  overflow: hidden;
 }
 
+/* Atlanta video fills the hero behind everything */
+.hero-vid-wrap {
+  position: absolute; inset: 0; z-index: 0; overflow: hidden;
+}
+.hero-vid {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.55; filter: saturate(0.8) brightness(0.7);
+}
+/* Gradient overlay so card & type stay legible */
+.hero-vid-wrap::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(to right,
+      rgba(6,3,10,0.92) 0%,
+      rgba(6,3,10,0.70) 50%,
+      rgba(6,3,10,0.30) 100%),
+    linear-gradient(to bottom,
+      rgba(6,3,10,0.85) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(6,3,10,0.95) 100%);
+}
+
+.hero-split {
+  position: relative; z-index: 1; width: 100%;
+  display: grid; grid-template-columns: 1fr clamp(320px,34vw,430px);
+  gap: clamp(36px,5vw,80px); align-items: center;
+  max-width: 1280px; margin: 0 auto;
+}
+
+/* ── Eyebrow ── */
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 28px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: clamp(14px,2vw,22px);
+  text-shadow: var(--txt-shadow);
+  opacity: 0; animation: fadeUp 0.7s ease 0.1s forwards;
 }
-.eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--orange); opacity: 0.5; }
+.eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--orange); opacity: 0.6; }
 
+/* ── MASSIVE H1 ── */
 h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 10vw, 128px);
-  line-height: 0.87; letter-spacing: 0.01em; margin-bottom: 24px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  font-size: clamp(72px,13vw,160px);
+  line-height: 0.82; letter-spacing: -0.02em;
+  margin-bottom: clamp(18px,2.5vw,28px);
+  text-shadow: var(--txt-shadow);
+  opacity: 0; animation: fadeUp 0.8s ease 0.18s forwards;
 }
 .t1 { display: block; color: var(--text); }
 .t2 {
   display: block;
-  background: linear-gradient(100deg, var(--orange) 0%, var(--red) 40%, var(--crimson) 100%);
+  background: linear-gradient(108deg, var(--orange) 0%, var(--red) 42%, var(--crimson) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  filter: drop-shadow(0 0 32px rgba(255,100,8,0.4));
 }
 
 .hero-tagline {
-  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.7; color: var(--text);
-  font-weight: 500; max-width: 480px; margin-bottom: 14px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards;
+  font-size: clamp(15px,1.5vw,19px); line-height: 1.68; color: var(--text);
+  font-weight: 500; max-width: 480px; margin-bottom: 10px;
+  text-shadow: var(--txt-shadow);
+  opacity: 0; animation: fadeUp 0.8s ease 0.24s forwards;
 }
 .hero-sub {
-  font-size: 15px; line-height: 1.75; color: var(--muted); max-width: 480px; margin-bottom: 32px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+  font-size: clamp(13px,1.1vw,15px); line-height: 1.8; color: var(--muted);
+  max-width: 460px; margin-bottom: clamp(20px,3vw,32px);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+  opacity: 0; animation: fadeUp 0.8s ease 0.28s forwards;
 }
 .hero-ig {
-  display: flex; align-items: center; gap: 12px;
-  opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s ease 0.32s forwards;
 }
 .hero-ig-link {
   display: flex; align-items: center; gap: 10px; text-decoration: none;
-  border: 1px solid rgba(255,148,8,0.2); border-radius: 10px; padding: 11px 16px;
-  background: rgba(255,148,8,0.06); transition: all 0.2s;
+  border: 1px solid rgba(255,148,8,0.22); border-radius: 10px; padding: 10px 16px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(12px); transition: all 0.22s;
 }
-.hero-ig-link:hover { background: rgba(255,148,8,0.1); border-color: rgba(255,148,8,0.4); }
+.hero-ig-link:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5); }
 .hero-ig-av {
-  width: 36px; height: 36px; border-radius: 9px;
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
   background: linear-gradient(135deg, var(--orange), var(--crimson));
   display: flex; align-items: center; justify-content: center;
 }
 .hero-ig-info { display: flex; flex-direction: column; gap: 2px; }
-.hero-ig-name { font-size: 14px; font-weight: 700; color: var(--text); }
-.hero-ig-meta { font-size: 11px; color: var(--muted); }
+.hero-ig-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.hero-ig-meta { font-size: 10px; color: var(--muted); }
 .hero-ig-btn {
-  font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: 0.06em;
-  text-transform: uppercase; padding: 8px 14px;
-  border: 1px solid rgba(255,148,8,0.25); border-radius: 6px; text-decoration: none;
-  background: rgba(255,148,8,0.05); transition: all 0.2s;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 9px 16px;
+  border: 1px solid rgba(255,148,8,0.28); border-radius: 7px; text-decoration: none;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); transition: all 0.2s;
 }
-.hero-ig-btn:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5); }
+.hero-ig-btn:hover { background: rgba(255,148,8,0.14); border-color: rgba(255,148,8,0.55); }
 
-/* ── GLASS CARD ── */
+/* ═══════════════════════════════════════════════════════
+   PREMIUM GLASS CARD — dark for legibility over light flare
+═══════════════════════════════════════════════════════ */
 .glass-card {
-  background: var(--glass); backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  border: 1px solid var(--border); border-radius: 20px; padding: 36px 32px;
-  box-shadow: 0 0 0 1px rgba(255,148,8,0.05) inset, 0 40px 80px rgba(0,0,0,0.5);
-  opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards;
+  background: var(--glass-dk);
+  backdrop-filter: blur(48px) saturate(160%);
+  -webkit-backdrop-filter: blur(48px) saturate(160%);
+  border: 1px solid rgba(255,148,8,0.2);
+  border-radius: 22px;
+  padding: clamp(24px,3.2vw,40px) clamp(20px,2.8vw,36px);
   position: relative; overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,148,8,0.08) inset,
+    0 0 60px rgba(255,80,8,0.1) inset,
+    0 12px 120px rgba(0,0,0,0.8);
+  opacity: 0; animation: fadeUp 0.9s ease 0.38s forwards;
 }
+/* Top edge hot line */
 .glass-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.45), transparent);
+  background: linear-gradient(90deg,
+    transparent 0%, rgba(255,148,8,0.55) 25%,
+    rgba(255,148,8,1) 50%,
+    rgba(255,148,8,0.55) 75%, transparent 100%);
+}
+/* Inner glow halo */
+.glass-card::after {
+  content: ''; position: absolute; top: -70px; left: 50%; transform: translateX(-50%);
+  width: 220px; height: 180px;
+  background: radial-gradient(ellipse, rgba(255,148,8,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 
-.card-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em; color: var(--text); margin-bottom: 4px; }
-.card-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+.card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px,3.2vw,38px); letter-spacing: 0.03em;
+  color: var(--text); margin-bottom: 4px;
+}
+.card-sub { font-size: 12px; color: var(--muted); margin-bottom: clamp(16px,2.2vw,24px); line-height: 1.5; }
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.form-group { margin-bottom: 14px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px; }
+.form-group { margin-bottom: 11px; }
 
-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+label {
+  display: block; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 5px;
+}
 
 input, select {
-  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border2);
-  border-radius: 8px; padding: 12px 14px;
-  font-family: 'Satoshi', sans-serif; font-size: 14px; color: var(--text); outline: none;
-  transition: border-color 0.2s, background 0.2s; -webkit-appearance: none;
+  width: 100%; background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 9px; padding: 12px 14px;
+  font-family: 'Satoshi', sans-serif; font-size: 14px;
+  color: var(--text); outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
 }
-input::placeholder { color: var(--muted); opacity: 0.55; }
-input:focus, select:focus { border-color: rgba(255,148,8,0.4); background: rgba(255,148,8,0.04); }
+input::placeholder { color: var(--muted); opacity: 0.5; }
+input:focus, select:focus {
+  border-color: rgba(255,148,8,0.5);
+  background: rgba(255,148,8,0.04);
+  box-shadow: 0 0 0 3px rgba(255,148,8,0.1);
+}
 select { color: var(--muted); cursor: pointer; }
 select.filled { color: var(--text); }
-select option { background: #1a0d14; color: var(--text); }
+select option { background: #120810; color: var(--text); }
 
 .phone-wrap { position: relative; }
-.phone-pre { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); pointer-events: none; z-index: 1; }
-.phone-wrap input { padding-left: 36px; }
-
-.btn-submit {
-  width: 100%; background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
-  border: none; border-radius: 10px; padding: 16px;
-  font-family: 'Satoshi', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
-  color: #fff; cursor: pointer; margin-top: 6px;
-  transition: opacity 0.2s, transform 0.1s; position: relative; overflow: hidden;
+.phone-pre {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  font-size: 13px; color: var(--muted); pointer-events: none; z-index: 1;
 }
-.btn-submit::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent); pointer-events: none; }
-.btn-submit:hover { opacity: 0.9; }
+.phone-wrap input { padding-left: 38px; }
+
+/* ── THE BUTTON ── */
+.btn-submit {
+  width: 100%; position: relative; overflow: hidden;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 48%, var(--crimson) 100%);
+  border: none; border-radius: 11px;
+  padding: clamp(14px,2vw,17px);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(18px,2vw,22px); letter-spacing: 0.1em;
+  color: #fff; cursor: pointer; margin-top: 4px;
+  box-shadow:
+    0 0 0 1px rgba(255,200,100,0.18) inset,
+    0 6px 32px rgba(202,63,22,0.5),
+    0 0 80px rgba(255,148,8,0.15);
+  transition: box-shadow 0.22s, transform 0.1s;
+}
+.btn-submit::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.16) 0%, transparent 55%);
+  pointer-events: none;
+}
+/* Shimmer sweep on hover */
+.btn-submit::after {
+  content: ''; position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+.btn-submit:hover::after { left: 160%; }
+.btn-submit:hover {
+  box-shadow:
+    0 0 0 1px rgba(255,200,100,0.18) inset,
+    0 8px 48px rgba(202,63,22,0.7),
+    0 0 100px rgba(255,148,8,0.3);
+  transform: translateY(-1px);
+}
 .btn-submit:active { transform: scale(0.99); }
 
-.form-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 12px; opacity: 0.7; }
+.form-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 10px; opacity: 0.55; }
 
-/* Success state with share */
+/* ── Success state ── */
 .success-state { display: none; text-align: center; }
 .success-icon {
   width: 56px; height: 56px; border-radius: 50%;
   background: linear-gradient(135deg, var(--orange), var(--crimson));
-  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 0 40px rgba(255,148,8,0.4), 0 0 80px rgba(255,148,8,0.15);
+  animation: successPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
 }
-.success-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: var(--text); margin-bottom: 8px; }
+@keyframes successPop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(34px,4vw,44px); color: var(--text); margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
 .success-sub { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
 
 .share-box {
-  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.2);
-  border-radius: 10px; padding: 16px;
-  margin-bottom: 14px;
+  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.22);
+  border-radius: 11px; padding: 14px; margin-bottom: 12px;
 }
-.share-box-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
-.share-box-msg { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
-.share-link-row {
-  display: flex; gap: 8px; align-items: center;
+.share-box-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 6px;
 }
+.share-box-msg { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.share-link-row { display: flex; gap: 8px; align-items: center; }
 .share-link-input {
-  flex: 1; background: rgba(255,255,255,0.04); border: 1px solid var(--border2);
-  border-radius: 6px; padding: 9px 12px;
-  font-family: 'Satoshi', sans-serif; font-size: 12px; color: var(--muted);
+  flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 7px; padding: 9px 11px;
+  font-family: 'Satoshi', sans-serif; font-size: 11px; color: var(--muted);
   outline: none; cursor: default;
 }
 .copy-btn {
   background: linear-gradient(90deg, var(--orange), var(--crimson));
-  border: none; border-radius: 6px; padding: 9px 14px;
-  font-family: 'Satoshi', sans-serif; font-size: 12px; font-weight: 700;
-  color: #fff; cursor: pointer; white-space: nowrap;
-  transition: opacity 0.2s;
+  border: none; border-radius: 7px; padding: 9px 16px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #fff; cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
 }
 .copy-btn:hover { opacity: 0.88; }
+.share-note { font-size: 10px; color: var(--muted); text-align: center; line-height: 1.6; }
 
-.share-note { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
-
-/* ── DIVIDER ── */
+/* ═══════════════════════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════════════════════ */
 .hr { border: none; border-top: 1px solid rgba(255,255,255,0.05); }
 
-/* ── THREADS SECTION ── */
-.threads-section { position: relative; z-index: 1; padding: 140px 52px; max-width: 1200px; margin: 0 auto; }
-
+/* ═══════════════════════════════════════════════════════
+   SHARED: SECTION LABEL
+═══════════════════════════════════════════════════════ */
 .section-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); display: flex; align-items: center; gap: 12px; margin-bottom: 60px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--muted); display: flex; align-items: center; gap: 14px;
 }
 .section-label::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
 
-.thread-display { min-height: 300px; }
+/* ═══════════════════════════════════════════════════════
+   THREADS SECTION — TICKET CARD
+═══════════════════════════════════════════════════════ */
+.threads-section {
+  position: relative; z-index: 1;
+  padding: clamp(80px,10vw,140px) clamp(20px,4.5vw,52px);
+  max-width: 1280px; margin: 0 auto;
+}
 
-.thread-word-wrap { display: flex; align-items: baseline; margin-bottom: 6px; }
+.thread-ticket {
+  position: relative; overflow: hidden;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(36px); -webkit-backdrop-filter: blur(36px);
+  border: 1px solid rgba(255,148,8,0.18); border-radius: 20px;
+  padding: clamp(32px,5vw,58px) clamp(28px,4.5vw,54px);
+  min-height: 320px; display: flex; flex-direction: column; justify-content: flex-end;
+}
+.thread-ticket::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.8), rgba(255,120,8,1) 50%, rgba(255,148,8,0.8), transparent);
+}
+
+/* Ghost number watermark */
+.ticket-ghost-num {
+  position: absolute; top: clamp(12px,2.5vw,24px); right: clamp(16px,3vw,32px);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px,14vw,160px); line-height: 1;
+  color: rgba(255,148,8,0.05); user-select: none; pointer-events: none;
+  letter-spacing: -0.03em;
+}
+
+/* Perforated dashed line at midpoint */
+.ticket-perf {
+  position: absolute; left: 0; right: 0; top: clamp(170px,24vw,260px);
+  border-top: 1px dashed rgba(255,148,8,0.1); pointer-events: none;
+}
+.ticket-notch {
+  position: absolute; top: clamp(160px,23vw,250px);
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg); border: 1px solid rgba(255,148,8,0.14);
+}
+.ticket-notch.left { left: -11px; }
+.ticket-notch.right { right: -11px; }
+
+/* Barcode strip */
+.ticket-barcode {
+  position: absolute; top: clamp(20px,3vw,32px); left: clamp(28px,4.5vw,54px);
+  display: flex; gap: 2px; align-items: flex-end; height: 36px; opacity: 0.2;
+}
+.ticket-barcode span { display: block; background: var(--orange); width: 2px; border-radius: 1px; }
+
+.ticket-label-row {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,148,8,0.5);
+  margin-bottom: 10px; display: flex; align-items: center; gap: 16px;
+}
+.ticket-label-row::after { content: ''; flex: 1; height: 1px; background: rgba(255,148,8,0.1); }
+
+/* ── MASSIVE THREAD WORD ── */
+.thread-word-wrap { display: flex; align-items: baseline; flex-wrap: wrap; }
 .thread-word {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 8vw, 100px);
-  line-height: 1; letter-spacing: 0.02em;
-  background: linear-gradient(100deg, var(--orange) 0%, var(--red) 45%, var(--crimson) 100%);
+  font-size: clamp(58px,10vw,128px);
+  line-height: 0.86; letter-spacing: -0.02em;
+  background: linear-gradient(108deg, var(--orange) 0%, var(--red) 45%, var(--crimson) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  min-height: 1.1em;
+  filter: drop-shadow(0 0 24px rgba(255,100,8,0.3));
+  min-height: 1.05em;
 }
 .cursor {
-  display: inline-block; width: 3px; height: 0.8em; background: var(--orange);
-  margin-left: 4px; vertical-align: middle; animation: blink 0.7s step-end infinite;
+  display: inline-block; width: 4px; height: 0.7em; background: var(--orange);
+  margin-left: 6px; vertical-align: middle; border-radius: 2px;
+  animation: blink 0.7s step-end infinite;
+  box-shadow: 0 0 12px rgba(255,148,8,0.8);
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .thread-def {
-  font-size: 17px; color: var(--muted); font-style: italic;
-  margin-bottom: 0; max-width: 640px; line-height: 1.75;
-  opacity: 0; transition: opacity 0.5s ease;
-  min-height: 80px;
+  font-size: clamp(13px,1.2vw,16px); color: var(--muted); font-style: italic;
+  max-width: 680px; line-height: 1.78; margin-top: 18px;
+  opacity: 0; transition: opacity 0.55s ease; min-height: 64px;
 }
 .thread-def.show { opacity: 1; }
 
-.thread-dots { display: flex; gap: 8px; margin-top: 36px; }
-.dot {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--sub);
-  cursor: pointer; transition: background 0.2s, transform 0.2s;
+.thread-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px; margin-top: 32px;
 }
-.dot.active { background: var(--orange); transform: scale(1.4); }
+.thread-dots { display: flex; gap: 8px; }
+.dot {
+  height: 6px; border-radius: 3px; background: var(--sub); cursor: pointer;
+  transition: background 0.22s, width 0.22s; width: 6px;
+}
+.dot.active { background: var(--orange); width: 22px; box-shadow: 0 0 8px rgba(255,148,8,0.5); }
 
-/* ── CITY ROLLOUT ── */
-.cities-section { position: relative; z-index: 1; padding: 0 52px 140px; max-width: 1200px; margin: 0 auto; }
+.thread-nav { display: flex; gap: 10px; }
+.thread-arrow {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(255,148,8,0.2); background: rgba(0,0,0,0.4); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; color: var(--muted);
+}
+.thread-arrow:hover { background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5); color: var(--orange); }
 
-.city-intro {
-  max-width: 600px; margin-bottom: 56px;
+/* ═══════════════════════════════════════════════════════
+   CITIES SECTION — TICKET AESTHETIC
+═══════════════════════════════════════════════════════ */
+.cities-section {
+  position: relative; z-index: 1;
+  padding: 0 clamp(20px,4.5vw,52px) clamp(80px,10vw,140px);
+  max-width: 1280px; margin: 0 auto;
+}
+
+.city-header {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(28px,5vw,60px); align-items: start;
+  margin-bottom: clamp(36px,5vw,56px);
 }
 .city-intro h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(44px, 5.5vw, 68px); line-height: 0.95; letter-spacing: 0.02em;
-  color: var(--text); margin-bottom: 16px;
+  font-size: clamp(44px,6vw,82px); line-height: 0.88;
+  letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px;
+  text-shadow: var(--txt-shadow);
 }
-.city-intro .city-sub {
-  font-size: 16px; color: var(--muted); line-height: 1.7;
+.city-sub { font-size: clamp(13px,1.2vw,16px); color: var(--muted); line-height: 1.72; }
+
+.city-brand-img {
+  width: 100%; border-radius: 16px; border: 1px solid rgba(255,148,8,0.14);
+  min-height: 280px; max-height: 380px; object-fit: cover; display: block;
 }
 
-.cities-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
-}
+.cities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
 
+/* City cards — ticket treatment */
 .city-card {
-  background: var(--glass); backdrop-filter: blur(12px);
-  border: 1px solid var(--border2); border-radius: 12px;
-  padding: 20px 18px; position: relative; overflow: hidden;
-  opacity: 0; transform: translateY(12px);
-  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
+  border: 1px solid var(--border2); border-radius: 12px; padding: 18px 16px;
+  position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.25s, box-shadow 0.25s;
 }
 .city-card.on { opacity: 1; transform: none; }
-.city-card.home { border-color: rgba(255,148,8,0.3); }
+
+/* Atlanta — animated conic border */
+.city-card.home {
+  border-color: rgba(255,148,8,0.35);
+  box-shadow: 0 0 40px rgba(255,148,8,0.12), inset 0 0 28px rgba(255,148,8,0.05);
+}
 .city-card.home::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.9), transparent);
 }
+/* Conic gradient spin for Atlanta */
+.atlanta-glow-ring {
+  position: absolute; inset: -2px; border-radius: 14px; z-index: -1;
+  background: conic-gradient(from 0deg,
+    rgba(255,148,8,0.5), rgba(149,18,44,0.3) 40%,
+    rgba(202,63,22,0.4) 60%, rgba(255,148,8,0.5));
+  animation: atlantaSpin 5s linear infinite;
+}
+@keyframes atlantaSpin { to { transform: rotate(360deg); } }
+
 .city-card:not(.home):hover { border-color: rgba(255,255,255,0.12); }
 
 .city-badge {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px;
+  margin-bottom: 8px; display: inline-block;
 }
-.city-badge.live    { background: rgba(255,148,8,0.15); color: var(--orange); border: 1px solid rgba(255,148,8,0.3); }
-.city-badge.soon    { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
+.city-badge.live { background: rgba(255,148,8,0.15); color: var(--orange); border: 1px solid rgba(255,148,8,0.35); }
+.city-badge.soon { background: rgba(255,255,255,0.03); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
 
-.city-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; letter-spacing: -0.01em; }
-.city-state { font-size: 12px; color: var(--muted); }
-
+.city-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
+.city-state { font-size: 11px; color: var(--muted); }
 .city-share {
-  display: flex; align-items: center; gap: 6px; margin-top: 12px;
-  font-size: 11px; color: var(--muted); cursor: pointer;
-  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05);
-  transition: color 0.2s;
+  display: flex; align-items: center; gap: 6px; margin-top: 10px;
+  font-size: 10px; color: var(--muted); cursor: pointer;
+  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); transition: color 0.2s;
 }
 .city-share:hover { color: var(--orange); }
-.city-share svg { flex-shrink: 0; transition: transform 0.2s; }
+.city-share svg { transition: transform 0.2s; flex-shrink: 0; }
 .city-share:hover svg { transform: translateX(2px); }
 
-/* ── HOW IT WORKS ── */
-.how-section {
-  position: relative; z-index: 1;
-  background: rgba(14,7,11,0.7); backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.how-inner { max-width: 1200px; margin: 0 auto; padding: 80px 52px; }
-.steps { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 48px; }
-.step {
-  padding: 40px 36px; border-right: 1px solid rgba(255,255,255,0.05);
-  opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.step:last-child { border-right: none; }
-.step.on { opacity: 1; transform: none; }
-.step-n {
-  font-family: 'Bebas Neue', sans-serif; font-size: 44px;
-  background: linear-gradient(135deg, var(--orange), var(--crimson));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  display: block; margin-bottom: 16px;
-}
-.step-t { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.step-d { font-size: 13px; line-height: 1.7; color: var(--muted); }
-
-/* ── INSTAGRAM SECTION ── */
-.ig-section { position: relative; z-index: 1; padding: 100px 52px; max-width: 1200px; margin: 0 auto; text-align: center; }
-.ig-card {
-  background: var(--glass); backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,148,8,0.15); border-radius: 24px; padding: 60px 48px;
-  position: relative; overflow: hidden;
-}
-.ig-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.5), transparent);
-}
-.ig-big-icon {
-  width: 72px; height: 72px; border-radius: 20px;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 24px; box-shadow: 0 8px 32px rgba(255,148,8,0.25);
-}
-.ig-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,56px); color: var(--text); margin-bottom: 12px; }
-.ig-sub { font-size: 16px; color: var(--muted); max-width: 440px; margin: 0 auto 32px; line-height: 1.65; }
-.ig-btn {
-  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
-  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
-  color: #fff; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; padding: 16px 36px; border-radius: 8px;
-  transition: opacity 0.2s;
-}
-.ig-btn:hover { opacity: 0.88; }
-.ig-handle { font-size: 13px; color: var(--muted); margin-top: 16px; }
-
-/* ── CTA ── */
-.cta-section { position: relative; z-index: 1; text-align: center; padding: 160px 52px; overflow: hidden; }
-.cta-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(149,18,44,0.2) 0%, transparent 60%); }
-.cta-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px,9vw,108px); line-height: 0.9; margin-bottom: 20px; position: relative; }
-.cta-tagline { font-size: 18px; font-weight: 500; color: var(--text); max-width: 480px; margin: 0 auto 12px; line-height: 1.6; position: relative; }
-.cta-sub { font-size: 15px; color: var(--muted); max-width: 400px; margin: 0 auto 48px; line-height: 1.65; position: relative; }
-.cta-btn {
-  display: inline-block; text-decoration: none;
-  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
-  color: #fff; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase; padding: 18px 52px; border-radius: 8px;
-  transition: opacity 0.2s;
-}
-.cta-btn:hover { opacity: 0.88; }
-
-/* ── FOOTER ── */
-footer {
-  position: relative; z-index: 1; border-top: 1px solid rgba(255,255,255,0.05);
-  padding: 28px 52px; display: flex; align-items: center; justify-content: space-between;
-}
-.foot-logo img { height: 16px; opacity: 0.25; filter: brightness(3); }
-.foot-links { display: flex; gap: 28px; }
-.foot-link { text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--muted); transition: color 0.2s; }
-.foot-link:hover { color: var(--text); }
-.foot-copy { font-size: 12px; color: var(--muted); opacity: 0.4; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
-
-/* ── VIDEO SECTION ── */
-.video-section {
-  position: relative; z-index: 1;
-  width: 100%; overflow: hidden;
-}
-
+/* ═══════════════════════════════════════════════════════
+   VIDEO SECTION — community.mp4
+═══════════════════════════════════════════════════════ */
+.video-section { position: relative; z-index: 1; width: 100%; overflow: hidden; }
 .video-wrap {
   position: relative; width: 100%;
-  height: clamp(240px, 55vw, 680px);
-  overflow: hidden;
-  max-width: 100vw;
+  height: clamp(280px,56vw,720px); overflow: hidden;
 }
-
 .community-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0.45;
-  filter: saturate(0.8);
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.45; filter: saturate(0.75);
 }
-
-/* Dark gradient overlays — top and bottom fade into page bg */
+/* Extra-heavy overlay for guaranteed legibility */
 .video-overlay {
   position: absolute; inset: 0;
   background:
     linear-gradient(to bottom,
-      rgba(8,4,7,1) 0%,
-      rgba(8,4,7,0) 18%,
-      rgba(8,4,7,0) 82%,
-      rgba(8,4,7,1) 100%
+      rgba(6,3,10,1) 0%,
+      rgba(6,3,10,0.05) 18%,
+      rgba(6,3,10,0.65) 52%,
+      rgba(6,3,10,0.05) 82%,
+      rgba(6,3,10,1) 100%
     ),
-    linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(149,18,44,0.08) 50%,
-      transparent 100%
-    );
+    radial-gradient(ellipse 75% 55% at 50% 50%, rgba(149,18,44,0.2) 0%, transparent 70%);
   pointer-events: none;
 }
-
-/* Centered text over video */
 .video-caption {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 0 24px;
-  pointer-events: none;
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  padding: 0 24px; pointer-events: none;
 }
-
 .video-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--orange);
-  margin-bottom: 16px;
-  display: flex; align-items: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
+  text-shadow: var(--txt-shadow);
 }
-.video-label::before,
-.video-label::after {
-  content: ''; display: block; width: 40px; height: 1px;
-  background: var(--orange); opacity: 0.5;
+.video-label::before, .video-label::after {
+  content: ''; display: block; width: 44px; height: 1px; background: var(--orange); opacity: 0.5;
 }
-
 .video-text {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(36px, 5.5vw, 72px);
-  line-height: 1; letter-spacing: 0.02em;
-  color: var(--text);
-  text-shadow: 0 2px 40px rgba(0,0,0,0.8);
+  font-size: clamp(38px,6.5vw,86px); line-height: 0.94;
+  letter-spacing: -0.02em; color: var(--text);
+  text-shadow: 0 2px 80px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.9), var(--txt-shadow);
 }
 
-/* ── TOAST ── */
+/* ═══════════════════════════════════════════════════════
+   HOW IT WORKS — TICKET AESTHETIC
+═══════════════════════════════════════════════════════ */
+.how-section {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.045);
+  border-bottom: 1px solid rgba(255,255,255,0.045);
+  overflow: hidden;
+}
+.how-section::before {
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 80vw; height: 100%;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(149,18,44,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.how-inner {
+  position: relative; z-index: 1; max-width: 1280px; margin: 0 auto;
+  padding: clamp(60px,8vw,110px) clamp(20px,4.5vw,52px);
+}
+.how-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: clamp(36px,5vw,60px); flex-wrap: wrap; gap: 20px;
+}
+.how-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px,8vw,100px); line-height: 0.86;
+  letter-spacing: -0.02em; color: var(--text);
+  text-shadow: var(--txt-shadow);
+}
+.how-title span {
+  background: linear-gradient(108deg, var(--orange) 0%, var(--red) 42%, var(--crimson) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+/* Ticket-style steps */
+.steps { display: grid; grid-template-columns: repeat(4,1fr); }
+.step {
+  position: relative; padding: clamp(28px,3.5vw,46px) clamp(22px,2.8vw,36px);
+  border: 1px solid rgba(255,255,255,0.055); border-left: none;
+  background: rgba(0,0,0,0.35); backdrop-filter: blur(8px);
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s; overflow: hidden;
+}
+.step:first-child { border-left: 1px solid rgba(255,255,255,0.055); border-radius: 12px 0 0 12px; }
+.step:last-child { border-radius: 0 12px 12px 0; }
+.step.on { opacity: 1; transform: none; }
+.step:hover { background: rgba(255,148,8,0.03); }
+/* Perforated top line */
+.step::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.25), transparent);
+}
+.step-barcode { display: flex; gap: 1.5px; align-items: flex-end; height: 22px; margin-bottom: 18px; opacity: 0.18; }
+.step-barcode span { display: block; background: var(--orange); width: 2px; border-radius: 1px; }
+
+.step-n {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(38px,4.5vw,56px);
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block; margin-bottom: 12px; letter-spacing: -0.01em;
+}
+.step-t { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.step-d { font-size: 12px; line-height: 1.74; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════════
+   INSTAGRAM SECTION
+═══════════════════════════════════════════════════════ */
+.ig-section {
+  position: relative; z-index: 1;
+  padding: clamp(60px,8vw,110px) clamp(20px,4.5vw,52px);
+  max-width: 1280px; margin: 0 auto; text-align: center;
+}
+.ig-card {
+  background: rgba(0,0,0,0.72); backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,148,8,0.16); border-radius: 24px;
+  padding: clamp(40px,6vw,80px) clamp(24px,4vw,60px);
+  position: relative; overflow: hidden;
+}
+.ig-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.6), transparent);
+}
+.ig-big-icon {
+  width: 68px; height: 68px; border-radius: 18px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px; box-shadow: 0 8px 40px rgba(255,148,8,0.32);
+}
+.ig-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,60px);
+  color: var(--text); margin-bottom: 10px; letter-spacing: -0.01em;
+}
+.ig-sub { font-size: clamp(13px,1.3vw,16px); color: var(--muted); max-width: 420px; margin: 0 auto 30px; line-height: 1.65; }
+.ig-btn {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 40px; border-radius: 9px;
+  box-shadow: 0 4px 28px rgba(202,63,22,0.38);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.ig-btn:hover { opacity: 0.9; box-shadow: 0 6px 40px rgba(202,63,22,0.62); }
+.ig-handle { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+/* ═══════════════════════════════════════════════════════
+   CTA SECTION
+═══════════════════════════════════════════════════════ */
+.cta-section {
+  position: relative; z-index: 1; text-align: center;
+  padding: clamp(100px,13vw,200px) clamp(20px,4.5vw,52px); overflow: hidden;
+}
+.cta-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 55% at 50% 100%, rgba(149,18,44,0.28) 0%, transparent 65%);
+}
+.cta-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px,11vw,136px); line-height: 0.82;
+  margin-bottom: 20px; position: relative;
+  letter-spacing: -0.02em; text-shadow: var(--txt-shadow);
+}
+.cta-tagline {
+  font-size: clamp(14px,1.4vw,18px); font-weight: 500; color: var(--text);
+  max-width: 460px; margin: 0 auto 10px; line-height: 1.62; position: relative;
+  text-shadow: var(--txt-shadow);
+}
+.cta-sub {
+  font-size: 14px; color: var(--muted); max-width: 380px; margin: 0 auto 50px;
+  line-height: 1.65; position: relative;
+}
+.cta-btn {
+  display: inline-block; text-decoration: none;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--red) 48%, var(--crimson) 100%);
+  color: #fff; font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(18px,2.2vw,24px); letter-spacing: 0.08em;
+  padding: 18px 64px; border-radius: 10px;
+  box-shadow: 0 6px 40px rgba(202,63,22,0.45);
+  transition: box-shadow 0.2s, transform 0.1s;
+}
+.cta-btn:hover {
+  box-shadow: 0 8px 60px rgba(202,63,22,0.7), 0 0 100px rgba(255,148,8,0.2);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 28px clamp(20px,4.5vw,52px);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.foot-logo img { height: 18px; opacity: 0.22; filter: brightness(3); display: block; }
+.foot-links { display: flex; gap: 24px; }
+.foot-link {
+  text-decoration: none; font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  color: var(--muted); transition: color 0.2s;
+}
+.foot-link:hover { color: var(--text); }
+.foot-copy { font-size: 11px; color: var(--muted); opacity: 0.36; }
+
+/* ═══════════════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════════════ */
 .toast {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
-  background: rgba(20,9,15,0.95); border: 1px solid rgba(255,148,8,0.3);
-  backdrop-filter: blur(16px); border-radius: 10px; padding: 12px 24px;
-  font-size: 13px; font-weight: 600; color: var(--orange); z-index: 998;
-  transition: transform 0.3s ease;
-  white-space: nowrap;
+  background: rgba(0,0,0,0.96); border: 1px solid rgba(255,148,8,0.32);
+  backdrop-filter: blur(24px); border-radius: 10px; padding: 13px 28px;
+  font-size: 13px; font-weight: 600; color: var(--orange); z-index: 9998;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap;
 }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ── MOBILE ── */
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════ */
+@keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
 @media (max-width: 960px) {
-  nav { padding: 14px 20px; position: relative; background: rgba(8,4,7,0.98); }
-  .nav-cta { display: none; }
-  .hero { padding: 0 24px; }
-  .hero-split { grid-template-columns: 1fr; gap: 40px; padding-top: 80px; padding-bottom: 60px; }
-  .threads-section, .cities-section { padding-left: 24px; padding-right: 24px; } .cities-section > div[style] { grid-template-columns: 1fr; }
-  .cities-grid { grid-template-columns: repeat(2, 1fr); }
-  .how-inner { padding: 60px 24px; }
-  .steps { grid-template-columns: repeat(2,1fr); }
-  .step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
-  .step:last-child { border-bottom: none; }
-  .ig-section { padding: 60px 24px; }
-  .ig-card { padding: 40px 24px; }
-  .cta-section { padding: 100px 24px; }
-  footer { flex-direction: column; gap: 20px; text-align: center; padding: 28px 24px; }
-  .foot-links { flex-wrap: wrap; justify-content: center; }
-  .nav-ig-text .nav-ig-sub { display: none; } .nav-ig-pill { padding: 7px 10px; gap:7px; } .nav-ig-handle { font-size: 11px; } .nav-ig-dot { width:24px; height:24px; } .nav-cta { display: none; }
+  nav { padding:12px 18px; position:relative; background:rgba(6,3,10,0.99); }
+  .nav-cta { display:none; }
+  .nav-ig-sub { display:none; }
+  .nav-ig-pill { padding:7px 10px; gap:7px; }
+  .nav-ig-handle { font-size:11px; }
+  .nav-ig-dot { width:22px; height:22px; }
+
+  .hero { padding:88px 20px 48px; min-height:100svh; }
+  .hero-split { grid-template-columns:1fr; gap:32px; }
+
+  .city-header { grid-template-columns:1fr; }
+  .city-brand-img { min-height:220px; max-height:260px; }
+  .threads-section, .cities-section { padding-left:20px; padding-right:20px; }
+  .cities-grid { grid-template-columns:repeat(2,1fr); }
+
+  .how-inner { padding:56px 20px; }
+  .steps { grid-template-columns:repeat(2,1fr); }
+  .step:first-child { border-radius:12px 0 0 0; }
+  .step:nth-child(2) { border-radius:0 12px 0 0; }
+  .step:nth-child(3) { border-left:none; border-radius:0 0 0 12px; }
+  .step:last-child { border-radius:0 0 12px 0; }
+
+  .ig-section { padding:56px 20px; }
+  .ig-card { padding:36px 22px; }
+  .cta-section { padding:88px 20px; }
+  footer { flex-direction:column; gap:18px; text-align:center; padding:24px 20px; }
+  .foot-links { flex-wrap:wrap; justify-content:center; }
+
+  .ticker-wrap { display:none; }
+  .ticket-notch, .ticket-perf { display:none; }
+  .how-header { flex-direction:column; align-items:flex-start; }
 }
 @media (max-width: 560px) {
-  .form-row { grid-template-columns: 1fr; }
-  .cities-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .cities-grid { grid-template-columns:1fr 1fr; }
+  .steps { grid-template-columns:1fr; }
+  .step { border-left:1px solid rgba(255,255,255,0.055) !important; border-radius:0 !important; }
+  .step:first-child { border-radius:12px 12px 0 0 !important; }
+  .step:last-child { border-radius:0 0 12px 12px !important; }
 }
 </style>
 </head>
 <body>
 
-<canvas id="canvas-bg"></canvas>
+<!-- ══ BACKGROUND FLARE VIDEO (light orange/pink texture) ══ -->
+<div id="bg-flare-wrap">
+  <video id="bg-flare" autoplay muted loop playsinline src="bg-flare.mp4"></video>
+</div>
+
 <div id="bar"></div>
 <div class="toast" id="toast"></div>
 
-<!-- Nav -->
+<!-- ══════════════════ NAV ══════════════════ -->
 <nav>
   <a href="#" class="nav-logo">
     <img src="logo-wordmark.png" alt="Stringz"
-      onerror="this.parentElement.innerHTML='<span style=\'font-family:Bebas Neue,sans-serif;font-size:22px;letter-spacing:0.08em;background:linear-gradient(90deg,#FF9408,#95122C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text\'>STRINGZ</span>'">
+      onerror="this.outerHTML='<span class=\'nav-logo-fallback\'>STRINGZ</span>'">
   </a>
-  <div style="display:flex;align-items:center;gap:14px">
+  <div class="nav-right">
     <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="nav-ig-pill">
       <div class="nav-ig-dot">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+        </svg>
       </div>
       <div class="nav-ig-text">
         <span class="nav-ig-handle">@stringz.social</span>
@@ -548,21 +920,57 @@ footer {
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- ══════════════════ HERO — hero-atl.mp4 ══════════════════ -->
 <section class="hero" id="top">
+
+  <!-- Atlanta video backdrop -->
+  <div class="hero-vid-wrap">
+    <video class="hero-vid" autoplay muted loop playsinline src="hero-atl.mp4"></video>
+  </div>
+
   <div class="hero-split">
+
+    <!-- Left: editorial copy -->
     <div>
+      <!-- Ticker -->
+      <div class="ticker-wrap">
+        <div class="ticker-track">
+          <span class="ticker-item"><em>✦</em>Pass the Aux</span>
+          <span class="ticker-item"><em>✦</em>Outside Energy</span>
+          <span class="ticker-item"><em>✦</em>The Feed</span>
+          <span class="ticker-item"><em>✦</em>The Sweat Check</span>
+          <span class="ticker-item"><em>✦</em>The Culture</span>
+          <span class="ticker-item"><em>✦</em>Secure the Bag</span>
+          <span class="ticker-item"><em>✦</em>The Arena</span>
+          <span class="ticker-item"><em>✦</em>Shoot Your Shot</span>
+          <span class="ticker-item"><em>✦</em>Pass the Aux</span>
+          <span class="ticker-item"><em>✦</em>Outside Energy</span>
+          <span class="ticker-item"><em>✦</em>The Feed</span>
+          <span class="ticker-item"><em>✦</em>The Sweat Check</span>
+          <span class="ticker-item"><em>✦</em>The Culture</span>
+          <span class="ticker-item"><em>✦</em>Secure the Bag</span>
+          <span class="ticker-item"><em>✦</em>The Arena</span>
+          <span class="ticker-item"><em>✦</em>Shoot Your Shot</span>
+        </div>
+      </div>
+
       <div class="eyebrow">Atlanta — You're Invited</div>
+
       <h1>
         <span class="t1">Your People</span>
         <span class="t2">Are Already<br>Out There.</span>
       </h1>
+
       <p class="hero-tagline">Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.</p>
       <p class="hero-sub">Find events worth showing up for, see who else is going, and build the kind of community you actually want to be part of.</p>
+
       <div class="hero-ig">
         <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="hero-ig-link">
           <div class="hero-ig-av">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+            </svg>
           </div>
           <div class="hero-ig-info">
             <span class="hero-ig-name">@stringz.social</span>
@@ -573,7 +981,7 @@ footer {
       </div>
     </div>
 
-    <!-- Waitlist card -->
+    <!-- Right: waitlist card -->
     <div class="glass-card" id="waitlist">
       <div id="form-state">
         <p class="card-title">Get Early Access.</p>
@@ -620,18 +1028,19 @@ footer {
           </select>
         </div>
 
-        <button class="btn-submit" onclick="handleSubmit()">Get Early Access</button>
+        <button class="btn-submit" onclick="handleSubmit()">Secure Your Spot →</button>
         <p class="form-note">No spam. Your info is never shared or sold.</p>
       </div>
 
       <!-- Success + share state -->
       <div class="success-state" id="success-state">
         <div class="success-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
         </div>
         <p class="success-title">You're In.</p>
         <p class="success-sub">Welcome to the community. We'll hit you when Atlanta goes live.</p>
-
         <div class="share-box">
           <p class="share-box-label">Grow Your Community</p>
           <p class="share-box-msg">Share your link and anyone who signs up automatically joins your Stringz community when we launch.</p>
@@ -643,92 +1052,117 @@ footer {
         <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
       </div>
     </div>
+
   </div>
 </section>
 
 <hr class="hr">
 
-<!-- Threads typewriter — name + description only -->
+<!-- ══════════════════ THREADS — TICKET CARD ══════════════════ -->
 <section class="threads-section">
-  <p class="section-label">Your Threads</p>
-  <div class="thread-display">
+  <div style="margin-bottom:clamp(24px,3.5vw,44px)">
+    <p class="section-label">Your Threads</p>
+  </div>
+
+  <div class="thread-ticket">
+    <div class="ticket-notch left"></div>
+    <div class="ticket-notch right"></div>
+    <div class="ticket-perf"></div>
+    <div class="ticket-barcode" id="thread-barcode"></div>
+    <div class="ticket-ghost-num" id="tw-num">01</div>
+
+    <div class="ticket-label-row">Thread</div>
     <div class="thread-word-wrap">
       <div class="thread-word" id="tw-word"></div>
       <div class="cursor"></div>
     </div>
     <div class="thread-def" id="tw-def"></div>
-    <div class="thread-dots" id="tw-dots"></div>
+
+    <div class="thread-footer">
+      <div class="thread-dots" id="tw-dots"></div>
+      <div class="thread-nav">
+        <div class="thread-arrow" onclick="prevThread()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </div>
+        <div class="thread-arrow" onclick="nextThread()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- City Rollout -->
+<!-- ══════════════════ CITIES ══════════════════ -->
 <section class="cities-section">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-bottom:56px;"><div class="city-intro" style="margin-bottom:0"><h2>Atlanta is Home.<br>But We're Just<br>Getting Started.</h2><p class="city-sub">Atlanta launches first — because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p></div><img src="brand_photo_stringz.png" alt="Stringz community" style="width:100%;border-radius:16px;border:1px solid rgba(255,148,8,0.15);min-height:320px;object-fit:cover;"></div><div class="cities-grid" id="cities">
+  <div class="city-header">
+    <div class="city-intro">
+      <h2>Atlanta is Home.<br>But We're Just<br>Getting Started.</h2>
+      <p class="city-sub">Atlanta launches first — because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p>
+    </div>
+    <img src="brand_photo_stringz.png" alt="Stringz community" class="city-brand-img"
+      onerror="this.style.display='none'">
+  </div>
+
+  <div class="cities-grid" id="cities">
     <div class="city-card home">
+      <div class="atlanta-glow-ring"></div>
       <span class="city-badge live">Live First</span>
       <p class="city-name">Atlanta</p>
       <p class="city-state">Georgia</p>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Houston</p>
-      <p class="city-state">Texas</p>
+      <p class="city-name">Houston</p><p class="city-state">Texas</p>
       <div class="city-share" onclick="shareCity('Houston')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock Houston early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Washington</p>
-      <p class="city-state">DC</p>
+      <p class="city-name">Washington</p><p class="city-state">DC</p>
       <div class="city-share" onclick="shareCity('Washington DC')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock DC early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Charlotte</p>
-      <p class="city-state">North Carolina</p>
+      <p class="city-name">Charlotte</p><p class="city-state">North Carolina</p>
       <div class="city-share" onclick="shareCity('Charlotte')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock Charlotte early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Chicago</p>
-      <p class="city-state">Illinois</p>
+      <p class="city-name">Chicago</p><p class="city-state">Illinois</p>
       <div class="city-share" onclick="shareCity('Chicago')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock Chicago early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">New York</p>
-      <p class="city-state">New York</p>
+      <p class="city-name">New York</p><p class="city-state">New York</p>
       <div class="city-share" onclick="shareCity('New York')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock NYC early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Miami</p>
-      <p class="city-state">Florida</p>
+      <p class="city-name">Miami</p><p class="city-state">Florida</p>
       <div class="city-share" onclick="shareCity('Miami')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock Miami early
       </div>
     </div>
     <div class="city-card">
       <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Los Angeles</p>
-      <p class="city-state">California</p>
+      <p class="city-name">Los Angeles</p><p class="city-state">California</p>
       <div class="city-share" onclick="shareCity('Los Angeles')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
         Share to unlock LA early
       </div>
     </div>
@@ -737,7 +1171,7 @@ footer {
 
 <hr class="hr">
 
-<!-- Video Section -->
+<!-- ══════════════════ VIDEO — community.mp4 ══════════════════ -->
 <div class="video-section">
   <div class="video-wrap">
     <video autoplay muted loop playsinline src="community.mp4" class="community-video"></video>
@@ -751,27 +1185,34 @@ footer {
 
 <hr class="hr">
 
-<!-- How It Works -->
+<!-- ══════════════════ HOW IT WORKS ══════════════════ -->
 <section class="how-section">
   <div class="how-inner">
-    <p class="section-label">How It Works</p>
+    <div class="how-header">
+      <p class="section-label">How It Works</p>
+      <h2 class="how-title">Show Up<br><span>With Intention.</span></h2>
+    </div>
     <div class="steps" id="steps">
       <div class="step">
+        <div class="step-barcode" id="bc1"></div>
         <span class="step-n">01</span>
         <p class="step-t">Find your thread</p>
         <p class="step-d">Browse this week's events filtered by the communities that match who you are. Music. Food. Fitness. Culture. You pick.</p>
       </div>
       <div class="step">
+        <div class="step-barcode" id="bc2"></div>
         <span class="step-n">02</span>
         <p class="step-t">See who's going</p>
         <p class="step-d">Before you commit — see who else is showing up. Invite your crew or find someone worth meeting. Know the room before you walk in.</p>
       </div>
       <div class="step">
+        <div class="step-barcode" id="bc3"></div>
         <span class="step-n">03</span>
         <p class="step-t">Show up with intention</p>
         <p class="step-d">RSVP, set your vibe, and connect with other attendees before the night starts. Walk in knowing exactly who to find.</p>
       </div>
       <div class="step">
+        <div class="step-barcode" id="bc4"></div>
         <span class="step-n">04</span>
         <p class="step-t">Build your world</p>
         <p class="step-d">After the meetup — a quick vibe check. Add who clicked. Let the rest go. Real community, on your terms.</p>
@@ -782,16 +1223,22 @@ footer {
 
 <hr class="hr">
 
-<!-- Instagram Section -->
+<!-- ══════════════════ INSTAGRAM ══════════════════ -->
 <section class="ig-section">
   <div class="ig-card">
     <div class="ig-big-icon">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/>
+      </svg>
     </div>
     <p class="ig-title">We're Building This in Public</p>
     <p class="ig-sub">Follow along on Instagram as we build Stringz from the ground up — behind the scenes, early looks, and the community growing with us.</p>
     <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="ig-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+      </svg>
       Follow @stringz.social
     </a>
     <p class="ig-handle">instagram.com/stringz.social</p>
@@ -800,140 +1247,179 @@ footer {
 
 <hr class="hr">
 
-<!-- CTA -->
+<!-- ══════════════════ CTA ══════════════════ -->
 <section class="cta-section">
   <div class="cta-glow"></div>
   <p class="eyebrow" style="justify-content:center;margin-bottom:28px;opacity:1">You're Already Invited</p>
   <h2 class="cta-h">
     <span style="color:var(--text);display:block">Find Your</span>
-    <span style="background:linear-gradient(100deg,var(--orange) 0%,var(--red) 42%,var(--crimson) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block">People.</span>
+    <span style="background:linear-gradient(108deg,var(--orange) 0%,var(--red) 42%,var(--crimson) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block">People.</span>
   </h2>
   <p class="cta-tagline">Whether you're going with friends or going solo, Stringz helps you find your crew or meet someone new.</p>
   <p class="cta-sub">Atlanta launches first. Secure your spot before we go live.</p>
-  <a href="#waitlist" class="cta-btn">Get Early Access</a>
+  <a href="#waitlist" class="cta-btn">Get Early Access →</a>
 </section>
 
-<!-- Footer -->
+<!-- ══════════════════ FOOTER ══════════════════ -->
 <footer>
   <div class="foot-logo">
     <img src="logo-wordmark.png" alt="Stringz" onerror="this.style.display='none'">
   </div>
   <div class="foot-links">
     <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="foot-link">Instagram</a>
-    <a href="mailto:support@stringz.social" class="foot-link">support@stringz.social</a>
+    <a href="/cdn-cgi/l/email-protection#45363035352a3731053631372c2b223f6b362a262c2429" class="foot-link">
+      <span class="__cf_email__" data-cfemail="52212722223d2026122126203b3c35287c213d313b333e">[email&#160;protected]</span>
+    </a>
   </div>
   <p class="foot-copy">© 2026 Stringz. All rights reserved.</p>
 </footer>
 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script>
-/* ── Animated Mesh ── */
-(function(){
-  const cv=document.getElementById('canvas-bg'), cx=cv.getContext('2d');
-  let W,H;
-  const orbs=[
-    {ox:.7,oy:.2,r:380,sx:.15,sy:.10,h:'crimson',a:.18},
-    {ox:.2,oy:.6,r:300,sx:-.10,sy:-.08,h:'red',a:.12},
-    {ox:.5,oy:.9,r:420,sx:.08,sy:-.12,h:'orange',a:.09},
-    {ox:.85,oy:.7,r:260,sx:-.12,sy:.15,h:'deep',a:.14},
-    {ox:.1,oy:.15,r:320,sx:.10,sy:.12,h:'crimson',a:.10},
-  ];
-  const COLS={crimson:[149,18,44],red:[202,63,22],orange:[255,148,8],deep:[100,8,30]};
-  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
-  function draw(ts){
-    cx.clearRect(0,0,W,H); cx.fillStyle='#080407'; cx.fillRect(0,0,W,H);
-    const t=ts*.0004;
-    orbs.forEach(o=>{
-      const nx=o.ox*W+Math.sin(t*o.sx*2+o.r)*60;
-      const ny=o.oy*H+Math.cos(t*o.sy*2+o.r)*50;
-      const [r,g,b]=COLS[o.h];
-      const g2=cx.createRadialGradient(nx,ny,0,nx,ny,o.r);
-      g2.addColorStop(0,`rgba(${r},${g},${b},${o.a})`);
-      g2.addColorStop(.5,`rgba(${r},${g},${b},${o.a*.4})`);
-      g2.addColorStop(1,`rgba(${r},${g},${b},0)`);
-      cx.fillStyle=g2; cx.beginPath(); cx.arc(nx,ny,o.r,0,Math.PI*2); cx.fill();
-    });
-    cx.fillStyle='rgba(8,4,7,0.22)'; cx.fillRect(0,0,W,H);
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',resize);
-  resize(); requestAnimationFrame(draw);
-})();
+/* ══════════════════════════════════════════════════════════
+   SUCCESS SWOOSH — preloaded, fires on successful submit
+══════════════════════════════════════════════════════════ */
+const swooshAudio = new Audio('success-swoosh.wav');
+swooshAudio.preload = 'auto';
 
-/* ── Scroll progress ── */
-window.addEventListener('scroll',()=>{
-  const s=scrollY,h=document.documentElement.scrollHeight-innerHeight;
-  document.getElementById('bar').style.width=(s/h*100)+'%';
-},{passive:true});
-
-/* ── Intersection observers ── */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*90);io.unobserve(e.target);}
-  });
-},{threshold:.12});
-document.querySelectorAll('.step,.city-card').forEach(el=>io.observe(el));
-
-/* ── Toast ── */
-function toast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2800);
+function playSwoosh() {
+  try {
+    swooshAudio.currentTime = 0;
+    swooshAudio.play().catch(() => {});
+  } catch(e) {}
 }
 
-/* ── Supabase config ── */
+/* ══════════════════════════════════════════════════════════
+   TYPE CLICK AUDIO — fires on every typewriter keystroke
+   Uses an AudioBuffer pool so rapid clicks never overlap
+══════════════════════════════════════════════════════════ */
+const clickAudio = new Audio('type-click.wav');
+clickAudio.preload = 'auto';
+
+/* Pool of 6 clones — rapid typing fires clicks without cutting off */
+const CLICK_POOL_SIZE = 6;
+const clickPool = [clickAudio];
+for (let i = 1; i < CLICK_POOL_SIZE; i++) {
+  const clone = new Audio('type-click.wav');
+  clone.preload = 'auto';
+  clone.volume = 0.35;
+  clickPool.push(clone);
+}
+clickAudio.volume = 0.35;
+let clickPoolIdx = 0;
+
+function playTypeClick() {
+  try {
+    const node = clickPool[clickPoolIdx % CLICK_POOL_SIZE];
+    clickPoolIdx++;
+    node.currentTime = 0;
+    node.play().catch(() => {});
+  } catch(e) {}
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const s = scrollY, h = document.documentElement.scrollHeight - innerHeight;
+  document.getElementById('bar').style.width = (s / h * 100) + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════════════════════════
+   INTERSECTION OBSERVERS
+══════════════════════════════════════════════════════════ */
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('on'), i * 90);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: .12 });
+document.querySelectorAll('.step, .city-card').forEach(el => io.observe(el));
+
+/* ══════════════════════════════════════════════════════════
+   DECORATIVE BARCODES
+══════════════════════════════════════════════════════════ */
+function makeBarcode(el, seed) {
+  if (!el) return;
+  const h = [28,16,22,12,28,10,20,16,28,12,18,28,14,22,10,28,18,14,22,28];
+  let html = '';
+  for (let i = 0; i < 20; i++)
+    html += `<span style="height:${h[(i + seed) % h.length]}px"></span>`;
+  el.innerHTML = html;
+}
+makeBarcode(document.getElementById('thread-barcode'), 0);
+makeBarcode(document.getElementById('bc1'), 3);
+makeBarcode(document.getElementById('bc2'), 8);
+makeBarcode(document.getElementById('bc3'), 14);
+makeBarcode(document.getElementById('bc4'), 6);
+
+/* ══════════════════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════════════════ */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SUPABASE CONFIG — DO NOT MODIFY
+══════════════════════════════════════════════════════════ */
 const SUPA_URL = 'https://ersdolnklkfxdpjtqqdb.supabase.co';
 const SUPA_KEY = 'sb_publishable_7DO1aPgeAvEwAn2ka2oU5A_lh2XmJnA';
 
-/* ── Referral code generator ── */
-function makeRefCode(email){
-  const base = btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g,'').substring(0,10).toLowerCase();
+function makeRefCode(email) {
+  const base = btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, '').substring(0, 10).toLowerCase();
   return base;
 }
-
-/* ── Get referred_by from URL ── */
-function getRefParam(){
+function getRefParam() {
   const p = new URLSearchParams(window.location.search);
   return p.get('ref') || null;
 }
 
-/* ── Waitlist submit ── */
-async function handleSubmit(){
+/* ══════════════════════════════════════════════════════════
+   WAITLIST SUBMIT — DO NOT MODIFY LOGIC
+   Audio trigger added at success point only
+══════════════════════════════════════════════════════════ */
+async function handleSubmit() {
   const first = document.getElementById('f-first').value.trim();
   const last  = document.getElementById('f-last').value.trim();
   const email = document.getElementById('f-email').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
   const city  = document.getElementById('f-city').value;
 
-  // Validate
-  const inv=[];
-  if(!first) inv.push('f-first');
-  if(!last)  inv.push('f-last');
-  if(!email||!email.includes('@')) inv.push('f-email');
-  if(!city)  inv.push('f-city');
-  if(inv.length){
-    inv.forEach(id=>{
-      const el=document.getElementById(id);
-      el.style.borderColor='rgba(255,80,80,0.6)';
-      setTimeout(()=>el.style.borderColor='',1800);
-    }); return;
+  const inv = [];
+  if (!first) inv.push('f-first');
+  if (!last)  inv.push('f-last');
+  if (!email || !email.includes('@')) inv.push('f-email');
+  if (!city)  inv.push('f-city');
+  if (inv.length) {
+    inv.forEach(id => {
+      const el = document.getElementById(id);
+      el.style.borderColor = 'rgba(255,80,80,0.6)';
+      setTimeout(() => el.style.borderColor = '', 1800);
+    });
+    return;
   }
 
-  // Disable button
   const btn = document.querySelector('.btn-submit');
   btn.textContent = 'Securing your spot...';
   btn.style.opacity = '0.7';
   btn.disabled = true;
 
-  const refCode = makeRefCode(email);
+  const refCode    = makeRefCode(email);
   const referredBy = getRefParam();
 
   try {
     const res = await fetch(`${SUPA_URL}/rest/v1/waitlist`, {
       method: 'POST',
       headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': `Bearer ${SUPA_KEY}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
+        'apikey':         SUPA_KEY,
+        'Authorization':  `Bearer ${SUPA_KEY}`,
+        'Content-Type':   'application/json',
+        'Prefer':         'return=minimal'
       },
       body: JSON.stringify({
         first_name:  first,
@@ -946,11 +1432,13 @@ async function handleSubmit(){
       })
     });
 
-    if(res.ok || res.status === 409) {
-      // 409 = duplicate email, still show success
+    if (res.ok || res.status === 409) {
+      /* ── AUDIO TRIGGER — fires exactly on success ── */
+      playSwoosh();
+
       const shareLink = `https://stringz.social?ref=${refCode}`;
       document.getElementById('share-url').value = shareLink;
-      document.getElementById('form-state').style.display = 'none';
+      document.getElementById('form-state').style.display  = 'none';
       document.getElementById('success-state').style.display = 'block';
     } else {
       const err = await res.json();
@@ -959,7 +1447,7 @@ async function handleSubmit(){
       btn.style.opacity = '1';
       btn.disabled = false;
     }
-  } catch(e){
+  } catch (e) {
     console.error('Network error:', e);
     btn.textContent = 'Something went wrong — try again';
     btn.style.opacity = '1';
@@ -967,74 +1455,91 @@ async function handleSubmit(){
   }
 }
 
-/* ── Copy referral link ── */
-function copyLink(){
-  const val=document.getElementById('share-url').value;
-  navigator.clipboard.writeText('https://'+val).then(()=>{
+/* ══════════════════════════════════════════════════════════
+   COPY LINK
+══════════════════════════════════════════════════════════ */
+function copyLink() {
+  const val = document.getElementById('share-url').value;
+  navigator.clipboard.writeText('https://' + val).then(() => {
     toast('Link copied — share it with your people!');
-  }).catch(()=>{
+  }).catch(() => {
     document.getElementById('share-url').select();
     document.execCommand('copy');
     toast('Link copied!');
   });
 }
 
-/* ── City share ── */
-function shareCity(city){
-  const msg=`Stringz is coming to ${city}! Sign up for early access — when you use my link, we automatically connect on the app: https://stringz.social`;
-  if(navigator.share){
-    navigator.share({title:'Stringz — Your People Are Already Out There', text:msg}).catch(()=>{});
+/* ══════════════════════════════════════════════════════════
+   CITY SHARE
+══════════════════════════════════════════════════════════ */
+function shareCity(city) {
+  const msg = `Stringz is coming to ${city}! Sign up for early access — when you use my link, we automatically connect on the app: https://stringz.social`;
+  if (navigator.share) {
+    navigator.share({ title: 'Stringz — Your People Are Already Out There', text: msg }).catch(() => {});
   } else {
-    navigator.clipboard.writeText(msg).then(()=>toast(`Copied share message for ${city}!`));
+    navigator.clipboard.writeText(msg).then(() => toast(`Copied share message for ${city}!`));
   }
 }
 
-/* ── Typewriter Threads (name + definition only) ── */
-const THREADS=[
-  {name:'Pass the Aux',       def:'Music is the main character. These are the nights where the playlist hits just right, the energy is electric, and you end up staying way longer than you planned. Whether it\'s a live set, a DJ night, or a watch party — if the sound is the whole point, this is your thread.'},
-  {name:'Outside Energy',     def:'Some of the best moments happen when you step outside. Day parties in the sun, street markets with good finds, pop-up events where the weather and the people just work. If it\'s happening outdoors and the vibe is everything, this is where you\'ll find it.'},
-  {name:'The Feed',           def:'Food festivals, bottomless brunches, pop-up dining experiences — events where the meal is the whole point and the conversations happen over a shared plate. Come hungry. Leave with new people in your phone.'},
-  {name:'The Sweat Check',    def:'Run clubs, yoga in the park, group fitness classes, wellness workshops. Because the people you work out alongside are usually the most real ones you\'ll meet. Sweat together, stay together.'},
-  {name:'The Culture',        def:'Fashion shows, gallery openings, comedy nights, film screenings. The events that remind you why your city is a creative capital. Come dressed. Come curious. Leave inspired.'},
-  {name:'Secure the Bag',     def:'Networking events that actually connect you with people doing real things. Panels, pitch nights, summits, and masterclasses — where the right conversation in the right room can genuinely change your trajectory.'},
-  {name:'The Arena',          def:'Bingo nights, watch parties, trivia leagues, bowling, game nights. Competitive energy mixed with good people. You come to play, you stay because the room just hits different.'},
-  {name:'Shoot Your Shot',    def:'Speed dating, singles mixers, and intentional social events for people who are actually open to meeting someone. Low pressure, real people, good energy. No apps. No swiping. Just showing up.'},
+/* ══════════════════════════════════════════════════════════
+   DICTIONARY TYPEWRITER — UNTOUCHED LOGIC
+══════════════════════════════════════════════════════════ */
+const THREADS = [
+  { name: 'Pass the Aux',    def: 'Music is the main character. These are the nights where the playlist hits just right, the energy is electric, and you end up staying way longer than you planned. Whether it\'s a live set, a DJ night, or a watch party — if the sound is the whole point, this is your thread.' },
+  { name: 'Outside Energy',  def: 'Some of the best moments happen when you step outside. Day parties in the sun, street markets with good finds, pop-up events where the weather and the people just work. If it\'s happening outdoors and the vibe is everything, this is where you\'ll find it.' },
+  { name: 'The Feed',        def: 'Food festivals, bottomless brunches, pop-up dining experiences — events where the meal is the whole point and the conversations happen over a shared plate. Come hungry. Leave with new people in your phone.' },
+  { name: 'The Sweat Check', def: 'Run clubs, yoga in the park, group fitness classes, wellness workshops. Because the people you work out alongside are usually the most real ones you\'ll meet. Sweat together, stay together.' },
+  { name: 'The Culture',     def: 'Fashion shows, gallery openings, comedy nights, film screenings. The events that remind you why your city is a creative capital. Come dressed. Come curious. Leave inspired.' },
+  { name: 'Secure the Bag',  def: 'Networking events that actually connect you with people doing real things. Panels, pitch nights, summits, and masterclasses — where the right conversation in the right room can genuinely change your trajectory.' },
+  { name: 'The Arena',       def: 'Bingo nights, watch parties, trivia leagues, bowling, game nights. Competitive energy mixed with good people. You come to play, you stay because the room just hits different.' },
+  { name: 'Shoot Your Shot', def: 'Speed dating, singles mixers, and intentional social events for people who are actually open to meeting someone. Low pressure, real people, good energy. No apps. No swiping. Just showing up.' },
 ];
 
-let cur=0, typeTimer=null, autoTimer=null;
+let cur = 0, typeTimer = null, autoTimer = null;
 
-function renderDots(){
-  const w=document.getElementById('tw-dots'); w.innerHTML='';
-  THREADS.forEach((_,i)=>{
-    const d=document.createElement('div'); d.className='dot'+(i===cur?' active':'');
-    d.onclick=()=>{clearTimeout(autoTimer);go(i);}; w.appendChild(d);
+function renderDots() {
+  const w = document.getElementById('tw-dots');
+  w.innerHTML = '';
+  THREADS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === cur ? ' active' : '');
+    d.onclick = () => { clearTimeout(autoTimer); go(i); };
+    w.appendChild(d);
   });
 }
 
-function typeWord(word,el,done){
-  clearTimeout(typeTimer); el.textContent=''; let i=0;
-  function t(){
-    if(i<=word.length){ el.textContent=word.slice(0,i++); typeTimer=setTimeout(t,i===1?100:48+Math.random()*28); }
-    else done();
+function typeWord(word, el, done) {
+  clearTimeout(typeTimer); el.textContent = ''; let i = 0;
+  function t() {
+    if (i <= word.length) {
+      el.textContent = word.slice(0, i);
+      if (i > 0) playTypeClick();
+      i++;
+      typeTimer = setTimeout(t, i === 1 ? 100 : 48 + Math.random() * 28);
+    } else { done(); }
   }
   t();
 }
 
-function go(index){
-  cur=index; renderDots();
-  const th=THREADS[index];
-  const wordEl=document.getElementById('tw-word');
-  const defEl=document.getElementById('tw-def');
-  defEl.classList.remove('show'); defEl.textContent='';
-  typeWord(th.name,wordEl,()=>{
-    setTimeout(()=>{
-      defEl.textContent=th.def; defEl.classList.add('show');
-      autoTimer=setTimeout(()=>go((cur+1)%THREADS.length),4000);
-    },150);
+function go(index) {
+  cur = index; renderDots();
+  const th     = THREADS[index];
+  const wordEl = document.getElementById('tw-word');
+  const defEl  = document.getElementById('tw-def');
+  const numEl  = document.getElementById('tw-num');
+  defEl.classList.remove('show'); defEl.textContent = '';
+  if (numEl) numEl.textContent = String(index + 1).padStart(2, '0');
+  typeWord(th.name, wordEl, () => {
+    defEl.textContent = th.def;
+    setTimeout(() => defEl.classList.add('show'), 60);
+    autoTimer = setTimeout(() => go((cur + 1) % THREADS.length), 5800);
   });
 }
 
-renderDots(); go(0);
+function nextThread() { clearTimeout(autoTimer); go((cur + 1) % THREADS.length); }
+function prevThread() { clearTimeout(autoTimer); go((cur - 1 + THREADS.length) % THREADS.length); }
+
+go(0);
 </script>
 </body>
 </html>
