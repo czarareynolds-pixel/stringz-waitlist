@@ -1408,7 +1408,7 @@ async function handleSubmit() {
     if (res.ok || res.status === 409) {
       /* ── AUDIO TRIGGER — fires exactly on success ── */
       playSwoosh();
-          emailjs.send('service_p0pkhiu', 'template_7fvnfxg', { to_email: email, first_name: first }).catch(function(err) { console.warn('EmailJS error', err); });
+          emailjs.send('service_p0pkhiu', 'template_7fvnfxg', { to_email: email, first_name: first, referral_link: 'https://www.stringz.social/waitlist?ref=' + encodeURIComponent(email) }).catch(function(err) { console.warn('EmailJS error', err); });
 
       const shareLink = `https://stringz.social?ref=${refCode}`;
       document.getElementById('share-url').value = shareLink;
