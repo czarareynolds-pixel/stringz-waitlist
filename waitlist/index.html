@@ -615,52 +615,7 @@ select option { background: #120810; color: var(--text); }
 .city-share svg { transition: transform 0.2s; flex-shrink: 0; }
 .city-share:hover svg { transform: translateX(2px); }
 
-/* ═══════════════════════════════════════════════════════
-   VIDEO SECTION — community.mp4
-═══════════════════════════════════════════════════════ */
-.video-section { position: relative; z-index: 1; width: 100%; overflow: hidden; }
-.video-wrap {
-  position: relative; width: 100%;
-  height: clamp(280px,56vw,720px); overflow: hidden;
-}
-.community-video {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; opacity: 0.45; filter: saturate(0.75);
-}
-/* Extra-heavy overlay for guaranteed legibility */
-.video-overlay {
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(to bottom,
-      rgba(6,3,10,1) 0%,
-      rgba(6,3,10,0.05) 18%,
-      rgba(6,3,10,0.65) 52%,
-      rgba(6,3,10,0.05) 82%,
-      rgba(6,3,10,1) 100%
-    ),
-    radial-gradient(ellipse 75% 55% at 50% 50%, rgba(149,18,44,0.2) 0%, transparent 70%);
-  pointer-events: none;
-}
-.video-caption {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; text-align: center;
-  padding: 0 24px; pointer-events: none;
-}
-.video-label {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.28em; text-transform: uppercase; color: var(--orange);
-  margin-bottom: 18px; display: flex; align-items: center; gap: 14px;
-  text-shadow: var(--txt-shadow);
-}
-.video-label::before, .video-label::after {
-  content: ''; display: block; width: 44px; height: 1px; background: var(--orange); opacity: 0.5;
-}
-.video-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(38px,6.5vw,86px); line-height: 0.94;
-  letter-spacing: -0.02em; color: var(--text);
-  text-shadow: 0 2px 80px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.9), var(--txt-shadow);
-}
+
 
 /* ═══════════════════════════════════════════════════════
    HOW IT WORKS — TICKET AESTHETIC
@@ -1168,20 +1123,6 @@ footer {
     </div>
   </div>
 </section>
-
-<hr class="hr">
-
-<!-- ══════════════════ VIDEO — community.mp4 ══════════════════ -->
-<div class="video-section">
-  <div class="video-wrap">
-    <video autoplay muted loop playsinline src="community.mp4" class="community-video"></video>
-    <div class="video-overlay"></div>
-    <div class="video-caption">
-      <p class="video-label">The Community</p>
-      <p class="video-text">Your people are already out there.<br>Stringz helps you find them.</p>
-    </div>
-  </div>
-</div>
 
 <hr class="hr">
 
