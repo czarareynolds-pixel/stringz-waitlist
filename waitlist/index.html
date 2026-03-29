@@ -1020,6 +1020,7 @@ footer {
           <div class="share-link-row">
             <input class="share-link-input" id="share-url" readonly value="stringz.social/ref/loading...">
             <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+            <button class="copy-btn" onclick="shareReferral()" style="background:linear-gradient(135deg,#CA3F16,#FF9408);border:none;margin-left:8px;">Share #8594;</button>
           </div>
         </div>
         <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
@@ -1432,6 +1433,20 @@ async function handleSubmit() {
 /* ══════════════════════════════════════════════════════════
    COPY LINK
 ══════════════════════════════════════════════════════════ */
+function shareReferral() {
+  const url = document.getElementById('share-url').value;
+  const shareData = {
+    title: 'Join me on Stringz',
+    text: 'I just secured my spot on Stringz — Atlanta\'s new app for finding events and your people. Join me:',
+    url: url.startsWith('http') ? url : 'https://' + url
+  };
+  if (navigator.share) {
+    navigator.share(shareData).catch(function(err) { console.warn('Share cancelled', err); });
+  } else {
+    navigator.clipboard.writeText(shareData.url).then(function() { toast('Link copied!'); });
+  }
+}
+
 function copyLink() {
   const val = document.getElementById('share-url').value;
   navigator.clipboard.writeText('https://' + val).then(() => {
