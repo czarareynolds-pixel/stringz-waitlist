@@ -75,7 +75,22 @@ body::before {
 #bg-flare {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0.55; filter: saturate(1.6) brightness(1.1);
+  pointer-events: none;
 }
+
+/* ── Kill native video play buttons / controls across all browsers ── */
+video::-webkit-media-controls,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+video::-moz-media-controls { display: none !important; }
+video { object-fit: cover; }
 /* Soft vignette — just enough to keep edges readable */
 #bg-flare-wrap::after {
   content: ''; position: absolute; inset: 0;
@@ -166,6 +181,7 @@ nav {
 .hero-vid {
   width: 100%; height: 100%; object-fit: cover;
   opacity: 0.80; filter: saturate(1.1) brightness(0.85);
+  pointer-events: none;
 }
 /* Lighter overlay — Atlanta shows through, text still readable */
 .hero-vid-wrap::after {
@@ -864,7 +880,7 @@ footer {
 
 <!-- ══ BACKGROUND FLARE VIDEO (light orange/pink texture) ══ -->
 <div id="bg-flare-wrap">
-  <video id="bg-flare" autoplay muted loop playsinline src="bg-flare.mp4"></video>
+  <video id="bg-flare" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture src="bg-flare.mp4"></video>
 </div>
 
 <div id="bar"></div>
@@ -898,7 +914,7 @@ footer {
 
   <!-- Atlanta video backdrop -->
   <div class="hero-vid-wrap">
-    <video class="hero-vid" autoplay muted loop playsinline src="hero-atl.mp4"></video>
+    <video class="hero-vid" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture src="hero-atl.mp4"></video>
   </div>
 
   <div class="hero-split">
@@ -1568,6 +1584,37 @@ function nextThread() { clearTimeout(autoTimer); go((cur + 1) % THREADS.length);
 function prevThread() { clearTimeout(autoTimer); go((cur - 1 + THREADS.length) % THREADS.length); }
 
 go(0);
+
+/* ══════════════════════════════════════════════════════════
+   VIDEO AUTOPLAY FALLBACK
+   Some browsers block autoplay even for muted videos.
+   This catches failed autoplay and retries on first user
+   interaction, ensuring background videos always play.
+══════════════════════════════════════════════════════════ */
+(function() {
+  var vids = document.querySelectorAll('video[autoplay]');
+  var needsRetry = [];
+
+  vids.forEach(function(v) {
+    v.removeAttribute('controls');
+    var p = v.play();
+    if (p && p.catch) {
+      p.catch(function() { needsRetry.push(v); });
+    }
+  });
+
+  function retryPlay() {
+    needsRetry.forEach(function(v) {
+      v.muted = true;
+      v.play().catch(function() {});
+    });
+    needsRetry = [];
+  }
+
+  document.addEventListener('touchstart', retryPlay, { once: true, passive: true });
+  document.addEventListener('click', retryPlay, { once: true });
+  document.addEventListener('scroll', retryPlay, { once: true, passive: true });
+})();
 </script>
 </body>
 </html>
