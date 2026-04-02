@@ -241,14 +241,14 @@ h1 {
 }
 
 .hero-tagline {
-  font-size: clamp(15px,1.5vw,19px); line-height: 1.68; color: var(--text);
-  font-weight: 500; max-width: 560px; margin: 0 auto 10px;
+  font-size: clamp(16px,1.6vw,21px); line-height: 1.68; color: var(--text);
+  font-weight: 500; max-width: 580px; margin: 0 auto 12px;
   text-shadow: var(--txt-shadow);
   opacity: 0; animation: fadeUp 0.8s ease 0.24s forwards;
 }
 .hero-sub {
-  font-size: clamp(14px,1.2vw,16px); line-height: 1.8; color: var(--muted);
-  max-width: 520px; margin: 0 auto clamp(20px,3vw,32px);
+  font-size: clamp(15px,1.3vw,18px); line-height: 1.78; color: var(--muted);
+  max-width: 540px; margin: 0 auto clamp(20px,3vw,32px);
   text-shadow: 0 1px 8px rgba(0,0,0,0.9);
   opacity: 0; animation: fadeUp 0.8s ease 0.28s forwards;
 }
@@ -260,7 +260,7 @@ h1 {
 }
 .hero-cta-arrow span {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(12px,1.1vw,14px); font-weight: 700;
+  font-size: clamp(13px,1.2vw,16px); font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--orange);
   text-shadow: 0 0 20px rgba(255,148,8,0.4);
@@ -290,8 +290,8 @@ h1 {
   display: flex; align-items: center; justify-content: center;
 }
 .hero-ig-info { display: flex; flex-direction: column; gap: 2px; }
-.hero-ig-name { font-size: 13px; font-weight: 700; color: var(--text); }
-.hero-ig-meta { font-size: 10px; color: var(--muted); }
+.hero-ig-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.hero-ig-meta { font-size: 11px; color: var(--muted); }
 .hero-ig-btn {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px; font-weight: 800; color: var(--orange); letter-spacing: 0.1em;
@@ -471,7 +471,7 @@ select option { background: #120810; color: var(--text); }
 ═══════════════════════════════════════════════════════ */
 .section-label {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase;
   color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 14px;
 }
 .section-label::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
@@ -529,8 +529,8 @@ select option { background: #120810; color: var(--text); }
 .ticket-barcode span { display: block; background: var(--orange); width: 2px; border-radius: 1px; }
 
 .ticket-label-row {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 9px; font-weight: 700;
-  letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,148,8,0.5);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,148,8,0.5);
   margin-bottom: 10px; display: flex; align-items: center; gap: 16px;
 }
 .ticket-label-row::after { content: ''; flex: 1; height: 1px; background: rgba(255,148,8,0.1); }
@@ -555,7 +555,7 @@ select option { background: #120810; color: var(--text); }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 .thread-def {
-  font-size: clamp(13px,1.2vw,16px); color: var(--muted); font-style: italic;
+  font-size: clamp(15px,1.3vw,18px); color: var(--muted); font-style: italic;
   max-width: 680px; line-height: 1.78; margin-top: 18px;
   opacity: 0; transition: opacity 0.55s ease; min-height: 64px;
 }
@@ -603,7 +603,7 @@ select option { background: #120810; color: var(--text); }
 }
 .cities-header p {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(15px,1.4vw,19px); font-weight: 500;
+  font-size: clamp(16px,1.5vw,20px); font-weight: 500;
   color: var(--muted); letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -641,13 +641,13 @@ select option { background: #120810; color: var(--text); }
 }
 .city-state {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(12px,1vw,14px); color: var(--muted);
+  font-size: clamp(13px,1.1vw,15px); color: var(--muted);
   letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
 }
 .city-cta {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(13px,1.1vw,15px); font-weight: 700;
+  font-size: clamp(14px,1.2vw,16px); font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--orange); text-decoration: none;
   margin-top: 12px; transition: color 0.25s, gap 0.25s;
@@ -725,8 +725,8 @@ select option { background: #120810; color: var(--text); }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   display: block; margin-bottom: 12px; letter-spacing: -0.01em;
 }
-.step-t { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.step-d { font-size: 13px; line-height: 1.74; color: var(--muted); }
+.step-t { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.step-d { font-size: 15px; line-height: 1.74; color: var(--muted); }
 
 /* ═══════════════════════════════════════════════════════
    INSTAGRAM SECTION
@@ -756,17 +756,17 @@ select option { background: #120810; color: var(--text); }
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,60px);
   color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; line-height: 1.0;
 }
-.ig-sub { font-size: clamp(14px,1.3vw,17px); color: var(--muted); max-width: 420px; margin: 0 auto 30px; line-height: 1.65; }
+.ig-sub { font-size: clamp(15px,1.4vw,18px); color: var(--muted); max-width: 440px; margin: 0 auto 30px; line-height: 1.68; }
 .ig-btn {
   display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
   background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
-  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 800;
+  color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase; padding: 16px 40px; border-radius: 9px;
   box-shadow: 0 4px 28px rgba(202,63,22,0.38);
   transition: opacity 0.2s, box-shadow 0.2s;
 }
 .ig-btn:hover { opacity: 0.9; box-shadow: 0 6px 40px rgba(202,63,22,0.62); }
-.ig-handle { font-size: 12px; color: var(--muted); margin-top: 14px; }
+.ig-handle { font-size: 13px; color: var(--muted); margin-top: 14px; }
 
 /* ═══════════════════════════════════════════════════════
    CTA SECTION
@@ -786,13 +786,13 @@ select option { background: #120810; color: var(--text); }
   letter-spacing: -0.02em; text-shadow: var(--txt-shadow);
 }
 .cta-tagline {
-  font-size: clamp(14px,1.4vw,18px); font-weight: 500; color: var(--text);
-  max-width: 460px; margin: 0 auto 10px; line-height: 1.62; position: relative;
+  font-size: clamp(16px,1.5vw,20px); font-weight: 500; color: var(--text);
+  max-width: 480px; margin: 0 auto 12px; line-height: 1.62; position: relative;
   text-shadow: var(--txt-shadow);
 }
 .cta-sub {
-  font-size: 15px; color: var(--muted); max-width: 420px; margin: 0 auto 50px;
-  line-height: 1.65; position: relative;
+  font-size: 16px; color: var(--muted); max-width: 440px; margin: 0 auto 50px;
+  line-height: 1.68; position: relative;
 }
 .cta-btn {
   display: inline-block; text-decoration: none;
@@ -867,8 +867,8 @@ footer {
 
   .hero { padding:88px 24px 48px; min-height:100svh; }
   .hero-split { gap: 28px; }
-  .hero-tagline { font-size: 16px; }
-  .hero-sub { font-size: 14px; }
+  .hero-tagline { font-size: 17px; }
+  .hero-sub { font-size: 15px; }
 
   .threads-section, .cities-section { padding-left:24px; padding-right:24px; }
   .cities-grid { grid-template-columns:repeat(3,1fr); gap:16px; }
@@ -879,19 +879,19 @@ footer {
   .step:nth-child(2) { border-radius:0 12px 0 0; }
   .step:nth-child(3) { border-left:none; border-radius:0 0 0 12px; }
   .step:last-child { border-radius:0 0 12px 0; }
-  .step-t { font-size: 16px; }
-  .step-d { font-size: 14px; }
+  .step-t { font-size: 17px; }
+  .step-d { font-size: 15px; }
 
   .ig-section { padding:56px 24px; }
   .ig-card { padding:36px 24px; }
-  .ig-sub { font-size: 15px; }
+  .ig-sub { font-size: 16px; }
   .cta-section { padding:88px 24px; }
   footer { flex-direction:column; gap:18px; text-align:center; padding:24px 20px; }
   .foot-links { flex-wrap:wrap; justify-content:center; }
 
   .ticker-wrap { display:none; }
   .ticket-notch, .ticket-perf { display:none; }
-  .how-header { flex-direction:column; align-items:flex-start; }
+  .how-header { flex-direction:column; align-items:center; text-align:center; }
 
   .card-sub { font-size: 14px; }
 }
@@ -922,8 +922,8 @@ footer {
 @media (max-width: 560px) {
   .hero { padding: 72px 16px 36px; }
   .hero-split { gap: 24px; }
-  .hero-tagline { font-size: 15px; line-height: 1.6; }
-  .hero-sub { font-size: 14px; line-height: 1.7; }
+  .hero-tagline { font-size: 16px; line-height: 1.6; }
+  .hero-sub { font-size: 15px; line-height: 1.7; }
 
   .how-title span { display: block; margin-top: 0.85em; }
   .t1 { margin-bottom: 0.55em !important; line-height: 1.2; display: block; }
@@ -932,7 +932,7 @@ footer {
   .form-row { grid-template-columns:1fr; }
   .glass-card { padding: 22px 16px; border-radius: 16px; }
   .card-title { font-size: 26px; }
-  .card-sub { font-size: 13px; }
+  .card-sub { font-size: 14px; }
   input, select { font-size: 16px; padding: 14px; }
   label { font-size: 10px; }
   .btn-submit { font-size: 20px; padding: 16px; }
@@ -948,15 +948,15 @@ footer {
   .step { border-left:1px solid rgba(255,255,255,0.055) !important; border-radius:0 !important; padding: 24px 18px; }
   .step:first-child { border-radius:12px 12px 0 0 !important; }
   .step:last-child { border-radius:0 0 12px 12px !important; }
-  .step-t { font-size: 15px; }
-  .step-d { font-size: 13px; line-height: 1.7; }
+  .step-t { font-size: 16px; }
+  .step-d { font-size: 14px; line-height: 1.7; }
 
   .ig-section { padding: 48px 16px; }
   .ig-card { padding: 32px 18px; border-radius: 18px; }
-  .ig-sub { font-size: 14px; line-height: 1.6; }
+  .ig-sub { font-size: 15px; line-height: 1.6; }
 
   .cta-section { padding: 72px 16px; }
-  .cta-sub { font-size: 14px; }
+  .cta-sub { font-size: 15px; }
 
   .how-inner { padding: 48px 16px; }
 
@@ -1043,7 +1043,7 @@ footer {
         <span class="t1">Your People</span>
         <span class="t2">Are Already<br>Going.</span>
       </h1>
-        <p class="hero-tagline" style="margin:18px auto 0;font-size:clamp(14px,1.8vw,18px);color:rgba(240,232,234,0.7);letter-spacing:0.04em;font-family:'Barlow Condensed',sans-serif;font-weight:500;text-transform:uppercase;max-width:560px;width:100%;">Don't walk into events alone again.</p>
+        <p class="hero-tagline" style="margin:18px auto 0;font-size:clamp(15px,1.8vw,20px);color:rgba(240,232,234,0.7);letter-spacing:0.04em;font-family:'Barlow Condensed',sans-serif;font-weight:500;text-transform:uppercase;max-width:580px;width:100%;">Don't walk into events alone again.</p>
 
       <p class="hero-tagline">SEE WHO’S GOING · INVITE YOUR CREW · AND MEET SOMEONE NEW.</p>
       <p class="hero-sub">Find events worth showing up for, see who else is going, and build the kind of community you actually want to be part of.</p>
