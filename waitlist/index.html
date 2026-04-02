@@ -472,9 +472,10 @@ select option { background: #120810; color: var(--text); }
 .section-label {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 10px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--muted); display: flex; align-items: center; gap: 14px;
+  color: var(--muted); display: flex; align-items: center; justify-content: center; gap: 14px;
 }
 .section-label::before { content: ''; width: 28px; height: 1px; background: var(--muted); }
+.section-label::after { content: ''; width: 28px; height: 1px; background: var(--muted); }
 
 /* ═══════════════════════════════════════════════════════
    THREADS SECTION — TICKET CARD
@@ -677,8 +678,8 @@ select option { background: #120810; color: var(--text); }
   padding: clamp(60px,8vw,110px) clamp(20px,4.5vw,52px);
 }
 .how-header {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  margin-bottom: clamp(36px,5vw,60px); flex-wrap: wrap; gap: 20px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  margin-bottom: clamp(36px,5vw,60px); gap: 12px;
 }
 .how-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -998,7 +999,7 @@ footer {
         <span class="nav-ig-sub">Follow us</span>
       </div>
     </a>
-    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    <a href="#cities" class="nav-cta">Get Early Access</a>
   </div>
 </nav>
 
@@ -1077,7 +1078,7 @@ footer {
 
 <!-- ══════════════════ THREADS — TICKET CARD ══════════════════ -->
 <section class="threads-section">
-  <div style="margin-bottom:clamp(24px,3.5vw,44px)">
+  <div style="margin-bottom:clamp(24px,3.5vw,44px);text-align:center">
     <p class="section-label">Your Threads</p>
   </div>
 
@@ -1264,7 +1265,7 @@ footer {
   </h2>
   <p class="cta-tagline">SEE WHO’S GOING · INVITE YOUR CREW · AND MEET SOMEONE NEW.</p>
   <p class="cta-sub">Atlanta launches first. Secure your spot before we go live.</p>
-  <a href="#waitlist" class="cta-btn">Join My City →</a>
+  <a href="#cities" class="cta-btn">Join My City →</a>
 </section>
 
 <!-- ══════════════════ FOOTER ══════════════════ -->
