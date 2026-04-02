@@ -88,12 +88,15 @@ body::before {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: clamp(28px,4vw,48px);
 }
+.logo-link {
+  display: inline-flex; text-decoration: none; line-height: 0;
+}
 .s-logo {
   height: clamp(36px,5vw,52px); width: auto; display: block;
   filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
   transition: filter 0.3s;
 }
-.s-logo:hover { filter: drop-shadow(0 0 28px rgba(255,148,8,0.6)); }
+.logo-link:hover .s-logo { filter: drop-shadow(0 0 28px rgba(255,148,8,0.6)); }
 
 .join-btn {
   font-family: 'Barlow Condensed', sans-serif;
@@ -347,9 +350,9 @@ body::before {
 
   <!-- ══════════ TOP BAR ══════════ -->
   <header class="top-bar">
-    <a href="/waitlist">
+    <a href="/waitlist" class="logo-link">
       <img src="/waitlist/stringz_s_logo.png" alt="Stringz" class="s-logo"
-        onerror="this.outerHTML='<span style=\"font-family:Bebas Neue,sans-serif;font-size:28px;color:#FF9408;letter-spacing:0.08em\">S</span>'">
+        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\"font-family:Bebas Neue,sans-serif;font-size:28px;color:#FF9408;letter-spacing:0.08em;display:block\">S</span>'">
     </a>
     <a href="#join" class="join-btn">Join My City</a>
   </header>
