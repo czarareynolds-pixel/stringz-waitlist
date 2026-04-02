@@ -36,7 +36,7 @@ html { scroll-behavior:smooth; font-size:16px; }
   --red:       #CA3F16;
   --crimson:   #95122C;
   --text:      #F2EBE0;
-  --muted:     #7a5060;
+  --muted:     #a8899a;
   --sub:       #2a1420;
   --border:    rgba(255,148,8,0.18);
   --border2:   rgba(255,255,255,0.07);
@@ -246,7 +246,7 @@ h1 {
   opacity: 0; animation: fadeUp 0.8s ease 0.24s forwards;
 }
 .hero-sub {
-  font-size: clamp(13px,1.1vw,15px); line-height: 1.8; color: var(--muted);
+  font-size: clamp(14px,1.2vw,16px); line-height: 1.8; color: var(--muted);
   max-width: 460px; margin-bottom: clamp(20px,3vw,32px);
   text-shadow: 0 1px 8px rgba(0,0,0,0.9);
   opacity: 0; animation: fadeUp 0.8s ease 0.28s forwards;
@@ -316,13 +316,13 @@ h1 {
   font-size: clamp(28px,3.2vw,38px); letter-spacing: 0.03em;
   color: var(--text); margin-bottom: 4px;
 }
-.card-sub { font-size: 12px; color: var(--muted); margin-bottom: clamp(16px,2.2vw,24px); line-height: 1.5; }
+.card-sub { font-size: 13px; color: var(--muted); margin-bottom: clamp(16px,2.2vw,24px); line-height: 1.6; }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px; }
 .form-group { margin-bottom: 11px; }
 
 label {
-  display: block; font-size: 9px; font-weight: 700;
+  display: block; font-size: 10px; font-weight: 700;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 5px;
 }
@@ -331,12 +331,12 @@ input, select {
   width: 100%; background: rgba(255,255,255,0.045);
   border: 1px solid rgba(255,255,255,0.09);
   border-radius: 9px; padding: 12px 14px;
-  font-family: 'Satoshi', sans-serif; font-size: 14px;
+  font-family: 'Satoshi', sans-serif; font-size: 16px;
   color: var(--text); outline: none;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   -webkit-appearance: none;
 }
-input::placeholder { color: var(--muted); opacity: 0.5; }
+input::placeholder { color: var(--muted); opacity: 0.6; }
 input:focus, select:focus {
   border-color: rgba(255,148,8,0.5);
   background: rgba(255,148,8,0.04);
@@ -391,7 +391,7 @@ select option { background: #120810; color: var(--text); }
 }
 .btn-submit:active { transform: scale(0.99); }
 
-.form-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 10px; opacity: 0.55; }
+.form-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; opacity: 0.6; }
 
 /* ── Success state ── */
 .success-state { display: none; text-align: center; }
@@ -409,7 +409,7 @@ select option { background: #120810; color: var(--text); }
   font-size: clamp(34px,4vw,44px); color: var(--text); margin-bottom: 6px;
   letter-spacing: 0.04em;
 }
-.success-sub { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+.success-sub { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
 
 .share-box {
   background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.22);
@@ -420,7 +420,7 @@ select option { background: #120810; color: var(--text); }
   font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--orange); margin-bottom: 6px;
 }
-.share-box-msg { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.share-box-msg { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
 .share-link-row { display: flex; gap: 8px; align-items: center; }
 .share-link-input {
   flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
@@ -577,7 +577,7 @@ select option { background: #120810; color: var(--text); }
   letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px;
   text-shadow: var(--txt-shadow);
 }
-.city-sub { font-size: clamp(13px,1.2vw,16px); color: var(--muted); line-height: 1.72; }
+.city-sub { font-size: clamp(14px,1.3vw,17px); color: var(--muted); line-height: 1.72; }
 
 .city-brand-img {
   width: 100%; border-radius: 16px; border: 1px solid rgba(255,148,8,0.14);
@@ -625,8 +625,8 @@ select option { background: #120810; color: var(--text); }
 .city-badge.live { background: rgba(255,148,8,0.15); color: var(--orange); border: 1px solid rgba(255,148,8,0.35); }
 .city-badge.soon { background: rgba(255,255,255,0.03); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
 
-.city-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
-.city-state { font-size: 11px; color: var(--muted); }
+.city-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
+.city-state { font-size: 12px; color: var(--muted); }
 .city-share {
   display: flex; align-items: center; gap: 6px; margin-top: 10px;
   font-size: 10px; color: var(--muted); cursor: pointer;
@@ -705,8 +705,8 @@ select option { background: #120810; color: var(--text); }
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   display: block; margin-bottom: 12px; letter-spacing: -0.01em;
 }
-.step-t { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.step-d { font-size: 12px; line-height: 1.74; color: var(--muted); }
+.step-t { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.step-d { font-size: 13px; line-height: 1.74; color: var(--muted); }
 
 /* ═══════════════════════════════════════════════════════
    INSTAGRAM SECTION
@@ -736,7 +736,7 @@ select option { background: #120810; color: var(--text); }
   font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,5vw,60px);
   color: var(--text); margin-bottom: 4px; letter-spacing: -0.01em; line-height: 1.0;
 }
-.ig-sub { font-size: clamp(13px,1.3vw,16px); color: var(--muted); max-width: 420px; margin: 0 auto 30px; line-height: 1.65; }
+.ig-sub { font-size: clamp(14px,1.3vw,17px); color: var(--muted); max-width: 420px; margin: 0 auto 30px; line-height: 1.65; }
 .ig-btn {
   display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
   background: linear-gradient(90deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
@@ -771,7 +771,7 @@ select option { background: #120810; color: var(--text); }
   text-shadow: var(--txt-shadow);
 }
 .cta-sub {
-  font-size: 14px; color: var(--muted); max-width: 380px; margin: 0 auto 50px;
+  font-size: 15px; color: var(--muted); max-width: 420px; margin: 0 auto 50px;
   line-height: 1.65; position: relative;
 }
 .cta-btn {
@@ -804,7 +804,7 @@ footer {
   color: var(--muted); transition: color 0.2s;
 }
 .foot-link:hover { color: var(--text); }
-.foot-copy { font-size: 11px; color: var(--muted); opacity: 0.36; }
+.foot-copy { font-size: 11px; color: var(--muted); opacity: 0.45; }
 
 /* ═══════════════════════════════════════════════════════
    TOAST
@@ -826,6 +826,17 @@ footer {
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════
+   TABLET — iPads landscape & small laptops (961–1024px)
+═══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-split { grid-template-columns: minmax(0,1fr) clamp(300px,38vw,400px); gap: 32px; }
+  .cities-grid { grid-template-columns: repeat(3,1fr); }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TABLET — iPads portrait & small tablets (≤960px)
+═══════════════════════════════════════════════════════ */
 @media (max-width: 960px) {
   nav { padding:12px 18px; position:relative; background:rgba(6,3,10,0.99); }
   .nav-cta { display:none; }
@@ -834,41 +845,109 @@ footer {
   .nav-ig-handle { font-size:11px; }
   .nav-ig-dot { width:22px; height:22px; }
 
-  .hero { padding:88px 20px 48px; min-height:100svh; }
+  .hero { padding:88px 24px 48px; min-height:100svh; }
   .hero-split { grid-template-columns:1fr; gap:32px; }
+  .hero-tagline { font-size: 16px; }
+  .hero-sub { font-size: 14px; }
 
   .city-header { grid-template-columns:1fr; }
-  .city-brand-img { min-height:220px; max-height:260px; }
-  .threads-section, .cities-section { padding-left:20px; padding-right:20px; }
-  .cities-grid { grid-template-columns:repeat(2,1fr); }
+  .city-brand-img { min-height:220px; max-height:300px; }
+  .threads-section, .cities-section { padding-left:24px; padding-right:24px; }
+  .cities-grid { grid-template-columns:repeat(3,1fr); gap:12px; }
 
-  .how-inner { padding:56px 20px; }
+  .how-inner { padding:56px 24px; }
   .steps { grid-template-columns:repeat(2,1fr); }
   .step:first-child { border-radius:12px 0 0 0; }
   .step:nth-child(2) { border-radius:0 12px 0 0; }
   .step:nth-child(3) { border-left:none; border-radius:0 0 0 12px; }
   .step:last-child { border-radius:0 0 12px 0; }
+  .step-t { font-size: 16px; }
+  .step-d { font-size: 14px; }
 
-  .ig-section { padding:56px 20px; }
-  .ig-card { padding:36px 22px; }
-  .cta-section { padding:88px 20px; }
+  .ig-section { padding:56px 24px; }
+  .ig-card { padding:36px 24px; }
+  .ig-sub { font-size: 15px; }
+  .cta-section { padding:88px 24px; }
   footer { flex-direction:column; gap:18px; text-align:center; padding:24px 20px; }
   .foot-links { flex-wrap:wrap; justify-content:center; }
 
   .ticker-wrap { display:none; }
   .ticket-notch, .ticket-perf { display:none; }
   .how-header { flex-direction:column; align-items:flex-start; }
+
+  .card-sub { font-size: 14px; }
+  .city-sub { font-size: 15px; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   iPAD MINI / LARGE PHONES (≤768px)
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero { padding: 80px 20px 40px; }
+  .hero-split { gap: 28px; }
+
+  .cities-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+  .city-card { padding: 16px 14px; }
+  .city-name { font-size: 15px; }
+  .city-badge { font-size: 9px; }
+
+  .glass-card { padding: 24px 20px; }
+  .card-title { font-size: 28px; }
+
+  .how-title { font-size: clamp(32px,7vw,48px); }
+
+  .threads-section .how-inner,
+  .threads-section { padding-left: 20px; padding-right: 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE (≤560px)
+═══════════════════════════════════════════════════════ */
 @media (max-width: 560px) {
+  .hero { padding: 72px 16px 36px; }
+  .hero-split { gap: 24px; }
+  .hero-tagline { font-size: 15px; line-height: 1.6; }
+  .hero-sub { font-size: 14px; line-height: 1.7; }
+
   .how-title span { display: block; margin-top: 0.85em; }
   .t1 { margin-bottom: 0.55em !important; line-height: 1.2; display: block; }
   .t2 { display: block; margin-top: 0.15em; line-height: 1.2; }
+
   .form-row { grid-template-columns:1fr; }
-  .cities-grid { grid-template-columns:1fr 1fr; }
+  .glass-card { padding: 22px 16px; border-radius: 16px; }
+  .card-title { font-size: 26px; }
+  .card-sub { font-size: 13px; }
+  input, select { font-size: 16px; padding: 14px; }
+  label { font-size: 10px; }
+  .btn-submit { font-size: 20px; padding: 16px; }
+
+  .cities-section { padding-left: 16px; padding-right: 16px; }
+  .cities-grid { grid-template-columns:1fr 1fr; gap: 8px; }
+  .city-card { padding: 14px 12px; }
+  .city-name { font-size: 14px; }
+  .city-state { font-size: 11px; }
+  .city-badge { font-size: 8px; padding: 3px 6px; }
+  .city-share { font-size: 10px; }
+
   .steps { grid-template-columns:1fr; }
-  .step { border-left:1px solid rgba(255,255,255,0.055) !important; border-radius:0 !important; }
+  .step { border-left:1px solid rgba(255,255,255,0.055) !important; border-radius:0 !important; padding: 24px 18px; }
   .step:first-child { border-radius:12px 12px 0 0 !important; }
   .step:last-child { border-radius:0 0 12px 12px !important; }
+  .step-t { font-size: 15px; }
+  .step-d { font-size: 13px; line-height: 1.7; }
+
+  .ig-section { padding: 48px 16px; }
+  .ig-card { padding: 32px 18px; border-radius: 18px; }
+  .ig-sub { font-size: 14px; line-height: 1.6; }
+
+  .cta-section { padding: 72px 16px; }
+  .cta-sub { font-size: 14px; }
+
+  .how-inner { padding: 48px 16px; }
+
+  footer { padding: 20px 16px; }
+  .foot-link { font-size: 12px; }
+  .foot-copy { font-size: 11px; }
 }
 </style>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
