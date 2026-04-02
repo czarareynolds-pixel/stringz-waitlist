@@ -224,41 +224,56 @@ body::before {
    BOTTOM BAR
 ═══════════════════════════════════════════════════════ */
 .bottom-bar {
-  display: flex; align-items: flex-end; justify-content: space-between;
+  display: flex; flex-direction: column; gap: 16px;
   margin-top: auto; padding-top: 20px;
 }
-
-/* Bottom-left: "Atlanta, You're Invited" */
-.invite-text {
-  max-width: 280px;
+.bottom-row {
+  display: flex; align-items: center; justify-content: flex-end;
 }
-.invite-text p {
-  font-size: clamp(13px,1.2vw,15px); color: var(--muted);
-  line-height: 1.6; margin-bottom: 12px;
+
+/* Bottom: City invite banner */
+.invite-banner {
+  width: 100%; padding: clamp(20px,3vw,36px) clamp(24px,4vw,48px);
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,148,8,0.14); border-radius: 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; margin-top: 20px;
+}
+.invite-banner::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.5), transparent);
+}
+.invite-left {
+  display: flex; align-items: baseline; gap: clamp(10px,2vw,24px);
+  flex-wrap: wrap;
 }
 .invite-city {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(22px,2.8vw,32px); color: var(--text);
-  line-height: 1.0; margin-bottom: 4px;
-  text-shadow: 0 0 20px rgba(255,148,8,0.3);
+  font-size: clamp(36px,5vw,64px); color: var(--text);
+  line-height: 1.0; letter-spacing: -0.02em;
+  text-shadow: 0 0 30px rgba(255,148,8,0.2);
 }
 .invite-sub {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(14px,1.5vw,18px); font-weight: 600;
+  font-size: clamp(18px,2.5vw,32px); font-weight: 700;
   background: linear-gradient(108deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   letter-spacing: 0.02em;
 }
 .more-info {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(11px,1vw,13px); font-weight: 700;
+  font-size: clamp(12px,1.1vw,15px); font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--orange); text-decoration: none;
-  transition: opacity 0.2s;
-  margin-top: 10px;
+  border: 1px solid rgba(255,148,8,0.25); border-radius: 8px;
+  padding: 10px 20px; transition: all 0.25s;
+  background: rgba(255,148,8,0.06);
+  white-space: nowrap; flex-shrink: 0;
 }
-.more-info:hover { opacity: 0.75; }
+.more-info:hover {
+  background: rgba(255,148,8,0.12); border-color: rgba(255,148,8,0.5);
+}
 .more-info svg { transition: transform 0.2s; }
 .more-info:hover svg { transform: translateX(3px); }
 
@@ -333,8 +348,9 @@ body::before {
   .event-card.pos-far-right { opacity: 0; pointer-events: none; }
   .nav-arrow.left { left: -4px; }
   .nav-arrow.right { right: -4px; }
-  .bottom-bar { flex-direction: column; gap: 24px; align-items: flex-start; }
-  .social-connect { align-self: flex-start; }
+  .invite-banner { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .invite-left { gap: 8px; }
+  .bottom-row { justify-content: flex-start; }
   .progress-bar { position: relative; bottom: auto; left: auto; transform: none; align-self: center; }
 }
 
@@ -395,29 +411,33 @@ body::before {
 
   <!-- ══════════ BOTTOM BAR ══════════ -->
   <footer class="bottom-bar">
-    <!-- Left: Los Angeles invite -->
-    <div class="invite-text">
-      <p class="invite-city">Los Angeles</p>
-      <p class="invite-sub">You're Invited</p>
+    <!-- Los Angeles invite banner -->
+    <div class="invite-banner">
+      <div class="invite-left">
+        <span class="invite-city">Los Angeles</span>
+        <span class="invite-sub">You're Invited</span>
+      </div>
       <a href="/waitlist" class="more-info">
         More Info
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
 
-    <!-- Right: IG connect -->
-    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="social-connect">
-      <div class="social-av">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
-        </svg>
-      </div>
-      <div class="social-info">
-        <span class="social-handle">@stringz.social</span>
-        <span class="social-label">Connect with us</span>
-      </div>
-    </a>
+    <!-- IG connect row -->
+    <div class="bottom-row">
+      <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="social-connect">
+        <div class="social-av">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <span class="social-handle">@stringz.social</span>
+          <span class="social-label">Connect with us</span>
+        </div>
+      </a>
+    </div>
   </footer>
 
 </div>
@@ -431,7 +451,8 @@ const EVENTS = [
     title: "Friday Night Social",
     date: "Apr 11, 2026",
     venue: "The Echo",
-    detail: "Cocktails, music & good vibes",
+    detail: "Cocktails, bowling & good vibes",
+    // Placeholder image — warm-toned event flyer aesthetic
     img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=800&fit=crop&q=80"
   },
   {
