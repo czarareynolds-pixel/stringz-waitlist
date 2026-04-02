@@ -235,14 +235,11 @@ body::before {
 .invite-banner {
   width: 100%; padding: clamp(20px,3vw,36px) clamp(24px,4vw,48px);
   background: rgba(0,0,0,0.5); backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,148,8,0.14); border-radius: 16px;
+  border: none; border-radius: 16px;
   display: flex; align-items: center; justify-content: space-between;
   gap: 24px; margin-top: 20px;
 }
-.invite-banner::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.5), transparent);
-}
+.invite-banner::before { display: none; }
 .invite-left {
   display: flex; align-items: baseline; gap: clamp(10px,2vw,24px);
   flex-wrap: wrap;
