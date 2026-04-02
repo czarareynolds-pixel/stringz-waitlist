@@ -562,79 +562,75 @@ select option { background: #120810; color: var(--text); }
 ═══════════════════════════════════════════════════════ */
 .cities-section {
   position: relative; z-index: 1;
-  padding: 0 clamp(20px,4.5vw,52px) clamp(80px,10vw,140px);
-  max-width: 1280px; margin: 0 auto;
+  padding: clamp(60px,8vw,120px) clamp(20px,4.5vw,52px) clamp(80px,10vw,140px);
+  max-width: 1080px; margin: 0 auto;
 }
 
-.city-header {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: clamp(28px,5vw,60px); align-items: start;
-  margin-bottom: clamp(36px,5vw,56px);
+/* Section header */
+.cities-header {
+  text-align: center; margin-bottom: clamp(48px,6vw,72px);
 }
-.city-intro h2 {
+.cities-header h2 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(32px,4.2vw,58px); line-height: 0.88;
-  letter-spacing: -0.02em; color: var(--text); margin-bottom: 16px;
+  font-size: clamp(42px,5.5vw,72px); line-height: 0.92;
+  letter-spacing: -0.02em; color: var(--text);
   text-shadow: var(--txt-shadow);
+  margin-bottom: 16px;
 }
-.city-sub { font-size: clamp(14px,1.3vw,17px); color: var(--muted); line-height: 1.72; }
-
-.city-brand-img {
-  width: 100%; border-radius: 16px; border: 1px solid rgba(255,148,8,0.14);
-  min-height: 280px; max-height: 380px; object-fit: cover; display: block;
+.cities-header p {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(15px,1.4vw,19px); font-weight: 500;
+  color: var(--muted); letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.cities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+/* City grid — editorial layout */
+.cities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,24px); }
 
-/* City cards — ticket treatment */
+/* City card — premium editorial style */
 .city-card {
-  background: rgba(0,0,0,0.7); backdrop-filter: blur(16px);
-  border: 1px solid var(--border2); border-radius: 12px; padding: 18px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+  padding: clamp(28px,3vw,40px) clamp(24px,2.5vw,32px);
   position: relative; overflow: hidden;
   opacity: 0; transform: translateY(14px);
-  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.25s, box-shadow 0.25s;
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.3s, background 0.3s;
+  display: flex; flex-direction: column; gap: 6px;
+  text-decoration: none; cursor: pointer;
 }
 .city-card.on { opacity: 1; transform: none; }
+.city-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 16px;
+  background: radial-gradient(ellipse 120% 80% at 50% 120%, rgba(255,148,8,0.06) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.city-card:hover::before { opacity: 1; }
+.city-card:hover {
+  border-color: rgba(255,148,8,0.2);
+  background: rgba(255,255,255,0.04);
+}
 
-/* Atlanta — animated conic border */
-.city-card.home {
-  border-color: rgba(255,148,8,0.35);
-  box-shadow: 0 0 40px rgba(255,148,8,0.12), inset 0 0 28px rgba(255,148,8,0.05);
+.city-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px,3vw,38px); color: var(--text);
+  line-height: 1.0; letter-spacing: -0.01em;
 }
-.city-card.home::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.9), transparent);
+.city-state {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(12px,1vw,14px); color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600;
 }
-/* Conic gradient spin for Atlanta */
-.atlanta-glow-ring {
-  position: absolute; inset: -2px; border-radius: 14px; z-index: -1;
-  background: conic-gradient(from 0deg,
-    rgba(255,148,8,0.5), rgba(149,18,44,0.3) 40%,
-    rgba(202,63,22,0.4) 60%, rgba(255,148,8,0.5));
-  animation: atlantaSpin 5s linear infinite;
+.city-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(13px,1.1vw,15px); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--orange); text-decoration: none;
+  margin-top: 12px; transition: color 0.25s, gap 0.25s;
 }
-@keyframes atlantaSpin { to { transform: rotate(360deg); } }
-
-.city-card:not(.home):hover { border-color: rgba(255,255,255,0.12); }
-
-.city-badge {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 8px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px;
-  margin-bottom: 8px; display: inline-block;
-}
-.city-badge.live { background: rgba(255,148,8,0.15); color: var(--orange); border: 1px solid rgba(255,148,8,0.35); }
-.city-badge.soon { background: rgba(255,255,255,0.03); color: var(--muted); border: 1px solid rgba(255,255,255,0.08); }
-
-.city-name { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 2px; letter-spacing: -0.01em; }
-.city-state { font-size: 12px; color: var(--muted); }
-.city-share {
-  display: flex; align-items: center; gap: 6px; margin-top: 10px;
-  font-size: 10px; color: var(--muted); cursor: pointer;
-  padding: 6px 0; border-top: 1px solid rgba(255,255,255,0.05); transition: color 0.2s;
-}
-.city-share:hover { color: var(--orange); }
-.city-share svg { transition: transform 0.2s; flex-shrink: 0; }
-.city-share:hover svg { transform: translateX(2px); }
+.city-card:hover .city-cta { color: var(--text); gap: 12px; }
+.city-cta svg { transition: transform 0.2s; }
+.city-card:hover .city-cta svg { transform: translateX(3px); }
 
 
 
@@ -850,10 +846,8 @@ footer {
   .hero-tagline { font-size: 16px; }
   .hero-sub { font-size: 14px; }
 
-  .city-header { grid-template-columns:1fr; }
-  .city-brand-img { min-height:220px; max-height:300px; }
   .threads-section, .cities-section { padding-left:24px; padding-right:24px; }
-  .cities-grid { grid-template-columns:repeat(3,1fr); gap:12px; }
+  .cities-grid { grid-template-columns:repeat(3,1fr); gap:16px; }
 
   .how-inner { padding:56px 24px; }
   .steps { grid-template-columns:repeat(2,1fr); }
@@ -876,7 +870,6 @@ footer {
   .how-header { flex-direction:column; align-items:flex-start; }
 
   .card-sub { font-size: 14px; }
-  .city-sub { font-size: 15px; }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -886,10 +879,9 @@ footer {
   .hero { padding: 80px 20px 40px; }
   .hero-split { gap: 28px; }
 
-  .cities-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
-  .city-card { padding: 16px 14px; }
-  .city-name { font-size: 15px; }
-  .city-badge { font-size: 9px; }
+  .cities-grid { grid-template-columns: repeat(2,1fr); gap: 14px; }
+  .city-card { padding: 24px 20px; }
+  .city-name { font-size: clamp(24px,4vw,30px); }
 
   .glass-card { padding: 24px 20px; }
   .card-title { font-size: 28px; }
@@ -922,12 +914,11 @@ footer {
   .btn-submit { font-size: 20px; padding: 16px; }
 
   .cities-section { padding-left: 16px; padding-right: 16px; }
-  .cities-grid { grid-template-columns:1fr 1fr; gap: 8px; }
-  .city-card { padding: 14px 12px; }
-  .city-name { font-size: 14px; }
-  .city-state { font-size: 11px; }
-  .city-badge { font-size: 8px; padding: 3px 6px; }
-  .city-share { font-size: 10px; }
+  .cities-grid { grid-template-columns: 1fr; gap: 12px; }
+  .city-card { padding: 24px 20px; flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; }
+  .city-card-info { display: flex; flex-direction: column; gap: 2px; }
+  .city-name { font-size: 26px; }
+  .city-cta { margin-top: 0; }
 
   .steps { grid-template-columns:1fr; }
   .step { border-left:1px solid rgba(255,255,255,0.055) !important; border-radius:0 !important; padding: 24px 18px; }
@@ -1094,9 +1085,7 @@ footer {
             <option>Miami, FL</option>
             <option>Dallas, TX</option>
             <option>Seattle, WA</option>
-            <option>San Francisco, CA</option>
-            <option>San Jose, CA</option>
-            <option>Oakland, CA</option>
+            <option>Bay Area, CA</option>
             <option>Other</option>
           </select>
         </div>
@@ -1169,111 +1158,82 @@ footer {
 
 <!-- ══════════════════ CITIES ══════════════════ -->
 <section class="cities-section">
-  <div class="city-header">
-    <div class="city-intro">
-      <p class="section-label" style="margin-bottom:18px;">Communities forming now. Join before your city fills up.</p>
-      <h2>Atlanta is Home.<br>But We're Just<br>Getting Started.</h2>
-      <p class="city-sub">Atlanta launches first — because this is where Stringz was born. Know someone in another city? Share your link and help us grow the community everywhere.</p>
-    </div>
-    <img src="brand_photo_stringz.png" alt="Stringz community" class="city-brand-img"
-      onerror="this.style.display='none'">
+  <div class="cities-header">
+    <h2>Choose Your City</h2>
+    <p>Communities are forming now. Join yours before launch.</p>
   </div>
 
   <div class="cities-grid" id="cities">
-    <div class="city-card home">
-      <div class="atlanta-glow-ring"></div>
-      <span class="city-badge live">Live First</span>
-      <p class="city-name">Atlanta</p>
-      <p class="city-state">Georgia</p>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Houston</p><p class="city-state">Texas</p>
-      <div class="city-share" onclick="shareCity('Houston')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Houston early
+    <a href="/waitlist-atlanta" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Atlanta</p>
+        <p class="city-state">Georgia</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Washington</p><p class="city-state">DC</p>
-      <div class="city-share" onclick="shareCity('Washington DC')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock DC early
+      <span class="city-cta">Join Atlanta <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-houston" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Houston</p>
+        <p class="city-state">Texas</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Charlotte</p><p class="city-state">North Carolina</p>
-      <div class="city-share" onclick="shareCity('Charlotte')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Charlotte early
+      <span class="city-cta">Join Houston <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-dc" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Washington</p>
+        <p class="city-state">DC</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Chicago</p><p class="city-state">Illinois</p>
-      <div class="city-share" onclick="shareCity('Chicago')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Chicago early
+      <span class="city-cta">Join DC <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-charlotte" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Charlotte</p>
+        <p class="city-state">North Carolina</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">New York</p><p class="city-state">New York</p>
-      <div class="city-share" onclick="shareCity('New York')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock NYC early
+      <span class="city-cta">Join Charlotte <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-chicago" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Chicago</p>
+        <p class="city-state">Illinois</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Miami</p><p class="city-state">Florida</p>
-      <div class="city-share" onclick="shareCity('Miami')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Miami early
+      <span class="city-cta">Join Chicago <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-newyork" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">New York</p>
+        <p class="city-state">New York</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Los Angeles</p><p class="city-state">California</p>
-      <div class="city-share" onclick="shareCity('Los Angeles')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock LA early
+      <span class="city-cta">Join New York <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-miami" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Miami</p>
+        <p class="city-state">Florida</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Seattle</p><p class="city-state">Washington</p>
-      <div class="city-share" onclick="shareCity('Seattle')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Seattle early
+      <span class="city-cta">Join Miami <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-losangeles" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Los Angeles</p>
+        <p class="city-state">California</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">San Francisco</p><p class="city-state">California</p>
-      <div class="city-share" onclick="shareCity('San Francisco')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock SF early
+      <span class="city-cta">Join Los Angeles <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-seattle" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Seattle</p>
+        <p class="city-state">Washington</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">San Jose</p><p class="city-state">California</p>
-      <div class="city-share" onclick="shareCity('San Jose')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock San Jose early
+      <span class="city-cta">Join Seattle <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
+    <a href="/waitlist-bayarea" class="city-card">
+      <div class="city-card-info">
+        <p class="city-name">Bay Area</p>
+        <p class="city-state">California</p>
       </div>
-    </div>
-    <div class="city-card">
-      <span class="city-badge soon">Coming Soon</span>
-      <p class="city-name">Oakland</p><p class="city-state">California</p>
-      <div class="city-share" onclick="shareCity('Oakland')">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-        Share to unlock Oakland early
-      </div>
-    </div>
+      <span class="city-cta">Join Bay Area <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></span>
+    </a>
   </div>
 </section>
 
