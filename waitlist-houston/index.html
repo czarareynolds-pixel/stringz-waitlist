@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Stringz Houston — You're Invited</title>
+<meta name="description" content="See what's happening in Houston. Browse events, invite your crew, and meet someone new. Stringz — your city, your people.">
+<link rel="canonical" href="https://stringz.social/waitlist-houston">
+<meta property="og:type"         content="website">
+<meta property="og:url"          content="https://stringz.social/waitlist-houston">
+<meta property="og:title"        content="Stringz Houston — You're Invited">
+<meta property="og:description"  content="See what's happening in Houston. Browse events, invite your crew, and meet someone new.">
+<meta property="og:image"        content="https://stringz.social/waitlist/brand_photo_stringz.png">
+<meta property="og:site_name"    content="Stringz">
+<meta name="twitter:card"        content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+
+:root {
+  --bg:        #0a0506;
+  --orange:    #FF9408;
+  --red:       #CA3F16;
+  --crimson:   #95122C;
+  --text:      #F2EBE0;
+  --muted:     #a8899a;
+  --border:    rgba(255,148,8,0.18);
+  --border2:   rgba(255,255,255,0.07);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Satoshi', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ── Film grain ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px; opacity: 0.03;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BACKGROUND — warm cinematic gradient
+═══════════════════════════════════════════════════════ */
+.bg-wash {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(149,18,44,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(202,63,22,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,148,8,0.06) 0%, transparent 70%);
+}
+
+/* Decorative arc rings (like the reference) */
+.arc-ring {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+  border: 1px solid rgba(202,63,22,0.15);
+}
+.arc-ring.r1 { width: 700px; height: 700px; top: -200px; right: -250px; }
+.arc-ring.r2 { width: 500px; height: 500px; top: -80px; right: -150px; border-color: rgba(202,63,22,0.1); }
+.arc-ring.r3 { width: 600px; height: 600px; bottom: -200px; left: -250px; border-color: rgba(255,148,8,0.08); }
+
+/* ═══════════════════════════════════════════════════════
+   LAYOUT — full viewport
+═══════════════════════════════════════════════════════ */
+.page {
+  position: relative; z-index: 1;
+  min-height: 100vh; display: flex; flex-direction: column;
+  padding: clamp(20px,3vw,40px) clamp(20px,4vw,52px);
+}
+
+/* ═══════════════════════════════════════════════════════
+   TOP NAV
+═══════════════════════════════════════════════════════ */
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: clamp(28px,4vw,48px);
+}
+.logo-link {
+  display: inline-flex; text-decoration: none; line-height: 0;
+  position: relative;
+}
+.s-logo {
+  height: clamp(110px,14vw,160px); width: auto; display: block;
+  filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
+  transition: filter 0.3s;
+}
+/* Fallback text hidden by default — shown via JS if image fails */
+.s-logo-fallback { display: none !important; }
+.s-logo-fallback.show { display: block !important; }
+.logo-link:hover .s-logo { filter: drop-shadow(0 0 28px rgba(255,148,8,0.6)); }
+.s-logo-fallback {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  color: #FF9408; letter-spacing: 0.08em; display: block; line-height: 1;
+  filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
+}
+
+.join-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(11px,1.2vw,14px); font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text); text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.16); border-radius: 8px;
+  padding: 10px 22px; transition: all 0.25s;
+  background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+}
+.join-btn:hover {
+  border-color: var(--orange); color: var(--orange);
+  background: rgba(255,148,8,0.08);
+}
+
+/* ═══════════════════════════════════════════════════════
+   CENTER — hero content
+═══════════════════════════════════════════════════════ */
+.hero-center {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; position: relative;
+}
+
+.event-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px,8vw,96px);
+  line-height: 0.92; letter-spacing: -0.02em;
+  color: var(--text); margin-bottom: 8px;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.6);
+  transition: opacity 0.4s ease;
+}
+.event-counter {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(12px,1vw,15px); font-weight: 600;
+  letter-spacing: 0.2em; color: var(--muted);
+  margin-bottom: clamp(24px,3vw,40px);
+  transition: opacity 0.4s ease;
+}
+
+/* ═══════════════════════════════════════════════════════
+   CAROUSEL — stacked tilted event cards
+═══════════════════════════════════════════════════════ */
+.carousel-wrap {
+  position: relative; width: 100%; max-width: 520px;
+  height: clamp(320px,45vw,480px);
+  margin: 0 auto clamp(24px,3vw,40px);
+  perspective: 1200px;
+}
+
+.card-stack {
+  position: relative; width: 100%; height: 100%;
+}
+
+.event-card {
+  position: absolute;
+  width: clamp(240px,55%,320px); height: clamp(300px,80%,420px);
+  left: 50%; top: 50%;
+  border-radius: 6px; overflow: hidden;
+  background: #1a1012;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04) inset;
+  transition: transform 0.6s cubic-bezier(0.25,0.8,0.25,1),
+              opacity 0.5s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+
+.event-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  display: block; pointer-events: none;
+}
+
+/* Stack positions — dynamically set via JS, but base states */
+.event-card.pos-center {
+  transform: translate(-50%,-50%) rotate(0deg) scale(1);
+  z-index: 10; opacity: 1;
+  box-shadow: 0 12px 60px rgba(0,0,0,0.7), 0 0 80px rgba(149,18,44,0.12);
+}
+.event-card.pos-left {
+  transform: translate(-110%,-52%) rotate(-8deg) scale(0.85);
+  z-index: 5; opacity: 0.7;
+}
+.event-card.pos-right {
+  transform: translate(10%,-52%) rotate(6deg) scale(0.85);
+  z-index: 5; opacity: 0.7;
+}
+.event-card.pos-far-left {
+  transform: translate(-150%,-54%) rotate(-14deg) scale(0.7);
+  z-index: 2; opacity: 0.35;
+}
+.event-card.pos-far-right {
+  transform: translate(60%,-54%) rotate(12deg) scale(0.7);
+  z-index: 2; opacity: 0.35;
+}
+.event-card.pos-hidden {
+  transform: translate(-50%,-50%) scale(0.5);
+  z-index: 0; opacity: 0; pointer-events: none;
+}
+
+/* Nav arrows */
+.nav-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: clamp(40px,5vw,56px); height: clamp(40px,5vw,56px);
+  border-radius: 50%; border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 20; transition: all 0.25s;
+  color: var(--muted);
+}
+.nav-arrow:hover { border-color: var(--orange); color: var(--orange); background: rgba(255,148,8,0.08); }
+.nav-arrow.left { left: clamp(-8px,-2vw,-20px); }
+.nav-arrow.right { right: clamp(-8px,-2vw,-20px); }
+
+/* ═══════════════════════════════════════════════════════
+   BOTTOM BAR
+═══════════════════════════════════════════════════════ */
+.bottom-bar {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-top: auto; padding-top: 20px;
+}
+
+/* Bottom-left: "Atlanta, You're Invited" */
+.invite-text {
+  max-width: 280px;
+}
+.invite-text p {
+  font-size: clamp(13px,1.2vw,15px); color: var(--muted);
+  line-height: 1.6; margin-bottom: 12px;
+}
+.invite-city {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px,2.8vw,32px); color: var(--text);
+  line-height: 1.0; margin-bottom: 4px;
+  text-shadow: 0 0 20px rgba(255,148,8,0.3);
+}
+.invite-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px,1.5vw,18px); font-weight: 600;
+  background: linear-gradient(108deg, var(--orange) 0%, var(--red) 50%, var(--crimson) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  letter-spacing: 0.02em;
+}
+.more-info {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(11px,1vw,13px); font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--orange); text-decoration: none;
+  transition: opacity 0.2s;
+  margin-top: 10px;
+}
+.more-info:hover { opacity: 0.75; }
+.more-info svg { transition: transform 0.2s; }
+.more-info:hover svg { transform: translateX(3px); }
+
+/* Bottom-center: progress / playback */
+.progress-bar {
+  display: flex; align-items: center; gap: 14px;
+  position: absolute; bottom: clamp(20px,3vw,40px); left: 50%;
+  transform: translateX(-50%);
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.15); transition: all 0.3s;
+  cursor: pointer;
+}
+.dot.active { background: var(--orange); width: 24px; border-radius: 4px; box-shadow: 0 0 8px rgba(255,148,8,0.5); }
+
+/* Bottom-right: IG connect */
+.social-connect {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  border: 1px solid rgba(255,148,8,0.2); border-radius: 10px;
+  padding: 10px 16px; background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px); transition: all 0.25s;
+}
+.social-connect:hover { background: rgba(255,148,8,0.08); border-color: rgba(255,148,8,0.4); }
+.social-av {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--orange), var(--crimson));
+  display: flex; align-items: center; justify-content: center;
+}
+.social-info { display: flex; flex-direction: column; gap: 1px; }
+.social-handle { font-size: 12px; font-weight: 700; color: var(--text); }
+.social-label {
+  font-size: 9px; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EVENT INFO OVERLAY (shows on card hover/tap)
+═══════════════════════════════════════════════════════ */
+.event-card .card-overlay {
+  position: absolute; inset: 0; display: flex;
+  flex-direction: column; justify-content: flex-end;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.event-card.pos-center:hover .card-overlay { opacity: 1; }
+.card-overlay .ev-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; color: var(--text); line-height: 1.1; margin-bottom: 4px;
+}
+.card-overlay .ev-detail {
+  font-size: 11px; color: var(--muted); line-height: 1.5;
+}
+.card-overlay .ev-date {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--orange); margin-bottom: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .carousel-wrap { max-width: 400px; height: clamp(280px,60vw,380px); }
+  .event-card { width: clamp(200px,60%,280px); height: clamp(260px,78%,360px); }
+  .event-card.pos-left  { transform: translate(-95%,-52%) rotate(-6deg) scale(0.82); }
+  .event-card.pos-right { transform: translate(0%,-52%) rotate(5deg) scale(0.82); }
+  .event-card.pos-far-left,
+  .event-card.pos-far-right { opacity: 0; pointer-events: none; }
+  .nav-arrow.left { left: -4px; }
+  .nav-arrow.right { right: -4px; }
+  .bottom-bar { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .social-connect { align-self: flex-start; }
+  .progress-bar { position: relative; bottom: auto; left: auto; transform: none; align-self: center; }
+}
+
+@media (max-width: 480px) {
+  .carousel-wrap { height: clamp(260px,70vw,340px); }
+  .event-card { width: clamp(180px,65%,250px); height: clamp(240px,80%,320px); }
+  .event-card.pos-left  { transform: translate(-85%,-52%) rotate(-5deg) scale(0.78); opacity: 0.5; }
+  .event-card.pos-right { transform: translate(0%,-52%) rotate(4deg) scale(0.78); opacity: 0.5; }
+  .event-title { font-size: clamp(36px,10vw,52px); }
+  .nav-arrow { width: 36px; height: 36px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-wash"></div>
+<div class="arc-ring r1"></div>
+<div class="arc-ring r2"></div>
+<div class="arc-ring r3"></div>
+
+<div class="page">
+
+  <!-- ══════════ TOP BAR ══════════ -->
+  <header class="top-bar">
+    <a href="/waitlist" class="logo-link" aria-label="Stringz Home">
+      <img src="../waitlist/logo-wordmark.png" alt="Stringz" class="s-logo" id="s-logo-img">
+      <span class="s-logo-fallback" id="s-logo-fb" aria-hidden="true">STRINGZ</span>
+    </a>
+    <script>
+      var _li = document.getElementById('s-logo-img');
+      var _lf = document.getElementById('s-logo-fb');
+      _li.onerror = function(){ _li.style.display='none'; _lf.classList.add('show'); };
+      if (_li.complete && _li.naturalWidth === 0) { _li.onerror(); }
+    </script>
+    <a href="#join" class="join-btn">Join My City</a>
+  </header>
+
+  <!-- ══════════ HERO CENTER ══════════ -->
+  <main class="hero-center">
+    <h1 class="event-title" id="ev-title">Friday Night Social</h1>
+    <p class="event-counter" id="ev-counter">(01 — 06)</p>
+
+    <div class="carousel-wrap">
+      <div class="card-stack" id="card-stack">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="nav-arrow left" onclick="prevSlide()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="nav-arrow right" onclick="nextSlide()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+      </div>
+    </div>
+
+    <div class="progress-bar" id="dots"></div>
+  </main>
+
+  <!-- ══════════ BOTTOM BAR ══════════ -->
+  <footer class="bottom-bar">
+    <!-- Left: Houston invite -->
+    <div class="invite-text">
+      <p class="invite-city">Houston</p>
+      <p class="invite-sub">You're Invited</p>
+      <a href="/waitlist" class="more-info">
+        More Info
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Right: IG connect -->
+    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="social-connect">
+      <div class="social-av">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
+        </svg>
+      </div>
+      <div class="social-info">
+        <span class="social-handle">@stringz.social</span>
+        <span class="social-label">Connect with us</span>
+      </div>
+    </a>
+  </footer>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   PLACEHOLDER EVENT DATA — replace with real data later
+══════════════════════════════════════════════════════════ */
+const EVENTS = [
+  {
+    title: "Friday Night Social",
+    date: "Apr 11, 2026",
+    venue: "The Post HTX",
+    detail: "Cocktails, music & good vibes",
+    img: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=800&fit=crop&q=80"
+  },
+  {
+    title: "Rooftop Sunset Mixer",
+    date: "Apr 18, 2026",
+    venue: "Z on 23 Rooftop",
+    detail: "DJs, skyline views & connections",
+    img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&h=800&fit=crop&q=80"
+  },
+  {
+    title: "Art & Wine Night",
+    date: "Apr 25, 2026",
+    venue: "MFAH",
+    detail: "Guided tour, wine tasting & mingling",
+    img: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600&h=800&fit=crop&q=80"
+  },
+  {
+    title: "Brunch & Beats",
+    date: "May 3, 2026",
+    venue: "Brasserie du Parc",
+    detail: "Live DJ, bottomless brunch & dancing",
+    img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=800&fit=crop&q=80"
+  },
+  {
+    title: "Midtown Game Night",
+    date: "May 10, 2026",
+    venue: "Cidercade Houston",
+    detail: "Retro games, craft beer & new friends",
+    img: "https://images.unsplash.com/photo-1511882150382-421056c89033?w=600&h=800&fit=crop&q=80"
+  },
+  {
+    title: "Outdoor Movie Night",
+    date: "May 17, 2026",
+    venue: "Discovery Green",
+    detail: "Blankets, popcorn & a classic film",
+    img: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&h=800&fit=crop&q=80"
+  }
+];
+
+/* ══════════════════════════════════════════════════════════
+   CAROUSEL ENGINE
+══════════════════════════════════════════════════════════ */
+let current = 0;
+const stack = document.getElementById('card-stack');
+const titleEl = document.getElementById('ev-title');
+const counterEl = document.getElementById('ev-counter');
+const dotsEl = document.getElementById('dots');
+
+// Build cards
+EVENTS.forEach((ev, i) => {
+  const card = document.createElement('div');
+  card.className = 'event-card';
+  card.innerHTML = `
+    <img src="${ev.img}" alt="${ev.title}" loading="lazy">
+    <div class="card-overlay">
+      <span class="ev-date">${ev.date}</span>
+      <span class="ev-name">${ev.title}</span>
+      <span class="ev-detail">${ev.venue} — ${ev.detail}</span>
+    </div>
+  `;
+  stack.appendChild(card);
+});
+
+// Build dots
+EVENTS.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot';
+  dot.onclick = () => goTo(i);
+  dotsEl.appendChild(dot);
+});
+
+const cards = stack.querySelectorAll('.event-card');
+const dots = dotsEl.querySelectorAll('.dot');
+
+function posClass(offset) {
+  if (offset === 0) return 'pos-center';
+  if (offset === 1) return 'pos-right';
+  if (offset === -1) return 'pos-left';
+  if (offset === 2) return 'pos-far-right';
+  if (offset === -2) return 'pos-far-left';
+  return 'pos-hidden';
+}
+
+function goTo(idx) {
+  current = idx;
+  const n = EVENTS.length;
+
+  cards.forEach((card, i) => {
+    card.className = 'event-card';
+    let offset = i - current;
+    // Wrap around
+    if (offset > n / 2) offset -= n;
+    if (offset < -n / 2) offset += n;
+    card.classList.add(posClass(offset));
+  });
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+
+  // Update title
+  titleEl.style.opacity = 0;
+  counterEl.style.opacity = 0;
+  setTimeout(() => {
+    titleEl.textContent = EVENTS[current].title;
+    counterEl.textContent = `(${String(current + 1).padStart(2, '0')} — ${String(n).padStart(2, '0')})`;
+    titleEl.style.opacity = 1;
+    counterEl.style.opacity = 1;
+  }, 200);
+}
+
+function nextSlide() { goTo((current + 1) % EVENTS.length); }
+function prevSlide() { goTo((current - 1 + EVENTS.length) % EVENTS.length); }
+
+// Init
+goTo(0);
+
+// Auto-advance every 5s
+let autoTimer = setInterval(nextSlide, 5000);
+// Pause on interaction
+document.querySelectorAll('.nav-arrow, .dot').forEach(el => {
+  el.addEventListener('click', () => {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(nextSlide, 5000);
+  });
+});
+
+// Swipe support for mobile
+let touchStartX = 0;
+stack.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+stack.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 40) {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(nextSlide, 5000);
+    if (dx > 0) prevSlide(); else nextSlide();
+  }
+}, { passive: true });
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
+</script>
+
+</body>
+</html>
