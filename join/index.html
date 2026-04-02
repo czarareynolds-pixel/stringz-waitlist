@@ -29,7 +29,7 @@ html { scroll-behavior:smooth; font-size:16px; }
   --crimson:   #95122C;
   --text:      #F2EBE0;
   --muted:     #a8899a;
-  --glass-dk:  rgba(0,0,0,0.82);
+  --border:    rgba(255,148,8,0.18);
 }
 
 body {
@@ -38,9 +38,6 @@ body {
   font-family: 'Satoshi', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
 }
 
 /* Film grain */
@@ -51,30 +48,17 @@ body::before {
   mix-blend-mode: overlay;
 }
 
-/* Warm background wash */
-.bg-wash {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(149,18,44,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 30% 70%, rgba(202,63,22,0.1) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 60% at 70% 30%, rgba(255,148,8,0.05) 0%, transparent 70%);
-}
-
-/* Layout */
-.page {
-  position: relative; z-index: 1;
-  width: 100%; max-width: 480px;
-  padding: clamp(40px,6vw,80px) clamp(16px,4vw,24px);
-}
-
-/* Top bar */
-.top-bar {
+/* ═══════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════ */
+.nav {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: clamp(32px,5vw,48px);
+  padding: clamp(16px,2.5vw,24px) clamp(24px,4vw,48px);
+  position: relative; z-index: 10;
 }
-.logo-link { text-decoration: none; }
+.logo-link { text-decoration: none; display: flex; align-items: center; }
 .logo-img {
-  height: clamp(28px,4vw,36px); width: auto; display: block;
+  height: clamp(28px,3.5vw,36px); width: auto; display: block;
   filter: brightness(0) invert(1); opacity: 0.9;
 }
 .logo-fallback {
@@ -83,75 +67,137 @@ body::before {
   text-decoration: none; letter-spacing: 0.04em;
   display: none;
 }
-.back-link {
+.nav-link {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 13px; font-weight: 700;
-  letter-spacing: 0.08em; text-transform: uppercase;
+  letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); text-decoration: none;
   transition: color 0.2s;
 }
-.back-link:hover { color: var(--orange); }
+.nav-link:hover { color: var(--text); }
 
-/* Glass card */
-.glass-card {
-  background: var(--glass-dk);
-  backdrop-filter: blur(48px) saturate(160%);
-  -webkit-backdrop-filter: blur(48px) saturate(160%);
-  border: 1px solid rgba(255,148,8,0.2);
-  border-radius: 22px;
-  padding: clamp(24px,3.2vw,40px) clamp(20px,2.8vw,36px);
-  position: relative; overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(255,148,8,0.08) inset,
-    0 0 60px rgba(255,80,8,0.1) inset,
-    0 12px 120px rgba(0,0,0,0.8);
-  opacity: 0; animation: fadeUp 0.9s ease 0.2s forwards;
+/* ═══════════════════════════════════════════════════════
+   HERO — cinematic arc + heading
+═══════════════════════════════════════════════════════ */
+.hero {
+  position: relative; text-align: center;
+  padding: clamp(40px,6vw,80px) clamp(24px,4vw,48px) 0;
+  overflow: hidden;
 }
-.glass-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg,
-    transparent 0%, rgba(255,148,8,0.55) 25%,
-    rgba(255,148,8,1) 50%,
-    rgba(255,148,8,0.55) 75%, transparent 100%);
-}
-.glass-card::after {
-  content: ''; position: absolute; top: -70px; left: 50%; transform: translateX(-50%);
-  width: 220px; height: 180px;
-  background: radial-gradient(ellipse, rgba(255,148,8,0.12) 0%, transparent 70%);
+
+/* Warm arc glow behind heading */
+.arc-glow {
+  position: absolute; left: 50%; bottom: -40%;
+  width: clamp(600px,90vw,1200px); height: clamp(400px,60vw,700px);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%,
+    rgba(255,148,8,0.12) 0%,
+    rgba(202,63,22,0.08) 30%,
+    rgba(149,18,44,0.04) 50%,
+    transparent 70%);
   pointer-events: none;
 }
-
-.card-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(28px,3.2vw,38px); letter-spacing: 0.03em;
-  color: var(--text); margin-bottom: 4px;
+/* Thin arc line */
+.arc-line {
+  position: absolute; left: 50%; bottom: -30%;
+  width: clamp(500px,80vw,1000px); height: clamp(350px,55vw,600px);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(255,148,8,0.12);
+  pointer-events: none;
 }
-.card-sub { font-size: 13px; color: var(--muted); margin-bottom: clamp(16px,2.2vw,24px); line-height: 1.6; }
+.arc-line:nth-child(2) {
+  width: clamp(550px,85vw,1100px); height: clamp(370px,57vw,650px);
+  border-color: rgba(202,63,22,0.08);
+  bottom: -33%;
+}
 
-/* Form */
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 11px; }
-.form-group { margin-bottom: 11px; }
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px,7vw,88px); line-height: 0.92;
+  letter-spacing: -0.02em; color: var(--text);
+  margin-bottom: 16px; position: relative; z-index: 1;
+  text-shadow: 0 0 60px rgba(255,148,8,0.15);
+}
+.hero-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px,1.4vw,18px); font-weight: 500;
+  color: var(--muted); letter-spacing: 0.06em;
+  text-transform: uppercase; position: relative; z-index: 1;
+  margin-bottom: clamp(24px,3vw,40px);
+}
+
+/* Social pills row */
+.social-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+  margin-bottom: clamp(16px,2vw,24px);
+}
+.social-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--text);
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: border-color 0.2s, background 0.2s;
+}
+.social-pill:hover { border-color: rgba(255,148,8,0.3); background: rgba(255,148,8,0.06); }
+.social-pill svg { opacity: 0.7; }
+
+/* ═══════════════════════════════════════════════════════
+   FORM SECTION — full-width, integrated
+═══════════════════════════════════════════════════════ */
+.form-section {
+  position: relative; z-index: 1;
+  max-width: 560px; margin: 0 auto;
+  padding: clamp(48px,6vw,80px) clamp(24px,4vw,48px) clamp(60px,8vw,100px);
+}
+
+.form-intro {
+  text-align: center; margin-bottom: clamp(32px,4vw,48px);
+}
+.form-intro h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px,1.2vw,16px); font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.form-intro p {
+  font-size: clamp(13px,1.1vw,15px); color: rgba(168,137,154,0.6);
+  line-height: 1.6;
+}
+
+/* Form fields */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.form-group { margin-bottom: 14px; }
 
 label {
-  display: block; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 5px;
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 8px;
 }
 
 input, select {
-  width: 100%; background: rgba(255,255,255,0.045);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 9px; padding: 12px 14px;
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px; padding: 16px 18px;
   font-family: 'Satoshi', sans-serif; font-size: 16px;
   color: var(--text); outline: none;
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   -webkit-appearance: none;
 }
-input::placeholder { color: var(--muted); opacity: 0.6; }
+input::placeholder { color: var(--muted); opacity: 0.5; }
 input:focus, select:focus {
-  border-color: rgba(255,148,8,0.5);
-  background: rgba(255,148,8,0.04);
-  box-shadow: 0 0 0 3px rgba(255,148,8,0.1);
+  border-color: rgba(255,148,8,0.4);
+  background: rgba(255,148,8,0.03);
+  box-shadow: 0 0 0 3px rgba(255,148,8,0.08);
 }
 select { color: var(--muted); cursor: pointer; }
 select.filled { color: var(--text); }
@@ -159,20 +205,27 @@ select option { background: #120810; color: var(--text); }
 
 .phone-wrap { position: relative; }
 .phone-pre {
-  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
-  font-size: 13px; color: var(--muted); pointer-events: none; z-index: 1;
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 14px; color: var(--muted); pointer-events: none; z-index: 1;
 }
-.phone-wrap input { padding-left: 38px; }
+.phone-wrap input { padding-left: 42px; }
+
+/* Consent text */
+.consent {
+  font-size: 12px; color: var(--muted); opacity: 0.5;
+  text-align: center; margin: 20px 0 8px;
+  line-height: 1.5;
+}
 
 /* Button */
 .btn-submit {
   width: 100%; position: relative; overflow: hidden;
   background: linear-gradient(90deg, var(--orange) 0%, var(--red) 48%, var(--crimson) 100%);
-  border: none; border-radius: 11px;
-  padding: clamp(14px,2vw,17px);
+  border: none; border-radius: 12px;
+  padding: clamp(16px,2vw,20px);
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(18px,2vw,22px); letter-spacing: 0.1em;
-  color: #fff; cursor: pointer; margin-top: 4px;
+  font-size: clamp(20px,2.2vw,26px); letter-spacing: 0.1em;
+  color: #fff; cursor: pointer;
   box-shadow:
     0 0 0 1px rgba(255,200,100,0.18) inset,
     0 6px 32px rgba(202,63,22,0.5),
@@ -200,52 +253,80 @@ select option { background: #120810; color: var(--text); }
 }
 .btn-submit:active { transform: scale(0.99); }
 
-.form-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; opacity: 0.6; }
+.form-note {
+  font-size: 11px; color: var(--muted); text-align: center;
+  margin-top: 12px; opacity: 0.5; line-height: 1.6;
+}
 
-/* Success state */
+/* ═══════════════════════════════════════════════════════
+   DIVIDER — warm glow line
+═══════════════════════════════════════════════════════ */
+.glow-divider {
+  width: 100%; height: 1px; border: none;
+  background: linear-gradient(90deg, transparent, rgba(255,148,8,0.25), transparent);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   SUCCESS STATE
+═══════════════════════════════════════════════════════ */
 .success-state { display: none; text-align: center; }
 .success-icon {
-  width: 56px; height: 56px; border-radius: 50%;
+  width: 64px; height: 64px; border-radius: 50%;
   background: linear-gradient(135deg, var(--orange), var(--crimson));
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px;
-  box-shadow: 0 0 40px rgba(255,148,8,0.4), 0 0 80px rgba(255,148,8,0.15);
+  margin: 0 auto 18px;
+  box-shadow: 0 0 50px rgba(255,148,8,0.4), 0 0 100px rgba(255,148,8,0.15);
   animation: successPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
 }
 @keyframes successPop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .success-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(34px,4vw,44px); color: var(--text); margin-bottom: 6px;
+  font-size: clamp(40px,5vw,56px); color: var(--text); margin-bottom: 8px;
   letter-spacing: 0.04em;
 }
-.success-sub { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+.success-sub { font-size: 15px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
 
 .share-box {
-  background: rgba(255,148,8,0.07); border: 1px solid rgba(255,148,8,0.22);
-  border-radius: 11px; padding: 14px; margin-bottom: 12px;
+  background: rgba(255,148,8,0.05); border: 1px solid rgba(255,148,8,0.15);
+  border-radius: 14px; padding: 20px; margin-bottom: 16px; text-align: left;
 }
 .share-box-label {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 8px;
 }
-.share-box-msg { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.share-box-msg { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
 .share-link-row { display: flex; gap: 8px; align-items: center; }
 .share-link-input {
   flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 7px; padding: 9px 11px;
-  font-family: 'Satoshi', sans-serif; font-size: 11px; color: var(--muted);
+  border-radius: 8px; padding: 10px 13px;
+  font-family: 'Satoshi', sans-serif; font-size: 12px; color: var(--muted);
   outline: none; cursor: default;
 }
 .copy-btn {
   background: linear-gradient(90deg, var(--orange), var(--crimson));
-  border: none; border-radius: 7px; padding: 9px 16px;
+  border: none; border-radius: 8px; padding: 10px 18px;
   font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: #fff; cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
 }
 .copy-btn:hover { opacity: 0.88; }
-.share-note { font-size: 10px; color: var(--muted); text-align: center; line-height: 1.6; }
+.share-note { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
+.footer {
+  text-align: center;
+  padding: clamp(40px,5vw,60px) clamp(24px,4vw,48px);
+  font-size: 12px; color: rgba(168,137,154,0.4);
+}
+.footer a {
+  color: rgba(168,137,154,0.5); text-decoration: none;
+  transition: color 0.2s;
+}
+.footer a:hover { color: var(--orange); }
 
 /* Toast */
 .toast {
@@ -259,102 +340,129 @@ select option { background: #120810; color: var(--text); }
 
 @keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
 
-/* Responsive */
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════ */
 @media (max-width: 560px) {
   .form-row { grid-template-columns: 1fr; }
-  .glass-card { padding: 22px 16px; border-radius: 16px; }
-  .card-title { font-size: 26px; }
-  input, select { font-size: 16px; padding: 14px; }
-  .btn-submit { font-size: 20px; padding: 16px; }
+  .social-row { gap: 8px; }
+  .social-pill { font-size: 12px; padding: 7px 12px; }
+  .hero h1 { font-size: 44px; }
 }
 </style>
 </head>
 <body>
 
-<div class="bg-wash"></div>
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav">
+  <a href="/waitlist" class="logo-link">
+    <img src="/waitlist/logo-wordmark.png" alt="Stringz" class="logo-img" id="join-logo">
+    <span class="logo-fallback" id="join-logo-fallback">Stringz</span>
+  </a>
+  <a href="/waitlist" class="nav-link">Browse Cities</a>
+</nav>
 
-<div class="page">
-  <div class="top-bar">
-    <a href="/waitlist" class="logo-link">
-      <img src="/waitlist/logo-wordmark.png" alt="Stringz" class="logo-img" id="join-logo">
-      <span class="logo-fallback" id="join-logo-fallback">Stringz</span>
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <div class="arc-glow"></div>
+  <div class="arc-line"></div>
+  <div class="arc-line"></div>
+
+  <h1>Join the<br>Community</h1>
+  <p class="hero-sub">Your people are already here. Save your spot.</p>
+
+  <div class="social-row">
+    <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="social-pill">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      @stringz.social
     </a>
-    <a href="/waitlist" class="back-link">Browse Cities</a>
   </div>
+</section>
 
-  <div class="glass-card">
-    <div id="form-state">
-      <p class="card-title">Save Your Spot.</p>
-      <p class="card-sub">Be the first in your city. Meet your people before everyone else.</p>
+<hr class="glow-divider">
 
-      <div class="form-row">
-        <div>
-          <label>First Name</label>
-          <input type="text" id="f-first" placeholder="First name" autocomplete="given-name">
-        </div>
-        <div>
-          <label>Last Name</label>
-          <input type="text" id="f-last" placeholder="Last name" autocomplete="family-name">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
-      </div>
-
-      <div class="form-group">
-        <label>Phone Number</label>
-        <div class="phone-wrap">
-          <span class="phone-pre"></span>
-          <input type="tel" id="f-phone" placeholder="+1 (404) 000-0000" autocomplete="tel">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Your City</label>
-        <select id="f-city" onchange="this.classList.add('filled')">
-          <option value="" disabled selected>Select your city</option>
-          <option>Atlanta, GA</option>
-          <option>Houston, TX</option>
-          <option>Washington, DC</option>
-          <option>Charlotte, NC</option>
-          <option>Chicago, IL</option>
-          <option>New York, NY</option>
-          <option>Los Angeles, CA</option>
-          <option>Miami, FL</option>
-          <option>Seattle, WA</option>
-          <option>Bay Area, CA</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <button class="btn-submit" onclick="handleSubmit()">Save My Spot &rarr;</button>
-      <p class="form-note">No spam. Your info is never shared or sold.</p>
+<!-- ══════════ FORM ══════════ -->
+<section class="form-section">
+  <div id="form-state">
+    <div class="form-intro">
+      <h2>Save Your Spot</h2>
+      <p>Be the first in your city. Meet your people before everyone else.</p>
     </div>
 
-    <!-- Success + share state -->
-    <div class="success-state" id="success-state">
-      <div class="success-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+    <div class="form-row">
+      <div>
+        <label>Full Name *</label>
+        <input type="text" id="f-first" placeholder="First name" autocomplete="given-name">
       </div>
-      <p class="success-title">You're In.</p>
-      <p class="success-sub">Welcome to the community. We'll hit you when your city goes live.</p>
-      <div class="share-box">
-        <p class="share-box-label">Grow Your Community</p>
-        <p class="share-box-msg">Share your link and anyone who signs up automatically joins your Stringz community when we launch.</p>
-        <div class="share-link-row">
-          <input class="share-link-input" id="share-url" readonly value="stringz.social/ref/loading...">
-          <button class="copy-btn" onclick="copyLink()">Copy Link</button>
-          <button class="copy-btn" onclick="shareReferral()" style="background:linear-gradient(135deg,#CA3F16,#FF9408);border:none;margin-left:8px;">Share &rarr;</button>
-        </div>
+      <div>
+        <label>&nbsp;</label>
+        <input type="text" id="f-last" placeholder="Last name" autocomplete="family-name">
       </div>
-      <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
     </div>
+
+    <div class="form-group">
+      <label>Email *</label>
+      <input type="email" id="f-email" placeholder="e.g. you@email.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <div class="phone-wrap">
+        <span class="phone-pre"></span>
+        <input type="tel" id="f-phone" placeholder="e.g. +1 (404) 000-0000" autocomplete="tel">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Your City *</label>
+      <select id="f-city" onchange="this.classList.add('filled')">
+        <option value="" disabled selected>Select your city</option>
+        <option>Atlanta, GA</option>
+        <option>Houston, TX</option>
+        <option>Washington, DC</option>
+        <option>Charlotte, NC</option>
+        <option>Chicago, IL</option>
+        <option>New York, NY</option>
+        <option>Los Angeles, CA</option>
+        <option>Miami, FL</option>
+        <option>Seattle, WA</option>
+        <option>Bay Area, CA</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <p class="consent">No spam. Your info is never shared or sold.</p>
+
+    <button class="btn-submit" onclick="handleSubmit()">Save My Spot &rarr;</button>
+    <p class="form-note">Your community starts here.</p>
   </div>
-</div>
+
+  <!-- Success + share state -->
+  <div class="success-state" id="success-state">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <p class="success-title">You're In.</p>
+    <p class="success-sub">Welcome to the community. We'll hit you when your city goes live.</p>
+    <div class="share-box">
+      <p class="share-box-label">Grow Your Community</p>
+      <p class="share-box-msg">Share your link and anyone who signs up automatically joins your Stringz community when we launch.</p>
+      <div class="share-link-row">
+        <input class="share-link-input" id="share-url" readonly value="stringz.social/ref/loading...">
+        <button class="copy-btn" onclick="copyLink()">Copy Link</button>
+        <button class="copy-btn" onclick="shareReferral()" style="background:linear-gradient(135deg,#CA3F16,#FF9408);border:none;margin-left:8px;">Share &rarr;</button>
+      </div>
+    </div>
+    <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <p>&copy; 2026 Stringz. All rights reserved. &nbsp;&middot;&nbsp; <a href="/waitlist">Back to cities</a></p>
+</footer>
 
 <div class="toast" id="toast"></div>
 

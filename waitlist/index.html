@@ -200,9 +200,9 @@ nav {
 
 .hero-split {
   position: relative; z-index: 1; width: 100%;
-  display: grid; grid-template-columns: minmax(0,1fr) clamp(320px,34vw,430px);
-  gap: clamp(36px,5vw,80px); align-items: center;
-  max-width: 1280px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+  max-width: 800px; margin: 0 auto;
 }
 /* Prevent giant h1 from blowing out the left column */
 .hero-split > div:first-child { min-width: 0; overflow: hidden; }
@@ -253,6 +253,7 @@ h1 {
 }
 .hero-ig {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  justify-content: center;
   opacity: 0; animation: fadeUp 0.8s ease 0.32s forwards;
 }
 .hero-ig-link {
@@ -826,7 +827,7 @@ footer {
    TABLET — iPads landscape & small laptops (961–1024px)
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero-split { grid-template-columns: minmax(0,1fr) clamp(300px,38vw,400px); gap: 32px; }
+  .hero-split { gap: 32px; }
   .cities-grid { grid-template-columns: repeat(3,1fr); }
 }
 
@@ -842,7 +843,7 @@ footer {
   .nav-ig-dot { width:22px; height:22px; }
 
   .hero { padding:88px 24px 48px; min-height:100svh; }
-  .hero-split { grid-template-columns:1fr; gap:32px; }
+  .hero-split { gap: 28px; }
   .hero-tagline { font-size: 16px; }
   .hero-sub { font-size: 14px; }
 
@@ -1041,81 +1042,6 @@ footer {
       </div>
     </div>
 
-    <!-- Right: waitlist card -->
-    <div class="glass-card" id="waitlist">
-      <div id="form-state">
-        <p class="card-title">Your People Are Already on Stringz.</p>
-        <p class="card-sub">Atlanta is home — you're up first.</p>
-
-        <div class="form-row">
-          <div>
-            <label>First Name</label>
-            <input type="text" id="f-first" placeholder="First name" autocomplete="given-name">
-          </div>
-          <div>
-            <label>Last Name</label>
-            <input type="text" id="f-last" placeholder="Last name" autocomplete="family-name">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Email Address</label>
-          <input type="email" id="f-email" placeholder="your@email.com" autocomplete="email">
-        </div>
-
-        <div class="form-group">
-          <label>Phone Number</label>
-          <div class="phone-wrap">
-            <span class="phone-pre">🇺🇸</span>
-            <input type="tel" id="f-phone" placeholder="+1 (404) 000-0000" autocomplete="tel">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Your City</label>
-          <select id="f-city" onchange="this.classList.add('filled')">
-            <option value="" disabled selected>Select your city</option>
-            <option>Atlanta, GA</option>
-            <option>Houston, TX</option>
-            <option>Washington, DC</option>
-            <option>Charlotte, NC</option>
-            <option>Chicago, IL</option>
-            <option>New York, NY</option>
-            <option>Los Angeles, CA</option>
-            <option>Miami, FL</option>
-            <option>Dallas, TX</option>
-            <option>Seattle, WA</option>
-            <option>Bay Area, CA</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <button class="btn-submit" onclick="handleSubmit()">Save My Spot →</button>
-        <p class="form-note">Be the first in your city. Meet your people before everyone else.</p>
-        <p class="form-note" style="margin-top:4px;opacity:0.5;">No spam. Your info is never shared or sold.</p>
-      </div>
-
-      <!-- Success + share state -->
-      <div class="success-state" id="success-state">
-        <div class="success-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-        </div>
-        <p class="success-title">You're In.</p>
-        <p class="success-sub">Welcome to the community. We'll hit you when Atlanta goes live.</p>
-        <div class="share-box">
-          <p class="share-box-label">Grow Your Community</p>
-          <p class="share-box-msg">Share your link and anyone who signs up automatically joins your Stringz community when we launch.</p>
-          <div class="share-link-row">
-            <input class="share-link-input" id="share-url" readonly value="stringz.social/ref/loading...">
-            <button class="copy-btn" onclick="copyLink()">Copy Link</button>
-            <button class="copy-btn" onclick="shareReferral()" style="background:linear-gradient(135deg,#CA3F16,#FF9408);border:none;margin-left:8px;">Share #8594;</button>
-          </div>
-        </div>
-        <p class="share-note">People who sign up through your link are automatically added to your community on launch day.</p>
-      </div>
-    </div>
 
   </div>
 </section>
