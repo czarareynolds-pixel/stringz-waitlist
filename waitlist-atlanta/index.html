@@ -97,6 +97,11 @@ body::before {
   transition: filter 0.3s;
 }
 .logo-link:hover .s-logo { filter: drop-shadow(0 0 28px rgba(255,148,8,0.6)); }
+.s-logo-fallback {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px;
+  color: #FF9408; letter-spacing: 0.08em; display: block;
+  filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
+}
 
 .join-btn {
   font-family: 'Barlow Condensed', sans-serif;
@@ -351,8 +356,8 @@ body::before {
   <!-- ══════════ TOP BAR ══════════ -->
   <header class="top-bar">
     <a href="/waitlist" class="logo-link">
-      <img src="/waitlist/stringz_s_logo.png" alt="Stringz" class="s-logo"
-        onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\"font-family:Bebas Neue,sans-serif;font-size:28px;color:#FF9408;letter-spacing:0.08em;display:block\">S</span>'">
+      <img src="../waitlist/stringz_s_logo.png" alt="Stringz" class="s-logo"
+        onerror="this.style.display='none';var s=document.createElement('span');s.textContent='S';s.className='s-logo-fallback';this.parentElement.appendChild(s);">
     </a>
     <a href="#join" class="join-btn">Join My City</a>
   </header>
