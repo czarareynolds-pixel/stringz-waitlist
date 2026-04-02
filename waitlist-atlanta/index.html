@@ -90,16 +90,20 @@ body::before {
 }
 .logo-link {
   display: inline-flex; text-decoration: none; line-height: 0;
+  position: relative;
 }
 .s-logo {
   height: clamp(36px,5vw,52px); width: auto; display: block;
   filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
   transition: filter 0.3s;
 }
+/* Fallback text hidden by default — shown via JS if image fails */
+.s-logo-fallback { display: none !important; }
+.s-logo-fallback.show { display: block !important; }
 .logo-link:hover .s-logo { filter: drop-shadow(0 0 28px rgba(255,148,8,0.6)); }
 .s-logo-fallback {
   font-family: 'Bebas Neue', sans-serif; font-size: 32px;
-  color: #FF9408; letter-spacing: 0.08em; display: block;
+  color: #FF9408; letter-spacing: 0.08em; display: block; line-height: 1;
   filter: drop-shadow(0 0 14px rgba(255,148,8,0.35));
 }
 
@@ -355,10 +359,16 @@ body::before {
 
   <!-- ══════════ TOP BAR ══════════ -->
   <header class="top-bar">
-    <a href="/waitlist" class="logo-link">
-      <img src="../waitlist/stringz_s_logo.png" alt="Stringz" class="s-logo"
-        onerror="this.style.display='none';var s=document.createElement('span');s.textContent='S';s.className='s-logo-fallback';this.parentElement.appendChild(s);">
+    <a href="/waitlist" class="logo-link" aria-label="Stringz Home">
+      <img src="../waitlist/stringz_s_logo.png" alt="" class="s-logo" id="s-logo-img">
+      <span class="s-logo-fallback" id="s-logo-fb" aria-hidden="true">S</span>
     </a>
+    <script>
+      var _li = document.getElementById('s-logo-img');
+      var _lf = document.getElementById('s-logo-fb');
+      _li.onerror = function(){ _li.style.display='none'; _lf.classList.add('show'); };
+      if (_li.complete && _li.naturalWidth === 0) { _li.onerror(); }
+    </script>
     <a href="#join" class="join-btn">Join My City</a>
   </header>
 
