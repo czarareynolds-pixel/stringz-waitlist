@@ -57,7 +57,7 @@ body::before {
 ═══════════════════════════════════════════════════════ */
 .bg-cityscape {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: url('Stringz_Waitlist_DC.png') center bottom / cover no-repeat;
+  background: url('Stringz_Waitlist_Atlanta.png') center bottom / cover no-repeat;
 }
 .bg-cityscape::after {
   content: ''; position: absolute; inset: 0;
@@ -86,7 +86,7 @@ body::before {
 .page {
   position: relative; z-index: 1;
   min-height: 100vh; display: flex; flex-direction: column;
-  padding: clamp(20px,3vw,40px) clamp(20px,4vw,52px);
+  padding: clamp(20px,3vw,40px) clamp(20px,4vw,52px) clamp(100px,15vh,160px);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -135,8 +135,9 @@ body::before {
 ═══════════════════════════════════════════════════════ */
 .hero-center {
   flex: 1; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  align-items: center; justify-content: flex-start;
   text-align: center; position: relative;
+  padding-top: clamp(10px,3vw,40px);
 }
 
 .event-title {
@@ -159,9 +160,9 @@ body::before {
    CAROUSEL — stacked tilted event cards
 ═══════════════════════════════════════════════════════ */
 .carousel-wrap {
-  position: relative; width: 100%; max-width: 520px;
-  height: clamp(320px,45vw,480px);
-  margin: 0 auto clamp(24px,3vw,40px);
+  position: relative; width: 100%; max-width: 460px;
+  height: clamp(280px,38vw,420px);
+  margin: 0 auto clamp(16px,2vw,28px);
   perspective: 1200px;
 }
 
