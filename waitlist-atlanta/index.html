@@ -86,7 +86,7 @@ body::before {
 .page {
   position: relative; z-index: 1;
   min-height: 100vh; display: flex; flex-direction: column;
-  padding: clamp(20px,3vw,40px) clamp(20px,4vw,52px) clamp(100px,15vh,160px);
+  padding: clamp(12px,2vw,24px) clamp(20px,4vw,52px) clamp(120px,18vh,200px);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -94,14 +94,14 @@ body::before {
 ═══════════════════════════════════════════════════════ */
 .top-bar {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: clamp(28px,4vw,48px);
+  margin-bottom: clamp(8px,1.5vw,16px);
 }
 .logo-link {
   display: inline-flex; text-decoration: none; line-height: 0;
   position: relative;
 }
 .s-logo {
-  height: clamp(110px,14vw,160px); width: auto; display: block;
+  height: clamp(80px,10vw,120px); width: auto; display: block;
   filter: drop-shadow(0 0 22px rgba(255,148,8,0.4));
   transition: filter 0.3s;
 }
@@ -137,14 +137,14 @@ body::before {
   flex: 1; display: flex; flex-direction: column;
   align-items: center; justify-content: flex-start;
   text-align: center; position: relative;
-  padding-top: clamp(10px,3vw,40px);
+  padding-top: 0;
 }
 
 .event-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(42px,8vw,96px);
+  font-size: clamp(36px,6vw,72px);
   line-height: 0.92; letter-spacing: -0.02em;
-  color: var(--text); margin-bottom: 8px;
+  color: var(--text); margin-bottom: 4px;
   text-shadow: 0 2px 30px rgba(0,0,0,0.6);
   transition: opacity 0.4s ease;
 }
@@ -152,7 +152,7 @@ body::before {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(12px,1vw,15px); font-weight: 600;
   letter-spacing: 0.2em; color: var(--muted);
-  margin-bottom: clamp(24px,3vw,40px);
+  margin-bottom: clamp(12px,1.5vw,20px);
   transition: opacity 0.4s ease;
 }
 
