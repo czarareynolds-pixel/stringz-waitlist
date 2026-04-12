@@ -57,12 +57,12 @@ body::before {
 ═══════════════════════════════════════════════════════ */
 .bg-cityscape {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: url('Stringz_Waitlist_Charlotte.png') center center / cover no-repeat;
+  background: url('Stringz_Waitlist_Charlotte.png') center bottom / cover no-repeat;
 }
 .bg-cityscape::after {
   content: ''; position: absolute; inset: 0;
   background:
-    linear-gradient(to bottom, rgba(10,5,6,0.72) 0%, rgba(10,5,6,0.55) 40%, rgba(10,5,6,0.78) 100%),
+    linear-gradient(to bottom, rgba(10,5,6,0.78) 0%, rgba(10,5,6,0.55) 35%, rgba(10,5,6,0.35) 75%, rgba(10,5,6,0.25) 100%),
     radial-gradient(ellipse 80% 60% at 20% 30%, rgba(149,18,44,0.18) 0%, transparent 60%),
     radial-gradient(ellipse 70% 50% at 80% 70%, rgba(202,63,22,0.12) 0%, transparent 55%);
 }
