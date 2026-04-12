@@ -229,53 +229,6 @@ body::before {
 .nav-arrow.left { left: clamp(-8px,-2vw,-20px); }
 .nav-arrow.right { right: clamp(-8px,-2vw,-20px); }
 
-/* ═══════════════════════════════════════════════════════
-   BOTTOM BAR
-═══════════════════════════════════════════════════════ */
-.bottom-bar {
-  display: flex; flex-direction: column; gap: 16px;
-  margin-top: auto; padding-top: 20px;
-}
-.bottom-row {
-  display: flex; align-items: center; justify-content: flex-end;
-}
-
-
-
-
-/* Bottom-center: progress / playback */
-.progress-bar {
-  display: flex; align-items: center; gap: 14px;
-  position: absolute; bottom: clamp(20px,3vw,40px); left: 50%;
-  transform: translateX(-50%);
-}
-.dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(255,255,255,0.15); transition: all 0.3s;
-  cursor: pointer;
-}
-.dot.active { background: var(--orange); width: 24px; border-radius: 4px; box-shadow: 0 0 8px rgba(255,148,8,0.5); }
-
-/* Bottom-right: IG connect */
-.social-connect {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-  border: 1px solid rgba(255,148,8,0.2); border-radius: 10px;
-  padding: 10px 16px; background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(12px); transition: all 0.25s;
-}
-.social-connect:hover { background: rgba(255,148,8,0.08); border-color: rgba(255,148,8,0.4); }
-.social-av {
-  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--orange), var(--crimson));
-  display: flex; align-items: center; justify-content: center;
-}
-.social-info { display: flex; flex-direction: column; gap: 1px; }
-.social-handle { font-size: 12px; font-weight: 700; color: var(--text); }
-.social-label {
-  font-size: 9px; font-weight: 600; color: var(--muted);
-  letter-spacing: 0.08em; text-transform: uppercase;
-}
 
 /* ═══════════════════════════════════════════════════════
    EVENT INFO OVERLAY (shows on card hover/tap)
@@ -314,7 +267,6 @@ body::before {
   .event-card.pos-far-right { opacity: 0; pointer-events: none; }
   .nav-arrow.left { left: -4px; }
   .nav-arrow.right { right: -4px; }
-  .bottom-row { justify-content: flex-start; }
   .progress-bar { position: relative; bottom: auto; left: auto; transform: none; align-self: center; }
 }
 
@@ -373,25 +325,6 @@ body::before {
 
     <div class="progress-bar" id="dots"></div>
   </main>
-
-  <!-- ══════════ BOTTOM BAR ══════════ -->
-  <footer class="bottom-bar">
-    <!-- IG connect row -->
-    <div class="bottom-row">
-      <a href="https://www.instagram.com/stringz.social/" target="_blank" rel="noopener" class="social-connect">
-        <div class="social-av">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8">
-            <rect x="2" y="2" width="20" height="20" rx="5"/>
-            <circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/>
-          </svg>
-        </div>
-        <div class="social-info">
-          <span class="social-handle">@stringz.social</span>
-          <span class="social-label">Connect with us</span>
-        </div>
-      </a>
-    </div>
-  </footer>
 
 </div>
 
